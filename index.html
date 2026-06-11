@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google Tag Manager (speed-safe deferred loader) -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        var loaded = false;
+        var timer = 0;
+        var events = ["pointerdown", "touchstart", "click", "keydown", "scroll"];
+
+        function cleanup() {
+          if (timer) w.clearTimeout(timer);
+          events.forEach(function (e) {
+            w.removeEventListener(e, loadGTM);
+          });
+        }
+
+        function loadGTM() {
+          if (loaded) return;
+          loaded = true;
+          cleanup();
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0];
+          var j = d.createElement(s);
+          var dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        }
+
+        events.forEach(function (e) {
+          w.addEventListener(e, loadGTM, { passive: true, once: true });
+        });
+        // Performance mode: load GTM on first real visitor interaction only.
+        // The affiliate click-tracking script below still appends Everflow/GCLID
+        // parameters independently, so offer tracking remains immediate.
+      })(window, document, "script", "dataLayer", "GTM-5PZ88WLJ");
+    </script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.builder.io" crossorigin />
+    <script data-ncr-font-loader>
+      (function () {
+        var href = "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap";
+        function loadFonts() {
+          if (document.querySelector('link[data-ncr-fonts]')) return;
+          var link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = href;
+          link.setAttribute("data-ncr-fonts", "true");
+          document.head.appendChild(link);
+        }
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadFonts, { timeout: 1400 });
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadFonts, 250);
+          }, { once: true });
+        }
+      })();
+    </script>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap"
+      />
+    </noscript>
+    <link
+      rel="preload"
+      as="image"
+      href="https://cdn.builder.io/api/v1/image/assets%2Fe9508f1e32b34813a11957a3abee3959%2Fbadcc4098d254fadb81b2c01ff7bb98c?format=webp&width=360"
+      fetchpriority="high"
+    />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="https://cdn.builder.io/api/v1/image/assets%2Fe9508f1e32b34813a11957a3abee3959%2Fe1efdedf37544e5982cb5ee6c0980a0e?format=webp&width=64&height=64"
+    />
+    <!-- National Consumer Review SEO / Site Name Signals -->
+    <title>National Consumer Review</title>
+    <meta
+      name="description"
+      content="Independent product reviews, comparisons, and buying guides from National Consumer Review."
+    />
+    <link rel="canonical" href="https://nationalconsumerreview.com/" />
+    <meta property="og:site_name" content="National Consumer Review" />
+    <meta property="og:title" content="National Consumer Review" />
+    <meta
+      property="og:description"
+      content="Independent product reviews, comparisons, and buying guides from National Consumer Review."
+    />
+    <meta property="og:url" content="https://nationalconsumerreview.com/" />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "National Consumer Review",
+        "alternateName": "NCR",
+        "url": "https://nationalconsumerreview.com/"
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5PZ88WLJ"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="root"></div>
+
+    <script type="module" src="/client/App.tsx"></script>
+
+    <!-- Affiliate link tracking -->
+    <script>
+      (function () {
+        function clean(value) {
+          return (value || "").trim().replace(/\+$/g, "");
+        }
+
+        function getTrackingData() {
+          const pageParams = new URLSearchParams(window.location.search);
+
+          const googleClickId =
+            clean(pageParams.get("sub2")) ||
+            clean(pageParams.get("gclid")) ||
+            clean(pageParams.get("gbraid")) ||
+            clean(pageParams.get("wbraid"));
+
+          const keyword =
+            clean(pageParams.get("sub4")) ||
+            clean(pageParams.get("utm_term"));
+
+          const campaignId = clean(pageParams.get("utm_campaign"));
+          const adgroupId = clean(pageParams.get("adgroupid"));
+
+          const trackingData = {
+            source_id: "google",
+
+            // AdsBranded / Everflow tracking setup
+            sub1: campaignId, // Campaign ID
+            sub2: googleClickId, // Google Click ID / GCLID
+            sub3: adgroupId, // Ad Group ID
+            sub4: keyword, // Keyword
+            sub5: "adv_compare_effort_gap_v1", // Prelander / angle label
+          };
+
+          // Backup Google click ID fields
+          if (clean(pageParams.get("gclid"))) {
+            trackingData.gclid = clean(pageParams.get("gclid"));
+          }
+
+          if (clean(pageParams.get("gbraid"))) {
+            trackingData.gbraid = clean(pageParams.get("gbraid"));
+          }
+
+          if (clean(pageParams.get("wbraid"))) {
+            trackingData.wbraid = clean(pageParams.get("wbraid"));
+          }
+
+          return trackingData;
+        }
+
+        function appendTrackingToLink(link) {
+          try {
+            const trackingData = getTrackingData();
+            const url = new URL(link.href);
+
+            Object.keys(trackingData).forEach(function (key) {
+              if (trackingData[key]) {
+                url.searchParams.set(key, trackingData[key]);
+              }
+            });
+
+            link.href = url.toString();
+          } catch (error) {
+            console.log("Tracking append error:", error);
+          }
+        }
+
+        document.addEventListener(
+          "click",
+          function (event) {
+            const link = event.target.closest
+              ? event.target.closest('a[href*="unbindgear.com/novavoltsolar"]')
+              : null;
+
+            if (link) {
+              appendTrackingToLink(link);
+            }
+          },
+          true,
+        );
+
+        document.addEventListener(
+          "auxclick",
+          function (event) {
+            const link = event.target.closest
+              ? event.target.closest('a[href*="unbindgear.com/novavoltsolar"]')
+              : null;
+
+            if (link) {
+              appendTrackingToLink(link);
+            }
+          },
+          true,
+        );
+      })();
+    </script>
+  </body>
+</html>

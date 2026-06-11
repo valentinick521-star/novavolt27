@@ -1,0 +1,28 @@
+[build]
+command = "npm run build:netlify"
+functions = "netlify/functions"
+publish = "dist/spa"
+
+
+[functions]
+external_node_modules = ["express"]
+node_bundler = "esbuild"
+
+[[redirects]]
+force = true
+from = "/api/*"
+status = 200
+to = "/.netlify/functions/api/:splat"
+
+# SPA fallback for any route without a prerendered file.
+# Prerendered static files (e.g. /privacy-policy/index.html) take precedence.
+[[redirects]]
+from = "/*"
+status = 200
+to = "/index.html"
+
+# Hashed, content-addressed assets can be cached forever.
+[[headers]]
+for = "/assets/*"
+[headers.values]
+cache-control = "public, max-age=31536000, immutable"
