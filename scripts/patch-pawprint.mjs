@@ -11,6 +11,9 @@ let html = fs.readFileSync(filePath, "utf8");
 const NCR_LOGO_URL =
   "https://cdn.builder.io/api/v1/image/assets%2Fe9508f1e32b34813a11957a3abee3959%2Fbadcc4098d254fadb81b2c01ff7bb98c?format=webp&width=360";
 
+const NCR_FAVICON_URL =
+  "https://cdn.builder.io/api/v1/image/assets%2Fe9508f1e32b34813a11957a3abee3959%2Fe1efdedf37544e5982cb5ee6c0980a0e?format=webp&width=64&height=64";
+
 // Replace the Pawprint text masthead with the National Consumer Review logo.
 html = html.replace(
   /<div class="brand" aria-label="Pet Wellness Report">[\s\S]*?<\/div>/,
@@ -97,7 +100,12 @@ const patchCss = `
   }
 </style>`;
 
-html = html.replace("</head>", `${patchCss}\n</head>`);
+// Use the exact National Consumer Review favicon used on novavolt20.
+// Remove any existing favicon declarations first so browsers don't pick a stale one.
+html = html.replace(/<link\b[^>]*rel=["'](?:shortcut icon|icon)["'][^>]*>\s*/gi, "");
+const faviconHtml = `<link rel="icon" type="image/webp" href="${NCR_FAVICON_URL}" />`;
+
+html = html.replace("</head>", `${faviconHtml}\n${patchCss}\n</head>`);
 
 fs.writeFileSync(filePath, html);
-console.log("Patched Pawprint prelander with compact NCR logo and working section navigation");
+console.log("Patched Pawprint prelander with NCR logo, favicon, and section navigation");
