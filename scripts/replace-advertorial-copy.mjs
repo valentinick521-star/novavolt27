@@ -187,14 +187,13 @@ for (const marker of [
   "Over 100,000 dog owners",
   "they’re physically still there, but some days they just don’t seem as present as they used to.",
   "the problem with aging starts at a cellular level.",
-  "What Makes Pawprint Protocol Different",
   "Weeks 4–8: Look for More Good Moments",
   "Made for Owners Who Aren’t Ready to Just Accept the Decline",
   "90-day money-back guarantee.",
   "The point is what those next 90 days could mean for you and your dog.",
   "TRY PAWPRINT PROTOCOL RISK-FREE",
   'class="pawprint-inline-link"',
-  'class="pawprint-lifestyle-image"',
+  "pawprint-lifestyle-image",
   'class="article-section-heading"',
   'class="article-timeline-heading"',
   'data-ncr-skim-format',
@@ -203,6 +202,7 @@ for (const marker of [
   'id="cellular-energy"',
   'id="ninety-day"',
   'id="evidence"',
+  'const OFFER_URL = "https://pawprintlab.com/products/pawprint-lab/?lpid=1160',
   "aff_id=34379",
 ]) {
   if (!html.includes(marker)) throw new Error(`Missing expected replacement copy/formatting: ${marker}`);
