@@ -17,6 +17,22 @@ if (!html.includes(sourceH1)) {
 
 html = html.replace(sourceH1, balancedH1);
 
+const oldDisclosure = `<strong>Editorial disclosure:</strong> This buyer's guide contains affiliate links. If you purchase through one, the publisher may earn a commission at no added cost to you. Product selection and evidence notes are presented separately from the offer.`;
+const newDisclosure = `<strong>Editorial disclosure:</strong> This page contains affiliate links. If you purchase through one, we may earn a commission at no added cost to you. These commissions help fund our independent journalism and research.`;
+
+if (!html.includes(oldDisclosure)) {
+  throw new Error("Could not find the existing editorial disclosure");
+}
+html = html.replace(oldDisclosure, newDisclosure);
+
+html = html.replace(/<div class="breadcrumb">[\s\S]*?<\/div>/, "");
+
+const newDek = `If your senior dog is getting lost in familiar rooms, pacing at night, staring into space, or simply seeming less present, you’re probably looking for something that can help bring back more of the dog you remember.`;
+if (!/<p class="dek">[\s\S]*?<\/p>/.test(html)) {
+  throw new Error("Could not find the article subheadline");
+}
+html = html.replace(/<p class="dek">[\s\S]*?<\/p>/, `<p class="dek">${newDek}</p>`);
+
 const css = `<style data-balanced-headline>
   .article-shell h1.balanced-headline {
     font-size: 45px;
@@ -48,9 +64,17 @@ const css = `<style data-balanced-headline>
 
 html = html.replace("</head>", `${css}\n</head>`);
 
-if (!html.includes('data-balanced-headline') || !html.includes('Helping Senior Dogs With Dementia')) {
-  throw new Error("Balanced headline patch failed");
+for (const marker of [
+  'data-balanced-headline',
+  'Helping Senior Dogs With Dementia',
+  'help fund our independent journalism and research',
+  'bring back more of the dog you remember',
+]) {
+  if (!html.includes(marker)) throw new Error(`Missing expected marker: ${marker}`);
+}
+if (html.includes('Cognitive Aging') || html.includes('Advertorial</div>')) {
+  throw new Error("Breadcrumb remained");
 }
 
 fs.writeFileSync(filePath, html);
-console.log("Balanced advertorial headline into three desktop lines");
+console.log("Balanced headline and refined advertorial disclosure and intro copy");
