@@ -1,3 +1,4 @@
+# Redeploy trigger: 2026-08-09
 [build]
 command = "npm run build:netlify"
 functions = "netlify/functions"
