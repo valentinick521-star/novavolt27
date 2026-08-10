@@ -1,43 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager (speed-safe deferred loader) -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        var loaded = false;
-        var timer = 0;
-        var events = ["pointerdown", "touchstart", "click", "keydown", "scroll"];
-
-        function cleanup() {
-          if (timer) w.clearTimeout(timer);
-          events.forEach(function (e) {
-            w.removeEventListener(e, loadGTM);
-          });
-        }
-
-        function loadGTM() {
-          if (loaded) return;
-          loaded = true;
-          cleanup();
-          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-          var f = d.getElementsByTagName(s)[0];
-          var j = d.createElement(s);
-          var dl = l != "dataLayer" ? "&l=" + l : "";
-          j.async = true;
-          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-          f.parentNode.insertBefore(j, f);
-        }
-
-        events.forEach(function (e) {
-          w.addEventListener(e, loadGTM, { passive: true, once: true });
-        });
-        // Performance mode: load GTM on first real visitor interaction only.
-        // The affiliate click-tracking script below still appends Everflow/GCLID
-        // parameters independently, so offer tracking remains immediate.
-      })(window, document, "script", "dataLayer", "GTM-5PZ88WLJ");
-    </script>
-    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -107,16 +70,6 @@
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-5PZ88WLJ"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
 
     <script type="module" src="/client/App.tsx"></script>
