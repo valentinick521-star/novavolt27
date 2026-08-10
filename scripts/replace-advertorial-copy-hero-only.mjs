@@ -8,19 +8,7 @@ const filePath = path.join(root, "dist", "spa", "index.html");
 const copyPath = path.join(root, "content", "pawprint-dementia", "final-copy.md");
 
 let html = fs.readFileSync(filePath, "utf8");
-
-const finalCopy = fs
-  .readFileSync(copyPath, "utf8")
-  .trim()
-  .replace("Over 15,000 dog owners", "Over 100,000 dog owners")
-  .replace(
-    "But the problem with them is they only mask the symptoms on the surface, while the underlying structure keeps degrading.",
-    "But the problem with most supplements is they only address symptoms on the surface, while the underlying structure keeps degrading.",
-  )
-  .replace(
-    "More moments where you look at them and think:\n\n**“There you are.”**\n\nBecause that’s what you really want.\n\n**More of the dog you remember.**",
-    "More moments where you look at them and think:\n\n**\"That's the dog I remember.\"**",
-  );
+const finalCopy = fs.readFileSync(copyPath, "utf8").trim();
 
 const headline =
   "This Breakthrough Formula Is Helping Senior Dogs With Cognitive Decline Feel Like Themselves Again";
@@ -35,6 +23,10 @@ const GA4_SRC = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
 
 const HERO_IMAGE = `<figure class="editorial-image">
 <img alt="Senior dog" decoding="async" fetchpriority="high" src="https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg"/>
+</figure>`;
+
+const UGC_IMAGE = `<figure class="editorial-image pawprint-ugc-image" style="margin:28px 0 24px;">
+<img alt="Senior dog with PawPrint Lab daily liquid supplement" decoding="async" loading="lazy" width="640" height="546" src="/assets/pawprint-ugc.webp"/>
 </figure>`;
 
 const SKIM_CSS = `
@@ -68,6 +60,7 @@ const SKIM_CSS = `
 }
 .article-shell .article-copy a.pawprint-inline-link:hover,
 .article-shell .article-copy a.pawprint-inline-link:focus-visible{color:#0b3f91 !important;}
+.article-shell .pawprint-ugc-image img{width:100%;height:auto;display:block;}
 `;
 
 function escapeHtml(value) {
@@ -79,7 +72,7 @@ function escapeHtml(value) {
 
 function linkPawprintMentions(value) {
   return value.replace(
-    /Pawprint Protocol/gi,
+    /PawPrint Protocol/gi,
     (match) =>
       `<a class="pawprint-inline-link" href="${AFFILIATE_HREF}" target="_blank" rel="sponsored noopener noreferrer">${match}</a>`,
   );
@@ -98,11 +91,11 @@ function plainHeading(value) {
 }
 
 function headingId(text) {
-  if (text === "What Makes Pawprint Protocol Different") return "approaches";
-  if (text === "What Could the Next 90 Days Look Like?") return "evidence";
-  if (text === "Made for Owners Who Aren’t Ready to Just Accept the Decline")
-    return "cellular-energy";
-  if (text === "That’s Why You Get 90 Days to Try It") return "ninety-day";
+  if (text === "So the real question becomes: is there a way to support that NAD+ directly?")
+    return "approaches";
+  if (text === "So, What Exactly Is PawPrint Protocol?") return "cellular-energy";
+  if (text === "What Really Matters") return "evidence";
+  if (text === "A Special Offer For Our Readers") return "ninety-day";
   return "";
 }
 
@@ -114,12 +107,8 @@ function renderCopy(markdown) {
     const raw = lines[i].trim();
     if (!raw) continue;
 
-    if (raw === "**[TRY PAWPRINT PROTOCOL RISK-FREE]**") {
-      out.push(
-        '<div class="cta-block" style="margin-bottom:0;">' +
-          `<a class="cta-button offer-link" href="${AFFILIATE_HREF}" target="_blank" rel="sponsored noopener noreferrer">TRY PAWPRINT PROTOCOL RISK-FREE</a>` +
-          "</div>",
-      );
+    if (raw === "INSERT IMAGE HERE UGC OF DOG") {
+      out.push(UGC_IMAGE);
       continue;
     }
 
@@ -159,6 +148,10 @@ function renderCopy(markdown) {
   return out.join("\n");
 }
 
+const FINAL_CTA = `<div class="cta-block" style="margin-bottom:0;">
+<a class="cta-button offer-link" href="${AFFILIATE_HREF}" target="_blank" rel="sponsored noopener noreferrer">TRY PAWPRINT PROTOCOL RISK-FREE</a>
+</div>`;
+
 const article = `<article class="article-shell">
 <h1 class="balanced-headline">${headline}</h1>
 <p class="dek">${subheadline}</p>
@@ -167,6 +160,7 @@ ${HERO_IMAGE}
 
 <div class="article-intro article-copy" id="senior-dogs">
 ${renderCopy(finalCopy)}
+${FINAL_CTA}
 </div>
 </article>`;
 
@@ -228,9 +222,15 @@ html = html.replace(
 
 const requiredText = [
   headline,
-  "Over 100,000 dog owners",
-  "But the problem with most supplements is they only address symptoms on the surface, while the underlying structure keeps degrading.",
-  "That's the dog I remember.",
+  "You’ve already seen the changes.",
+  "without enough NAD+ the cells in your dog, don’t have enough energy to repair themselves.",
+  "So, What Exactly Is PawPrint Protocol?",
+  "What Really Matters",
+  "A Special Offer For Our Readers",
+  "25% savings",
+  "90-Day money-back guarantee",
+  "pawprint-ugc-image",
+  "/assets/pawprint-ugc.webp",
   "TRY PAWPRINT PROTOCOL RISK-FREE",
   'target="_blank"',
   'id="senior-dogs"',
@@ -247,6 +247,10 @@ for (const marker of requiredText) {
   if (!html.includes(marker)) {
     throw new Error(`Missing expected replacement copy/formatting: ${marker}`);
   }
+}
+
+if (html.includes("INSERT IMAGE HERE UGC OF DOG")) {
+  throw new Error("UGC image placeholder leaked into rendered article");
 }
 
 const giddyupCount =
@@ -282,19 +286,25 @@ for (const markdownMarker of ["## ", "### ", "**"]) {
 }
 
 const articleImages = renderedArticle.match(/<img\b/gi) || [];
-if (articleImages.length !== 1) {
+if (articleImages.length !== 2) {
   throw new Error(
-    `Expected exactly one article image (the hero), found ${articleImages.length}`,
+    `Expected exactly two article images (hero and requested UGC), found ${articleImages.length}`,
   );
 }
 if (
   !/fetchpriority=["']high["']/i.test(renderedArticle) ||
   !/alt=["']Senior dog["']/i.test(renderedArticle)
 ) {
-  throw new Error("The remaining article image is not the intended top hero");
+  throw new Error("The top hero image is not the intended high-priority image");
+}
+if (
+  !renderedArticle.includes("pawprint-ugc-image") ||
+  !renderedArticle.includes("/assets/pawprint-ugc.webp")
+) {
+  throw new Error("The requested PawPrint UGC image is missing");
 }
 
 fs.writeFileSync(filePath, html);
 console.log(
-  "Completed PawPrint build with hero image only, plus GA4, GiddyUp, and affiliate links",
+  "Completed PawPrint advertorial copy replacement with requested UGC image, plus GA4, GiddyUp, and affiliate links",
 );
