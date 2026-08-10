@@ -32,23 +32,47 @@ const subheadline = "If your senior dog is getting lost in familiar rooms, pacin
 const AFFILIATE_URL = "https://pawprintlab.com/products/pawprint-lab/?lpid=1160&source_id=DL&utm_source=34379&utm_medium=&utm_term=1160&aff_id=34379&sub_id=&req_id=&oid=1160&device_type=&country_name=&_ef_transaction_id=&oid=1160&affid=34379";
 const AFFILIATE_HREF = AFFILIATE_URL.replace(/&/g, "&amp;");
 const GIDDYUP_SRC = "https://js.giddyup.io/gulinkfixup.js";
+const GA4_ID = "G-JKY9VNJSWP";
+const GA4_SRC = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
 const BESTSELLER_BASE = "https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505";
 
+function isJpeg(buffer) {
+  return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+}
+
+function isPng(buffer) {
+  return buffer.length >= 8 &&
+    buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47 &&
+    buffer[4] === 0x0d && buffer[5] === 0x0a && buffer[6] === 0x1a && buffer[7] === 0x0a;
+}
+
+function isWebp(buffer) {
+  return buffer.length >= 12 &&
+    buffer.toString("ascii", 0, 4) === "RIFF" &&
+    buffer.toString("ascii", 8, 12) === "WEBP";
+}
+
 function materializeDataUri(dataUri, filename) {
-  const match = dataUri.match(/^data:image\/(?:jpeg|jpg|png|webp);base64,(.+)$/s);
+  const match = dataUri.match(/^data:image\/(jpeg|jpg|png|webp);base64,(.+)$/s);
   if (!match) throw new Error(`Invalid image data URI for ${filename}`);
+
+  const subtype = match[1].toLowerCase();
+  const buffer = Buffer.from(match[2], "base64");
+  if (buffer.length < 1024) throw new Error(`Generated image asset is empty or truncated: ${filename} (${buffer.length} bytes)`);
+
+  const signatureValid =
+    ((subtype === "jpeg" || subtype === "jpg") && isJpeg(buffer)) ||
+    (subtype === "png" && isPng(buffer)) ||
+    (subtype === "webp" && isWebp(buffer));
+
+  if (!signatureValid) throw new Error(`Generated image asset has an invalid ${subtype} signature: ${filename}`);
 
   fs.mkdirSync(assetDir, { recursive: true });
   const outputPath = path.join(assetDir, filename);
-  fs.writeFileSync(outputPath, Buffer.from(match[1], "base64"));
-
-  const size = fs.statSync(outputPath).size;
-  if (size < 20000) throw new Error(`Generated image asset is unexpectedly small: ${filename} (${size} bytes)`);
+  fs.writeFileSync(outputPath, buffer);
   return `/assets/${filename}`;
 }
 
-// Turn uploaded image data into normal static image files instead of huge inline data URLs.
-// This is more reliable in browsers and avoids the rendering issues we saw with embedded images.
 const LIFESTYLE_ASSET = materializeDataUri(lifestyleImageData, "pawprint-lifestyle.jpg");
 const UGC_ASSET = materializeDataUri(ugcImageData, "pawprint-ugc.jpg");
 
@@ -245,6 +269,20 @@ html = html.replace(
 html = html.replace(/<style data-ncr-skim-format>[\s\S]*?<\/style>\s*/g, "");
 html = html.replace("</head>", `<style data-ncr-skim-format>${SKIM_CSS}</style>\n</head>`);
 
+// Install GA4 exactly once in <head>.
+html = html.replace(/\s*<!-- Google tag \(gtag\.js\) -->\s*/gi, "");
+html = html.replace(/\s*<script[^>]*src=["']https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-JKY9VNJSWP["'][^>]*><\/script>/gi, "");
+html = html.replace(/\s*<script>\s*window\.dataLayer\s*=\s*window\.dataLayer\s*\|\|\s*\[\];[\s\S]*?gtag\(['"]config['"],\s*['"]G-JKY9VNJSWP['"]\);\s*<\/script>/gi, "");
+const GA4_TAG = `<!-- Google tag (gtag.js) -->
+<script async src="${GA4_SRC}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${GA4_ID}');
+</script>`;
+html = html.replace("</head>", `${GA4_TAG}\n</head>`);
+
 // Install GiddyUp exactly once near the end of body.
 html = html.replace(/\s*<script[^>]*src=["']https:\/\/js\.giddyup\.io\/gulinkfixup\.js["'][^>]*><\/script>/gi, "");
 html = html.replace(
@@ -266,6 +304,8 @@ const requiredText = [
   'id="evidence"',
   "aff_id=34379",
   GIDDYUP_SRC,
+  GA4_ID,
+  GA4_SRC,
   LIFESTYLE_ASSET,
   UGC_ASSET,
 ];
@@ -288,7 +328,6 @@ for (const className of [
   if (!classTokens.has(className)) throw new Error(`Missing expected class token: ${className}`);
 }
 
-// The old formula-adjacent product proof image is intentionally removed.
 if (classTokens.has("pawprint-product-proof")) {
   throw new Error("Formula-adjacent product proof image should have been removed");
 }
@@ -305,6 +344,12 @@ for (const oldCopy of [
 const giddyupCount = (html.match(/https:\/\/js\.giddyup\.io\/gulinkfixup\.js/g) || []).length;
 if (giddyupCount !== 1) throw new Error(`Expected exactly one GiddyUp script, found ${giddyupCount}`);
 
+const ga4LoaderCount = (html.match(/https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-JKY9VNJSWP/g) || []).length;
+const ga4ConfigCount = (html.match(/gtag\(['"]config['"],\s*['"]G-JKY9VNJSWP['"]\)/g) || []).length;
+if (ga4LoaderCount !== 1 || ga4ConfigCount !== 1) {
+  throw new Error(`Expected exactly one GA4 tag/config, found loader=${ga4LoaderCount}, config=${ga4ConfigCount}`);
+}
+
 for (const assetName of ["pawprint-lifestyle.jpg", "pawprint-ugc.jpg"]) {
   const generatedPath = path.join(assetDir, assetName);
   if (!fs.existsSync(generatedPath)) throw new Error(`Missing generated image asset: ${assetName}`);
@@ -317,7 +362,6 @@ for (const markdownMarker of ["## ", "### ", "**"]) {
   }
 }
 
-// Confirm there is NO inserted image between the formula paragraph and the next section heading.
 const formulaIndex = renderedArticle.indexOf("The formula contains NAD+");
 const whatMakesIndex = renderedArticle.indexOf("What Makes");
 const betweenFormulaAndHeading = renderedArticle.slice(formulaIndex, whatMakesIndex);
@@ -333,4 +377,4 @@ if (!(finalMemoryIndex >= 0 && bottomProofIndex > finalMemoryIndex && ctaIndex >
 }
 
 fs.writeFileSync(filePath, html);
-console.log("Completed PawPrint image cleanup: removed formula proof image, materialized uploaded images as static assets, preserved affiliate links and tracking");
+console.log("Completed PawPrint build: valid static images, GA4, GiddyUp, affiliate links, and requested image placement");
