@@ -1,16 +1,36 @@
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const outputHtml = path.join(root, "dist", "spa", "index.html");
 const assetDir = path.join(root, "dist", "spa", "assets");
-const chunkDir = path.join(root, "content", "pawprint-dementia", "clean-v3");
+const lifestyleChunkDir = path.join(root, "content", "pawprint-dementia", "clean-v3");
+const ugcChunkDir = path.join(root, "content", "pawprint-dementia", "clean-v6");
+
+const IMAGE_SOURCES = {
+  lifestyle: {
+    dir: lifestyleChunkDir,
+    parts: ["00", "01", "02"],
+    expectedBytes: 40880,
+    expectedSha256: "f5d8504ca88ba6b282081ab33f4e5ee98f9bedc7d3ecf820496d4292b8e0fbe4",
+  },
+  ugc: {
+    dir: ugcChunkDir,
+    parts: ["00", "01", "02", "03", "04", "05"],
+    expectedBytes: 37816,
+    expectedSha256: "5b9261a1a193bc4f3188df04c41d14f4c27b8726575ada0693c776b21f632fb7",
+  },
+};
 
 function readCleanWebp(prefix) {
-  const chunkPaths = ["00", "01", "02"].map((part) =>
-    path.join(chunkDir, `${prefix}-${part}.b64`),
+  const source = IMAGE_SOURCES[prefix];
+  if (!source) throw new Error(`Unknown clean image source: ${prefix}`);
+
+  const chunkPaths = source.parts.map((part) =>
+    path.join(source.dir, `${prefix}-${part}.b64`),
   );
 
   for (const chunkPath of chunkPaths) {
@@ -41,7 +61,6 @@ function readCleanWebp(prefix) {
     );
   }
 
-  // RIFF stores the file size minus the first 8 bytes at offset 4.
   const declaredSize = buffer.readUInt32LE(4) + 8;
   if (declaredSize !== buffer.length) {
     throw new Error(
@@ -49,10 +68,11 @@ function readCleanWebp(prefix) {
     );
   }
 
-  // File size is not a quality or validity signal for WebP. A highly compressed,
-  // perfectly valid image can be well below an arbitrary 80–85 KB threshold.
-  if (buffer.length < 1024) {
-    throw new Error(`Clean ${prefix} image is implausibly small (${buffer.length} bytes)`);
+  const sha256 = crypto.createHash("sha256").update(buffer).digest("hex");
+  if (buffer.length !== source.expectedBytes || sha256 !== source.expectedSha256) {
+    throw new Error(
+      `Clean ${prefix} image integrity mismatch (bytes ${buffer.length}/${source.expectedBytes}, sha256 ${sha256}/${source.expectedSha256})`,
+    );
   }
 
   return buffer;
@@ -87,5 +107,5 @@ if (html.includes("/assets/pawprint-lifestyle.jpg") || html.includes("/assets/pa
 fs.writeFileSync(outputHtml, html);
 
 console.log(
-  `Replaced corrupted PawPrint photos with validated clean WebP assets (${lifestyle.length} / ${ugc.length} bytes)`,
+  `Replaced corrupted PawPrint photos with verified clean WebP assets (${lifestyle.length} / ${ugc.length} bytes)`,
 );
