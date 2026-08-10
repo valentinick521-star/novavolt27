@@ -26,7 +26,7 @@ const HERO_IMAGE = `<figure class="editorial-image">
 </figure>`;
 
 const UGC_IMAGE = `<figure class="editorial-image pawprint-ugc-image" style="margin:28px 0 24px;">
-<img alt="Senior dog with PawPrint Lab daily liquid supplement" decoding="async" loading="lazy" width="640" height="546" src="/assets/pawprint-ugc.webp"/>
+<img alt="Senior dog with PawPrint Lab daily liquid supplement" decoding="async" loading="lazy" width="1080" height="921" src="/assets/pawprint-ugc.webp"/>
 </figure>`;
 
 const SKIM_CSS = `
@@ -60,7 +60,7 @@ const SKIM_CSS = `
 }
 .article-shell .article-copy a.pawprint-inline-link:hover,
 .article-shell .article-copy a.pawprint-inline-link:focus-visible{color:#0b3f91 !important;}
-.article-shell .pawprint-ugc-image img{width:100%;height:auto;display:block;}
+.article-shell .pawprint-ugc-image img{width:100%;max-width:100%;height:auto!important;display:block;object-fit:contain;aspect-ratio:auto 1080 / 921;}
 `;
 
 function escapeHtml(value) {
