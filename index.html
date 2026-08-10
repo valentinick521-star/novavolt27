@@ -74,7 +74,7 @@
 
     <script type="module" src="/client/App.tsx"></script>
 
-    <!-- Affiliate link tracking -->
+    <!-- Affiliate campaign metadata -->
     <script>
       (function () {
         function clean(value) {
@@ -84,12 +84,6 @@
         function getTrackingData() {
           const pageParams = new URLSearchParams(window.location.search);
 
-          const googleClickId =
-            clean(pageParams.get("sub2")) ||
-            clean(pageParams.get("gclid")) ||
-            clean(pageParams.get("gbraid")) ||
-            clean(pageParams.get("wbraid"));
-
           const keyword =
             clean(pageParams.get("sub4")) ||
             clean(pageParams.get("utm_term"));
@@ -97,31 +91,13 @@
           const campaignId = clean(pageParams.get("utm_campaign"));
           const adgroupId = clean(pageParams.get("adgroupid"));
 
-          const trackingData = {
+          return {
             source_id: "google",
-
-            // AdsBranded / Everflow tracking setup
             sub1: campaignId, // Campaign ID
-            sub2: googleClickId, // Google Click ID / GCLID
             sub3: adgroupId, // Ad Group ID
             sub4: keyword, // Keyword
             sub5: "adv_compare_effort_gap_v1", // Prelander / angle label
           };
-
-          // Backup Google click ID fields
-          if (clean(pageParams.get("gclid"))) {
-            trackingData.gclid = clean(pageParams.get("gclid"));
-          }
-
-          if (clean(pageParams.get("gbraid"))) {
-            trackingData.gbraid = clean(pageParams.get("gbraid"));
-          }
-
-          if (clean(pageParams.get("wbraid"))) {
-            trackingData.wbraid = clean(pageParams.get("wbraid"));
-          }
-
-          return trackingData;
         }
 
         function appendTrackingToLink(link) {
