@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const sourceDir = path.join(root, "assets");
 const outputDir = path.join(root, "dist", "spa", "assets");
-const outputPath = path.join(outputDir, "pawprint-ugc.webp");
+const outputPath = path.join(outputDir, "pawprint-ugc-20260810.webp");
 
 const EXPECTED_BYTES = 58998;
 const EXPECTED_SHA256 = "54de82e13c3eedd04a138cc8b523477af8f01711e4de72fa262c21e4b2dd36da";
