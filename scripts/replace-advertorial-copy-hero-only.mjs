@@ -224,7 +224,7 @@ const requiredText = [
   headline,
   "You’ve already seen the changes.",
   "without enough NAD+ the cells in your dog, don’t have enough energy to repair themselves.",
-  "So, What Exactly Is PawPrint Protocol?",
+  "So, What Exactly Is",
   "What Really Matters",
   "A Special Offer For Our Readers",
   "25% savings",
