@@ -26,12 +26,13 @@ if (!ctaMatch) {
 const affiliateHref = ctaMatch[1];
 
 const redesignedCta = `<div class="healthinsider-bottom-cta">
-  <div class="healthinsider-bottom-cta__headline">Try PawPrint Protocol for 90 Days With a Money-Back Guarantee</div>
+  <div class="healthinsider-bottom-cta__headline">Continue to PawPrint Protocol’s Official Website</div>
+  <div class="healthinsider-bottom-cta__subcopy">You’ll be taken directly to pawprintlab.com, the official website for PawPrint Protocol.</div>
   <a class="healthinsider-bottom-cta__button offer-link" href="${affiliateHref}" target="_blank" rel="sponsored noopener noreferrer">
-    <span>CHECK PAWPRINT PROTOCOL AVAILABILITY</span>
+    <span>VISIT THE OFFICIAL PAWPRINT WEBSITE</span>
     <span class="healthinsider-bottom-cta__arrow" aria-hidden="true">→</span>
   </a>
-  <div class="healthinsider-bottom-cta__note">90-day money-back guarantee · Individual results vary</div>
+  <div class="healthinsider-bottom-cta__note">pawprintlab.com · 90-day money-back guarantee</div>
 </div>`;
 
 article = article.replace(ctaPattern, redesignedCta);
@@ -39,18 +40,29 @@ html = html.replace(articleMatch[0], article);
 
 const CTA_CSS = `
 .healthinsider-bottom-cta{
-  max-width:680px;
+  max-width:720px;
   margin:34px auto 6px;
+  padding:27px 26px 28px;
+  border:1px solid #e2e2e2;
+  border-radius:4px;
+  background:#f3f3f3;
   text-align:center;
 }
 .healthinsider-bottom-cta__headline{
   max-width:620px;
-  margin:0 auto 17px;
+  margin:0 auto 8px;
   color:#171717;
   font-size:24px;
   font-weight:800;
   line-height:1.28;
   letter-spacing:-.018em;
+}
+.healthinsider-bottom-cta__subcopy{
+  max-width:610px;
+  margin:0 auto 18px;
+  color:#555;
+  font-size:15px;
+  line-height:1.5;
 }
 .healthinsider-bottom-cta__button,
 .healthinsider-bottom-cta__button:visited{
@@ -91,17 +103,25 @@ const CTA_CSS = `
   transform:translateY(-1px);
 }
 .healthinsider-bottom-cta__note{
-  margin-top:11px;
+  margin-top:12px;
   color:#777;
   font-size:12px;
   line-height:1.4;
 }
 @media(max-width:600px){
-  .healthinsider-bottom-cta{margin-top:28px;}
+  .healthinsider-bottom-cta{
+    margin-top:28px;
+    padding:23px 16px 24px;
+  }
   .healthinsider-bottom-cta__headline{
     font-size:21px;
     line-height:1.3;
-    margin-bottom:15px;
+    margin-bottom:7px;
+  }
+  .healthinsider-bottom-cta__subcopy{
+    font-size:14px;
+    line-height:1.45;
+    margin-bottom:16px;
   }
   .healthinsider-bottom-cta__button,
   .healthinsider-bottom-cta__button:visited{
@@ -120,9 +140,10 @@ html = html.replace("</head>", `<style data-ncr-bottom-cta>${CTA_CSS}</style>\n<
 
 for (const marker of [
   "healthinsider-bottom-cta",
-  "Try PawPrint Protocol for 90 Days With a Money-Back Guarantee",
-  "CHECK PAWPRINT PROTOCOL AVAILABILITY",
-  "90-day money-back guarantee · Individual results vary",
+  "Continue to PawPrint Protocol’s Official Website",
+  "You’ll be taken directly to pawprintlab.com, the official website for PawPrint Protocol.",
+  "VISIT THE OFFICIAL PAWPRINT WEBSITE",
+  "pawprintlab.com · 90-day money-back guarantee",
 ]) {
   if (!html.includes(marker)) {
     throw new Error(`Missing expected redesigned CTA marker: ${marker}`);
@@ -134,4 +155,4 @@ if ((html.match(/healthinsider-bottom-cta__button/g) || []).length < 1) {
 }
 
 fs.writeFileSync(filePath, html);
-console.log("Restyled final PawPrint CTA to the Health Insider-inspired layout");
+console.log("Restyled final PawPrint CTA with official-site reassurance and gray panel");
