@@ -15,8 +15,11 @@ const BOTTOM_BESTSELLER_IMAGE = `<figure class="editorial-image pawprint-bottom-
 <img alt="PawPrint Protocol best-seller, over 100,000 units sold, 90-day guarantee"
   decoding="async"
   loading="lazy"
-  src="${BESTSELLER_BASE}&width=1445"
-  srcset="${BESTSELLER_BASE}&width=850 850w, ${BESTSELLER_BASE}&width=1445 1445w"
+  fetchpriority="low"
+  width="1000"
+  height="1000"
+  src="${BESTSELLER_BASE}&width=780"
+  srcset="${BESTSELLER_BASE}&width=480 480w, ${BESTSELLER_BASE}&width=780 780w, ${BESTSELLER_BASE}&width=1000 1000w"
   sizes="(max-width: 780px) calc(100vw - 48px), 780px"/>
 </figure>`;
 
@@ -60,7 +63,8 @@ if (/pawprint-lifestyle-image|pawprint-ugc-image/.test(article)) {
 html = html.replace(articleMatch[0], article);
 
 // The GiddyUp script is created by the preceding advertorial build step.
-// Move that existing single tag into <head>; do not create a duplicate.
+// Keep the existing single tag in <head>, but defer execution so it does not
+// block HTML parsing or rendering.
 const giddyupScriptMatch = html.match(
   /<script[^>]*src=["'][^"']*gulinkfixup\.js["'][^>]*><\/script>/i,
 );
@@ -69,7 +73,10 @@ if (!giddyupScriptMatch) {
 }
 
 html = html.replace(giddyupScriptMatch[0], "");
-html = html.replace("</head>", `${giddyupScriptMatch[0]}\n</head>`);
+const deferredGiddyupScript = /\bdefer\b/i.test(giddyupScriptMatch[0])
+  ? giddyupScriptMatch[0]
+  : giddyupScriptMatch[0].replace("<script", "<script defer");
+html = html.replace("</head>", `${deferredGiddyupScript}\n</head>`);
 
 const giddyupScripts =
   html.match(/<script[^>]*src=["'][^"']*gulinkfixup\.js["'][^>]*><\/script>/gi) || [];
@@ -79,10 +86,72 @@ if (giddyupScripts.length !== 1) {
   );
 }
 
-if (!/<head>[\s\S]*gulinkfixup\.js[\s\S]*<\/head>/i.test(html)) {
-  throw new Error("GiddyUp click-ID script was not moved into <head>");
+if (!/<head>[\s\S]*<script[^>]*\bdefer\b[^>]*gulinkfixup\.js[\s\S]*<\/head>/i.test(html)) {
+  throw new Error("GiddyUp click-ID script was not deferred in <head>");
+}
+
+// Mobile performance patch: the original hero is a 6000x3376 JPEG (~567 KiB)
+// even though it renders at roughly article width. Route it through the same
+// responsive Next.js image endpoint used by the source publisher, give the
+// browser explicit intrinsic dimensions, and preload the responsive candidate.
+const HERO_ORIGINAL =
+  "https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg";
+const HERO_ENCODED = encodeURIComponent(HERO_ORIGINAL);
+const heroUrl = (width) =>
+  `https://www.theepochtimes.com/_next/image?url=${HERO_ENCODED}&w=${width}&q=70`;
+const HERO_640 = heroUrl(640).replace(/&/g, "&amp;");
+const HERO_828 = heroUrl(828).replace(/&/g, "&amp;");
+const HERO_1080 = heroUrl(1080).replace(/&/g, "&amp;");
+const HERO_SRCSET = `${HERO_640} 640w, ${HERO_828} 828w, ${HERO_1080} 1080w`;
+const HERO_SIZES = "(max-width: 780px) calc(100vw - 48px), 780px";
+
+const optimizedHero = `<img alt="Senior dog"
+  width="6000"
+  height="3376"
+  loading="eager"
+  decoding="async"
+  fetchpriority="high"
+  src="${HERO_828}"
+  srcset="${HERO_SRCSET}"
+  sizes="${HERO_SIZES}"/>`;
+
+const heroPattern = /<img\s+alt=["']Senior dog["'][^>]*>/i;
+if (!heroPattern.test(html)) {
+  throw new Error("Could not find the top hero image for performance optimization");
+}
+html = html.replace(heroPattern, optimizedHero);
+
+// Remove the old high-priority logo preload so it does not compete with the
+// actual LCP image on a constrained mobile connection.
+html = html.replace(
+  /\s*<link\s+rel=["']preload["']\s+as=["']image["']\s+href=["'][^"']*badcc4098d254fadb81b2c01ff7bb98c[^"']*["'][^>]*>/gi,
+  "",
+);
+
+// Ensure only one responsive hero preload/preconnect is present.
+html = html.replace(/\s*<link[^>]+data-ncr-hero-preload[^>]*>/gi, "");
+html = html.replace(/\s*<link[^>]+data-ncr-epoch-preconnect[^>]*>/gi, "");
+
+const HERO_PRELOAD = `<link data-ncr-epoch-preconnect rel="preconnect" href="https://www.theepochtimes.com" crossorigin />
+<link data-ncr-hero-preload rel="preload" as="image"
+  href="${HERO_828}"
+  imagesrcset="${HERO_SRCSET}"
+  imagesizes="${HERO_SIZES}"
+  fetchpriority="high" />`;
+html = html.replace("</head>", `${HERO_PRELOAD}\n</head>`);
+
+if (!html.includes('width="6000"') || !html.includes('height="3376"')) {
+  throw new Error("Hero intrinsic dimensions were not added");
+}
+if (!html.includes("/_next/image?url=") || !html.includes("imagesrcset=")) {
+  throw new Error("Responsive hero delivery/preload was not added");
+}
+if (/badcc4098d254fadb81b2c01ff7bb98c[^>]*fetchpriority=["']high["']/i.test(html)) {
+  throw new Error("Old high-priority logo preload remained");
 }
 
 fs.writeFileSync(filePath, html);
 
-console.log("Kept the top and bottom advertorial images; middle two remain removed; moved GiddyUp script into head");
+console.log(
+  "Kept top/bottom advertorial images, optimized responsive image delivery and LCP, and deferred GiddyUp without changing tracking logic",
+);
