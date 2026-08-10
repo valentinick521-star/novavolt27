@@ -40,8 +40,9 @@ html = html.replace(articleMatch[0], article);
 
 const CTA_CSS = `
 .healthinsider-bottom-cta{
-  max-width:720px;
-  margin:34px auto 6px;
+  width:100%;
+  max-width:none;
+  margin:34px 0 6px;
   padding:27px 26px 28px;
   border:1px solid #e2e2e2;
   border-radius:4px;
