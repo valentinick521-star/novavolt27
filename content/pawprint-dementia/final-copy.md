@@ -68,9 +68,9 @@ And because it’s a liquid, you can easily add it to your dog’s food each day
 
 But PawPrint doesn’t stop at NAD+, it also has:
 
-- **NMN** — gives the body the **building blocks** it can use to make NAD+.
-- **CoQ10** — helps the cell’s **little power plants** keep making energy.
-- **Resveratrol** — works like a **maintenance crew**, helping support the systems tied to healthy aging.
+- **NMN** — gives the body the building blocks it can use to make NAD+.
+- **CoQ10** — helps the cell’s little power plants keep making energy.
+- **Resveratrol** — works like a maintenance crew, helping support the systems tied to healthy aging.
 
 Together, they help support the same cellular system from different sides.
 
@@ -88,7 +88,7 @@ Those little moments when they seem more like themselves again.
 
 Many owners of senior dogs using PawPrint have reported seeing their dogs become **more alert and more engaged** after adding the formula to their routine.
 
-**Those are the little moments that mean everything.**
+Those are the little moments that mean everything.
 
 And it’s one reason thousands of dog parents have already decided to give PawPrint Protocol a try.
 
@@ -96,7 +96,7 @@ And it’s one reason thousands of dog parents have already decided to give PawP
 
 After looking into PawPrint Protocol, we reached out to the company to see if they could offer something special to readers of this article.
 
-**PawPrint agreed to give our readers access to a discounted price.**
+PawPrint agreed to give our readers access to a discounted price.
 
 Through this page, you can currently get the regular **$89 bottle for $69**, with an additional **25% savings** available through the subscription option.
 
