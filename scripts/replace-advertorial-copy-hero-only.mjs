@@ -91,7 +91,7 @@ function plainHeading(value) {
 }
 
 function headingId(text) {
-  if (text === "So the real question becomes: is there a way to support that NAD+ directly?")
+  if (text.toLowerCase() === "so the real question becomes: is there a way to support that nad+ directly?")
     return "approaches";
   if (text === "So, What Exactly Is PawPrint Protocol?") return "cellular-energy";
   if (text === "What Really Matters") return "evidence";
@@ -223,7 +223,7 @@ html = html.replace(
 const requiredText = [
   headline,
   "You’ve already seen the changes.",
-  "without enough NAD+ the cells in your dog, don’t have enough energy to repair themselves.",
+  "don’t have enough energy to repair themselves.",
   "So, What Exactly Is",
   "What Really Matters",
   "A Special Offer For Our Readers",
