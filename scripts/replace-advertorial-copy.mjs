@@ -32,9 +32,13 @@ const AFFILIATE_URL = "https://pawprintlab.com/products/pawprint-lab/?lpid=1160&
 const AFFILIATE_HREF = AFFILIATE_URL.replace(/&/g, "&amp;");
 const GIDDYUP_SRC = "https://js.giddyup.io/gulinkfixup.js";
 
-const HERO_IMAGE = '<figure class="editorial-image">\n<img alt="Senior dog" decoding="async" fetchpriority="high" src="https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg"/>\n</figure>';
+const HERO_IMAGE = `<figure class="editorial-image">
+<img alt="Senior dog" decoding="async" fetchpriority="high" src="https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg"/>
+</figure>`;
 
-const PRODUCT_PROOF_IMAGE = '<figure class="editorial-image pawprint-product-proof" style="margin-top:28px;">\n<img alt="PawPrint Protocol product proof" decoding="async" loading="lazy" src="https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505"/>\n</figure>';
+const PRODUCT_PROOF_IMAGE = `<figure class="editorial-image pawprint-product-proof" style="margin-top:28px;">
+<img alt="PawPrint Protocol product proof" decoding="async" loading="lazy" src="https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505"/>
+</figure>`;
 
 const LIFESTYLE_IMAGE = `<figure class="editorial-image pawprint-lifestyle-image" style="margin-top:28px;">
 <img alt="Pawprint Lab liquid supplement beside a dog’s paw" decoding="async" loading="lazy" src="${lifestyleImageData}"/>
@@ -44,7 +48,9 @@ const UGC_IMAGE = `<figure class="editorial-image pawprint-ugc-image" style="mar
 <img alt="Dog beside a bottle of Pawprint Lab liquid supplement" decoding="async" loading="lazy" src="${ugcImageData}"/>
 </figure>`;
 
-const BOTTOM_BESTSELLER_IMAGE = '<figure class="editorial-image pawprint-bottom-proof" style="margin:28px 0 24px;">\n<img alt="PawPrint Protocol best-seller, over 100,000 units sold, 90-day guarantee" decoding="async" loading="lazy" src="https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505"/>\n</figure>';
+const BOTTOM_BESTSELLER_IMAGE = `<figure class="editorial-image pawprint-bottom-proof" style="margin:28px 0 24px;">
+<img alt="PawPrint Protocol best-seller, over 100,000 units sold, 90-day guarantee" decoding="async" loading="lazy" src="https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505"/>
+</figure>`;
 
 const SKIM_CSS = `
 .article-shell .article-copy h2.article-section-heading{
@@ -131,10 +137,8 @@ function renderCopy(markdown) {
     if (!raw) continue;
 
     if (raw === "**[TRY PAWPRINT PROTOCOL RISK-FREE]**") {
-      if (!bottomProofInserted) {
-        out.push(BOTTOM_BESTSELLER_IMAGE);
-        bottomProofInserted = true;
-      }
+      out.push(BOTTOM_BESTSELLER_IMAGE);
+      bottomProofInserted = true;
       out.push(
         '<div class="cta-block" style="margin-bottom:0;">' +
           `<a class="cta-button offer-link" href="${AFFILIATE_HREF}" target="_blank" rel="sponsored noopener noreferrer">TRY PAWPRINT PROTOCOL RISK-FREE</a>` +
@@ -153,15 +157,16 @@ function renderCopy(markdown) {
       const source = raw.slice(3);
       const text = plainHeading(source);
 
-      if (text === "What Makes Pawprint Protocol Different" && !productProofInserted) {
+      // These section boundaries are deterministic anchors for image placement.
+      if (text === "What Makes Pawprint Protocol Different") {
         out.push(PRODUCT_PROOF_IMAGE);
         productProofInserted = true;
       }
-      if (text === "What Could the Next 90 Days Look Like?" && !lifestyleInserted) {
+      if (text === "What Could the Next 90 Days Look Like?") {
         out.push(LIFESTYLE_IMAGE);
         lifestyleInserted = true;
       }
-      if (text === "That’s Why You Get 90 Days to Try It" && !ugcInserted) {
+      if (text === "That’s Why You Get 90 Days to Try It") {
         out.push(UGC_IMAGE);
         ugcInserted = true;
       }
@@ -197,9 +202,7 @@ function renderCopy(markdown) {
 const article = `<article class="article-shell">
 <h1 class="balanced-headline">${headline}</h1>
 <p class="dek">${subheadline}</p>
-
 ${HERO_IMAGE}
-
 <div class="article-intro article-copy" id="senior-dogs">
 ${renderCopy(finalCopy)}
 </div>
@@ -213,6 +216,7 @@ html = html.replace(/<article class="article-shell">[\s\S]*?<\/article>/, articl
 html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${headline}</title>`);
 html = html.replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${subheadline}" />`);
 
+// Keep any legacy offer-link handler pointed at the same affiliate destination.
 html = html.replace(
   /const OFFER_URL = ["'][^"']*["'];/,
   `const OFFER_URL = ${JSON.stringify(AFFILIATE_URL)};`,
@@ -221,25 +225,20 @@ html = html.replace(
 html = html.replace(/<style data-ncr-skim-format>[\s\S]*?<\/style>\s*/g, "");
 html = html.replace("</head>", `<style data-ncr-skim-format>${SKIM_CSS}</style>\n</head>`);
 
-// Install the GiddyUp link-fixup script exactly once near the end of <body>.
+// Install GiddyUp exactly once near the end of body.
 html = html.replace(/\s*<script[^>]*src=["']https:\/\/js\.giddyup\.io\/gulinkfixup\.js["'][^>]*><\/script>/gi, "");
 html = html.replace(
   "</body>",
   `<script type="text/javascript" src="${GIDDYUP_SRC}"></script>\n</body>`,
 );
 
-const requiredMarkers = [
+const requiredText = [
   headline,
   "Over 100,000 dog owners",
   "But the problem with most supplements is they only address symptoms on the surface, while the underlying structure keeps degrading.",
   "That's the dog I remember.",
   "TRY PAWPRINT PROTOCOL RISK-FREE",
   'target="_blank"',
-  'class="pawprint-inline-link"',
-  'class="pawprint-product-proof"',
-  'class="pawprint-lifestyle-image"',
-  'class="pawprint-ugc-image"',
-  'class="pawprint-bottom-proof"',
   'id="senior-dogs"',
   'id="approaches"',
   'id="cellular-energy"',
@@ -248,8 +247,25 @@ const requiredMarkers = [
   "aff_id=34379",
   GIDDYUP_SRC,
 ];
-for (const marker of requiredMarkers) {
+for (const marker of requiredText) {
   if (!html.includes(marker)) throw new Error(`Missing expected replacement copy/formatting: ${marker}`);
+}
+
+// Validate CSS class tokens correctly even when an element has multiple classes.
+const classTokens = new Set(
+  [...html.matchAll(/class=["']([^"']+)["']/g)]
+    .flatMap((match) => match[1].trim().split(/\s+/)),
+);
+for (const className of [
+  "pawprint-inline-link",
+  "pawprint-product-proof",
+  "pawprint-lifestyle-image",
+  "pawprint-ugc-image",
+  "pawprint-bottom-proof",
+  "article-section-heading",
+  "article-timeline-heading",
+]) {
+  if (!classTokens.has(className)) throw new Error(`Missing expected class token: ${className}`);
 }
 
 for (const oldCopy of [
@@ -271,5 +287,20 @@ for (const markdownMarker of ["## ", "### ", "**"]) {
   }
 }
 
+// Verify the key image placements are in the requested order.
+const formulaIndex = renderedArticle.indexOf("The formula contains NAD+");
+const productProofIndex = renderedArticle.indexOf("pawprint-product-proof");
+const whatMakesIndex = renderedArticle.indexOf("What Makes");
+if (!(formulaIndex >= 0 && productProofIndex > formulaIndex && whatMakesIndex > productProofIndex)) {
+  throw new Error("Product proof image is not positioned directly after the formula introduction");
+}
+
+const finalMemoryIndex = renderedArticle.lastIndexOf("More of the dog you remember.");
+const bottomProofIndex = renderedArticle.indexOf("pawprint-bottom-proof");
+const ctaIndex = renderedArticle.indexOf("TRY PAWPRINT PROTOCOL RISK-FREE");
+if (!(finalMemoryIndex >= 0 && bottomProofIndex > finalMemoryIndex && ctaIndex > bottomProofIndex)) {
+  throw new Error("Bottom best-seller image is not positioned between the final memory line and CTA");
+}
+
 fs.writeFileSync(filePath, html);
-console.log("Completed PawPrint copy, deterministic image placement, new-tab affiliate links, and single GiddyUp tracking install");
+console.log("Completed PawPrint copy, deterministic image placement, new-tab affiliate links, robust validation, and single GiddyUp tracking install");
