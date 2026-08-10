@@ -208,7 +208,7 @@ html = html.replace(
   "",
 );
 const GA4_TAG = `<!-- Google tag (gtag.js) -->
-<script async src="${GA4_SRC}"></script>
+<script async fetchpriority="low" src="${GA4_SRC}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
