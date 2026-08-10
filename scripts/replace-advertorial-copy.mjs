@@ -8,6 +8,7 @@ const filePath = path.join(root, "dist", "spa", "index.html");
 const copyPath = path.join(root, "content", "pawprint-dementia", "final-copy.md");
 const lifestyleImagePath = path.join(root, "content", "pawprint-dementia", "lifestyle-image.txt");
 const ugcImagePath = path.join(root, "content", "pawprint-dementia", "ugc-image.txt");
+const assetDir = path.join(root, "dist", "spa", "assets");
 
 let html = fs.readFileSync(filePath, "utf8");
 const lifestyleImageData = fs.readFileSync(lifestyleImagePath, "utf8").trim();
@@ -31,25 +32,43 @@ const subheadline = "If your senior dog is getting lost in familiar rooms, pacin
 const AFFILIATE_URL = "https://pawprintlab.com/products/pawprint-lab/?lpid=1160&source_id=DL&utm_source=34379&utm_medium=&utm_term=1160&aff_id=34379&sub_id=&req_id=&oid=1160&device_type=&country_name=&_ef_transaction_id=&oid=1160&affid=34379";
 const AFFILIATE_HREF = AFFILIATE_URL.replace(/&/g, "&amp;");
 const GIDDYUP_SRC = "https://js.giddyup.io/gulinkfixup.js";
+const BESTSELLER_BASE = "https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505";
 
-const HERO_IMAGE = `<figure class="editorial-image">
-<img alt="Senior dog" decoding="async" fetchpriority="high" src="https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg"/>
-</figure>`;
+function materializeDataUri(dataUri, filename) {
+  const match = dataUri.match(/^data:image\/(?:jpeg|jpg|png|webp);base64,(.+)$/s);
+  if (!match) throw new Error(`Invalid image data URI for ${filename}`);
 
-const PRODUCT_PROOF_IMAGE = `<figure class="editorial-image pawprint-product-proof" style="margin-top:28px;">
-<img alt="PawPrint Protocol product proof" decoding="async" loading="lazy" src="https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505"/>
-</figure>`;
+  fs.mkdirSync(assetDir, { recursive: true });
+  const outputPath = path.join(assetDir, filename);
+  fs.writeFileSync(outputPath, Buffer.from(match[1], "base64"));
+
+  const size = fs.statSync(outputPath).size;
+  if (size < 20000) throw new Error(`Generated image asset is unexpectedly small: ${filename} (${size} bytes)`);
+  return `/assets/${filename}`;
+}
+
+// Turn uploaded image data into normal static image files instead of huge inline data URLs.
+// This is more reliable in browsers and avoids the rendering issues we saw with embedded images.
+const LIFESTYLE_ASSET = materializeDataUri(lifestyleImageData, "pawprint-lifestyle.jpg");
+const UGC_ASSET = materializeDataUri(ugcImageData, "pawprint-ugc.jpg");
+
+const HERO_IMAGE = '<figure class="editorial-image">\n<img alt="Senior dog" decoding="async" fetchpriority="high" src="https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg"/>\n</figure>';
 
 const LIFESTYLE_IMAGE = `<figure class="editorial-image pawprint-lifestyle-image" style="margin-top:28px;">
-<img alt="Pawprint Lab liquid supplement beside a dog’s paw" decoding="async" loading="lazy" src="${lifestyleImageData}"/>
+<img alt="Pawprint Lab liquid supplement beside a dog’s paw" decoding="async" loading="lazy" src="${LIFESTYLE_ASSET}"/>
 </figure>`;
 
 const UGC_IMAGE = `<figure class="editorial-image pawprint-ugc-image" style="margin-top:28px;">
-<img alt="Dog beside a bottle of Pawprint Lab liquid supplement" decoding="async" loading="lazy" src="${ugcImageData}"/>
+<img alt="Dog beside a bottle of Pawprint Lab liquid supplement" decoding="async" loading="lazy" src="${UGC_ASSET}"/>
 </figure>`;
 
 const BOTTOM_BESTSELLER_IMAGE = `<figure class="editorial-image pawprint-bottom-proof" style="margin:28px 0 24px;">
-<img alt="PawPrint Protocol best-seller, over 100,000 units sold, 90-day guarantee" decoding="async" loading="lazy" src="https://pawprintlab.com/cdn/shop/files/PawPrint_carousel_12_1x1_51956652-502d-4b17-9fcc-e7b94a15c8bf.jpg?v=1771763505"/>
+<img alt="PawPrint Protocol best-seller, over 100,000 units sold, 90-day guarantee"
+  decoding="async"
+  loading="lazy"
+  src="${BESTSELLER_BASE}&width=1445"
+  srcset="${BESTSELLER_BASE}&width=850 850w, ${BESTSELLER_BASE}&width=1445 1445w"
+  sizes="(max-width: 780px) calc(100vw - 48px), 780px"/>
 </figure>`;
 
 const SKIM_CSS = `
@@ -83,13 +102,18 @@ const SKIM_CSS = `
 }
 .article-shell .article-copy a.pawprint-inline-link:hover,
 .article-shell .article-copy a.pawprint-inline-link:focus-visible{color:#0b3f91 !important;}
-.article-shell .pawprint-product-proof img,
+.article-shell .pawprint-lifestyle-image{
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+}
 .article-shell .pawprint-lifestyle-image img,
 .article-shell .pawprint-ugc-image img,
 .article-shell .pawprint-bottom-proof img{
   width:100%;
   height:auto;
   display:block;
+  image-rendering:auto;
 }
 `;
 
@@ -127,7 +151,6 @@ function headingId(text) {
 function renderCopy(markdown) {
   const lines = markdown.split(/\r?\n/);
   const out = [];
-  let productProofInserted = false;
   let lifestyleInserted = false;
   let ugcInserted = false;
   let bottomProofInserted = false;
@@ -137,8 +160,10 @@ function renderCopy(markdown) {
     if (!raw) continue;
 
     if (raw === "**[TRY PAWPRINT PROTOCOL RISK-FREE]**") {
-      out.push(BOTTOM_BESTSELLER_IMAGE);
-      bottomProofInserted = true;
+      if (!bottomProofInserted) {
+        out.push(BOTTOM_BESTSELLER_IMAGE);
+        bottomProofInserted = true;
+      }
       out.push(
         '<div class="cta-block" style="margin-bottom:0;">' +
           `<a class="cta-button offer-link" href="${AFFILIATE_HREF}" target="_blank" rel="sponsored noopener noreferrer">TRY PAWPRINT PROTOCOL RISK-FREE</a>` +
@@ -157,16 +182,11 @@ function renderCopy(markdown) {
       const source = raw.slice(3);
       const text = plainHeading(source);
 
-      // These section boundaries are deterministic anchors for image placement.
-      if (text === "What Makes Pawprint Protocol Different") {
-        out.push(PRODUCT_PROOF_IMAGE);
-        productProofInserted = true;
-      }
-      if (text === "What Could the Next 90 Days Look Like?") {
+      if (text === "What Could the Next 90 Days Look Like?" && !lifestyleInserted) {
         out.push(LIFESTYLE_IMAGE);
         lifestyleInserted = true;
       }
-      if (text === "That’s Why You Get 90 Days to Try It") {
+      if (text === "That’s Why You Get 90 Days to Try It" && !ugcInserted) {
         out.push(UGC_IMAGE);
         ugcInserted = true;
       }
@@ -191,7 +211,6 @@ function renderCopy(markdown) {
     out.push(`<p>${inlineMarkup(raw)}</p>`);
   }
 
-  if (!productProofInserted) throw new Error("Could not place product proof image before What Makes Pawprint Protocol Different");
   if (!lifestyleInserted) throw new Error("Could not place lifestyle image before the 90-day timeline");
   if (!ugcInserted) throw new Error("Could not place UGC image before the 90-day guarantee section");
   if (!bottomProofInserted) throw new Error("Could not place bottom best-seller image before the CTA");
@@ -202,7 +221,9 @@ function renderCopy(markdown) {
 const article = `<article class="article-shell">
 <h1 class="balanced-headline">${headline}</h1>
 <p class="dek">${subheadline}</p>
+
 ${HERO_IMAGE}
+
 <div class="article-intro article-copy" id="senior-dogs">
 ${renderCopy(finalCopy)}
 </div>
@@ -216,7 +237,6 @@ html = html.replace(/<article class="article-shell">[\s\S]*?<\/article>/, articl
 html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${headline}</title>`);
 html = html.replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${subheadline}" />`);
 
-// Keep any legacy offer-link handler pointed at the same affiliate destination.
 html = html.replace(
   /const OFFER_URL = ["'][^"']*["'];/,
   `const OFFER_URL = ${JSON.stringify(AFFILIATE_URL)};`,
@@ -246,19 +266,19 @@ const requiredText = [
   'id="evidence"',
   "aff_id=34379",
   GIDDYUP_SRC,
+  LIFESTYLE_ASSET,
+  UGC_ASSET,
 ];
 for (const marker of requiredText) {
   if (!html.includes(marker)) throw new Error(`Missing expected replacement copy/formatting: ${marker}`);
 }
 
-// Validate CSS class tokens correctly even when an element has multiple classes.
 const classTokens = new Set(
   [...html.matchAll(/class=["']([^"']+)["']/g)]
     .flatMap((match) => match[1].trim().split(/\s+/)),
 );
 for (const className of [
   "pawprint-inline-link",
-  "pawprint-product-proof",
   "pawprint-lifestyle-image",
   "pawprint-ugc-image",
   "pawprint-bottom-proof",
@@ -266,6 +286,11 @@ for (const className of [
   "article-timeline-heading",
 ]) {
   if (!classTokens.has(className)) throw new Error(`Missing expected class token: ${className}`);
+}
+
+// The old formula-adjacent product proof image is intentionally removed.
+if (classTokens.has("pawprint-product-proof")) {
+  throw new Error("Formula-adjacent product proof image should have been removed");
 }
 
 for (const oldCopy of [
@@ -280,6 +305,11 @@ for (const oldCopy of [
 const giddyupCount = (html.match(/https:\/\/js\.giddyup\.io\/gulinkfixup\.js/g) || []).length;
 if (giddyupCount !== 1) throw new Error(`Expected exactly one GiddyUp script, found ${giddyupCount}`);
 
+for (const assetName of ["pawprint-lifestyle.jpg", "pawprint-ugc.jpg"]) {
+  const generatedPath = path.join(assetDir, assetName);
+  if (!fs.existsSync(generatedPath)) throw new Error(`Missing generated image asset: ${assetName}`);
+}
+
 const renderedArticle = html.match(/<article class="article-shell">[\s\S]*?<\/article>/)?.[0] || "";
 for (const markdownMarker of ["## ", "### ", "**"]) {
   if (renderedArticle.includes(markdownMarker)) {
@@ -287,12 +317,12 @@ for (const markdownMarker of ["## ", "### ", "**"]) {
   }
 }
 
-// Verify the key image placements are in the requested order.
+// Confirm there is NO inserted image between the formula paragraph and the next section heading.
 const formulaIndex = renderedArticle.indexOf("The formula contains NAD+");
-const productProofIndex = renderedArticle.indexOf("pawprint-product-proof");
 const whatMakesIndex = renderedArticle.indexOf("What Makes");
-if (!(formulaIndex >= 0 && productProofIndex > formulaIndex && whatMakesIndex > productProofIndex)) {
-  throw new Error("Product proof image is not positioned directly after the formula introduction");
+const betweenFormulaAndHeading = renderedArticle.slice(formulaIndex, whatMakesIndex);
+if (formulaIndex < 0 || whatMakesIndex < 0 || /<figure\b/i.test(betweenFormulaAndHeading)) {
+  throw new Error("An image still appears between the formula paragraph and What Makes Pawprint Protocol Different");
 }
 
 const finalMemoryIndex = renderedArticle.lastIndexOf("More of the dog you remember.");
@@ -303,4 +333,4 @@ if (!(finalMemoryIndex >= 0 && bottomProofIndex > finalMemoryIndex && ctaIndex >
 }
 
 fs.writeFileSync(filePath, html);
-console.log("Completed PawPrint copy, deterministic image placement, new-tab affiliate links, robust validation, and single GiddyUp tracking install");
+console.log("Completed PawPrint image cleanup: removed formula proof image, materialized uploaded images as static assets, preserved affiliate links and tracking");
