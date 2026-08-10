@@ -98,7 +98,7 @@ const HERO_ORIGINAL =
   "https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg";
 const HERO_ENCODED = encodeURIComponent(HERO_ORIGINAL);
 const heroUrl = (width) =>
-  `https://www.theepochtimes.com/_next/image?url=${HERO_ENCODED}&w=${width}&q=70`;
+  `https://www.theepochtimes.com/_next/image?url=${HERO_ENCODED}&w=${width}&q=75`;
 const HERO_640 = heroUrl(640).replace(/&/g, "&amp;");
 const HERO_828 = heroUrl(828).replace(/&/g, "&amp;");
 const HERO_1080 = heroUrl(1080).replace(/&/g, "&amp;");
