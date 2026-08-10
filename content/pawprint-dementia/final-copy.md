@@ -56,15 +56,11 @@ INSERT IMAGE HERE UGC OF DOG
 
 At the center of the formula is **NAD+ — the same molecule your dog’s cells rely on to make energy**.
 
-Instead of coming as a pill, chew, or powder, PawPrint Protocol comes as a liquid that can be added right to your dog’s food each day.
-
-**The idea is simple: give aging dogs direct NAD+ support in an easy-to-use daily formula.**
+The idea is simple, give aging dogs direct NAD+ support in an easy-to-use daily formula.
 
 But PawPrint Protocol is different from many other senior-dog supplements in two important ways: how it delivers NAD+, and what else is in the formula.
 
-First, it’s not another pill, chew, or powder.
-
-PawPrint Protocol is the delivers NAD+ in a nano-liposomal liquid.
+Instead of coming as a pill, chew, or powder, PawPrint Protocol comes as a nano-liposomal liquid.
 
 That simply means the NAD+ is carried inside tiny fat-like particles designed to help deliver it throughout the body.
 
