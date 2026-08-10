@@ -24,15 +24,15 @@ Your dog can become more frail, more withdrawn, and **less like the companion yo
 
 When cells have the energy they need, the whole dog benefits — including the brain.
 
-Think of it like a car. When the tank is full, it runs smoothly and with plenty of power. But as the gas starts to run low, the engine begins to sputter… until eventually it dies.
+Think of it like a car. When the tank is full, it runs smoothly and with plenty of power. But as the gas starts to run low, the engine begins to sputter… until eventually it stops working.
 
 That’s what’s happening inside your dog’s cells. The power fades, and the brain is one of the first things to feel it.
 
-Researchers have been studying this for years. And what they’ve found is clear: **without enough NAD+ the cells in your dog, don’t have enough energy to repair themselves.**
+Researchers have been studying this for years. And what they’ve found is clear: **without enough NAD+, the cells in your dog don’t have enough energy to repair themselves.**
 
 This is why simply adding surface-level nutrients isn’t enough.
 
-## **So the real question becomes: is there a way to support that NAD+ directly?**
+## **So the real question becomes: Is there a way to support that NAD+ directly?**
 
 This is where the research gets interesting.
 
