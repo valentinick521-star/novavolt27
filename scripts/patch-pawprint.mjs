@@ -29,7 +29,7 @@ const favicon = '<link rel="icon" type="image/webp" href="https://cdn.builder.io
 const affiliateTracking = `<script data-preserved-affiliate-tracking>
 (function(){
 function clean(value){return(value||"").trim().replace(/\\+$/g,"");}
-function getTrackingData(){const p=new URLSearchParams(window.location.search);const click=clean(p.get("sub2"))||clean(p.get("gclid"))||clean(p.get("gbraid"))||clean(p.get("wbraid"));const keyword=clean(p.get("sub4"))||clean(p.get("utm_term"));const data={source_id:"google",sub1:clean(p.get("utm_campaign")),sub2:click,sub3:clean(p.get("adgroupid")),sub4:keyword,sub5:"top1_novavolt"};if(clean(p.get("gclid")))data.gclid=clean(p.get("gclid"));if(clean(p.get("gbraid")))data.gbraid=clean(p.get("gbraid"));if(clean(p.get("wbraid")))data.wbraid=clean(p.get("wbraid"));return data;}
+function getTrackingData(){const p=new URLSearchParams(window.location.search);const keyword=clean(p.get("sub4"))||clean(p.get("utm_term"));return{source_id:"google",sub1:clean(p.get("utm_campaign")),sub3:clean(p.get("adgroupid")),sub4:keyword,sub5:"top1_novavolt"};}
 function append(link){try{const data=getTrackingData(),url=new URL(link.href);Object.keys(data).forEach(k=>{if(data[k])url.searchParams.set(k,data[k]);});link.href=url.toString();}catch(e){console.log("Tracking append error:",e);}}
 document.addEventListener("click",e=>{const a=e.target.closest?e.target.closest('a[href*="unbindgear.com/novavoltsolar"]'):null;if(a)append(a);},true);
 document.addEventListener("auxclick",e=>{const a=e.target.closest?e.target.closest('a[href*="unbindgear.com/novavoltsolar"]'):null;if(a)append(a);},true);
