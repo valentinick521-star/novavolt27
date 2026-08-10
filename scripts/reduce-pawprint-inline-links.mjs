@@ -15,18 +15,20 @@ if (!articleMatch) {
 
 let article = articleMatch[0];
 let linkCount = 0;
+const linkedOccurrences = new Set([1, 3, 6]);
+
 article = article.replace(
   /<a class="pawprint-inline-link"[^>]*>(PawPrint Protocol)<\/a>/gi,
   (full, text) => {
     linkCount += 1;
-    return linkCount === 1 ? full : text;
+    return linkedOccurrences.has(linkCount) ? full : text;
   },
 );
 
-if (linkCount < 1) {
-  throw new Error("Expected at least one PawPrint inline link");
+if (linkCount < 6) {
+  throw new Error(`Expected at least 6 PawPrint Protocol mentions, found ${linkCount}`);
 }
 
 html = html.replace(articleMatch[0], article);
 fs.writeFileSync(filePath, html);
-console.log(`Reduced PawPrint inline links from ${linkCount} to 1`);
+console.log(`Reduced PawPrint inline links from ${linkCount} to ${linkedOccurrences.size}`);
