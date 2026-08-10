@@ -30,8 +30,8 @@ if (!articleMatch) {
 
 let article = articleMatch[0];
 
-// The previous build step intentionally leaves only the top hero image.
-// Add back the original bottom proof image immediately before the final CTA.
+// The previous build step leaves the top hero plus the requested middle UGC image.
+// Keep both and add the existing bottom proof image immediately before the final CTA.
 const ctaMarker = '<div class="cta-block" style="margin-bottom:0;">';
 if (!article.includes(ctaMarker)) {
   throw new Error("Could not find the final CTA block");
@@ -42,9 +42,9 @@ if (!article.includes("pawprint-bottom-proof")) {
 }
 
 const articleImages = article.match(/<img\b/gi) || [];
-if (articleImages.length !== 2) {
+if (articleImages.length !== 3) {
   throw new Error(
-    `Expected exactly two article images (top and bottom), found ${articleImages.length}`,
+    `Expected exactly three article images (top hero, UGC, and bottom proof), found ${articleImages.length}`,
   );
 }
 
@@ -52,12 +52,16 @@ if (!/fetchpriority=["']high["']/i.test(article) || !/alt=["']Senior dog["']/i.t
   throw new Error("The top hero image changed unexpectedly");
 }
 
+if (!article.includes("pawprint-ugc-image") || !article.includes("/assets/pawprint-ugc.webp")) {
+  throw new Error("The requested PawPrint UGC image is missing");
+}
+
 if (!article.includes("pawprint-bottom-proof") || !article.includes(BESTSELLER_BASE)) {
   throw new Error("The original bottom best-seller image is missing");
 }
 
-if (/pawprint-lifestyle-image|pawprint-ugc-image/.test(article)) {
-  throw new Error("A middle advertorial image is still present");
+if (/pawprint-lifestyle-image/.test(article)) {
+  throw new Error("An unintended middle lifestyle image is still present");
 }
 
 html = html.replace(articleMatch[0], article);
@@ -153,5 +157,5 @@ if (/badcc4098d254fadb81b2c01ff7bb98c[^>]*fetchpriority=["']high["']/i.test(html
 fs.writeFileSync(filePath, html);
 
 console.log(
-  "Kept top/bottom advertorial images, optimized responsive image delivery and LCP, and deferred GiddyUp without changing tracking logic",
+  "Kept hero and requested UGC image, restored bottom proof, optimized responsive image delivery and LCP, and deferred GiddyUp without changing tracking logic",
 );
