@@ -119,6 +119,25 @@
     body { font-size: 18.5px; } /* desktop: +0.5px */
   }
 
+  /* No-image mode: prevent every image from rendering anywhere on the site. */
+  img,
+  picture {
+    display: none !important;
+  }
+
+  /* Remove empty image-only wrappers so hidden images do not leave blank boxes. */
+  a:has(> img:only-child),
+  span:has(> img:only-child),
+  figure:has(> img:only-child) {
+    display: none !important;
+  }
+
+  /* Let image/text grids collapse cleanly after the image element is removed. */
+  .grid:has(> a > img),
+  .grid:has(> span > img) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
   .scrollbar-thin {
     scrollbar-width: thin;
   }
