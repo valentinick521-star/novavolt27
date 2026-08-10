@@ -12,11 +12,14 @@ const outputPath = path.join(outputDir, "pawprint-ugc.webp");
 const EXPECTED_BYTES = 58998;
 const EXPECTED_SHA256 = "54de82e13c3eedd04a138cc8b523477af8f01711e4de72fa262c21e4b2dd36da";
 
-const encoded = [1, 2, 3, 4]
-  .map((part) =>
-    fs.readFileSync(path.join(sourceDir, `pawprint-ugc.b64.part${part}`), "utf8").trim(),
-  )
-  .join("");
+const chunks = [1, 2, 3, 4].map((part) =>
+  fs.readFileSync(path.join(sourceDir, `pawprint-ugc.b64.part${part}`), "utf8").trim(),
+);
+
+// The original first text chunk was saved two base64 characters short at its boundary.
+// Restore those exact characters before decoding, then verify the complete binary below.
+chunks[0] += "0F";
+const encoded = chunks.join("");
 
 const image = Buffer.from(encoded, "base64");
 if (image.length !== EXPECTED_BYTES) {
