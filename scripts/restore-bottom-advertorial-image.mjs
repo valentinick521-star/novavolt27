@@ -58,6 +58,31 @@ if (/pawprint-lifestyle-image|pawprint-ugc-image/.test(article)) {
 }
 
 html = html.replace(articleMatch[0], article);
+
+// The GiddyUp script is created by the preceding advertorial build step.
+// Move that existing single tag into <head>; do not create a duplicate.
+const giddyupScriptMatch = html.match(
+  /<script[^>]*src=["'][^"']*gulinkfixup\.js["'][^>]*><\/script>/i,
+);
+if (!giddyupScriptMatch) {
+  throw new Error("Could not find the existing GiddyUp click-ID script");
+}
+
+html = html.replace(giddyupScriptMatch[0], "");
+html = html.replace("</head>", `${giddyupScriptMatch[0]}\n</head>`);
+
+const giddyupScripts =
+  html.match(/<script[^>]*src=["'][^"']*gulinkfixup\.js["'][^>]*><\/script>/gi) || [];
+if (giddyupScripts.length !== 1) {
+  throw new Error(
+    `Expected exactly one GiddyUp click-ID script, found ${giddyupScripts.length}`,
+  );
+}
+
+if (!/<head>[\s\S]*gulinkfixup\.js[\s\S]*<\/head>/i.test(html)) {
+  throw new Error("GiddyUp click-ID script was not moved into <head>");
+}
+
 fs.writeFileSync(filePath, html);
 
-console.log("Kept the top and bottom advertorial images; middle two remain removed");
+console.log("Kept the top and bottom advertorial images; middle two remain removed; moved GiddyUp script into head");
