@@ -1,0 +1,649 @@
+@media (max-width: 760px) {
+  .dog-cognitive-page-root .hero-side{
+    box-shadow: 0 10px 26px rgba(12, 27, 49, 0.1);
+  }
+  .dog-cognitive-page-root .hero-pick-score{
+    padding: 12px 0 10px;
+  }
+  .dog-cognitive-page-root .product-card.winner{
+    box-shadow: 0 12px 30px rgba(31, 79, 184, 0.13);
+  }
+  .dog-cognitive-page-root .rankings-table tbody tr.winner td:first-child{
+    border-left-width: 5px;
+  }
+}
+
+/* ── UNIFIED VISUAL SYSTEM ── */
+.dog-cognitive-page-root .hero{
+  padding-top: 32px;
+  padding-bottom: 0px;
+}
+.dog-cognitive-page-root .hero h1{
+  margin-bottom: 16px;
+}
+.dog-cognitive-page-root .hero-title-sub{
+  margin-bottom: 0;
+  padding-bottom: 22px;
+}
+.dog-cognitive-page-root .hero-meta{
+  order: 3;
+  margin-top: 0 !important;
+  margin-bottom: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+}
+.dog-cognitive-page-root .hero-byline-avatar{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e4e9ef;
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+.dog-cognitive-page-root .hero-byline-text{
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+.dog-cognitive-page-root .hero-byline-author{
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.25;
+}
+.dog-cognitive-page-root .hero-byline-title{
+  font-size: 12px;
+  color: var(--light);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.dog-cognitive-page-root .hero-updated{
+  font-size: 12px;
+  color: var(--light);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-left: auto;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.dog-cognitive-page-root .hero-body{
+  margin-top: 22px;
+}
+.dog-cognitive-page-root .hero-body p{
+  margin-bottom: 18px;
+}
+.dog-cognitive-page-root .hero-body p:last-child{
+  margin-bottom: 0;
+}
+.dog-cognitive-page-root .stars, .dog-cognitive-page-root .score-rating .stars, .dog-cognitive-page-root .hero-pick-rating .stars{
+  color: var(--star) !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  letter-spacing: 1px;
+}
+.dog-cognitive-page-root .product-card.winner{
+  border-color: var(--accent);
+  border-width: 2px;
+  box-shadow: 0 6px 24px rgba(30, 84, 184, 0.1);
+}
+.dog-cognitive-page-root .product-card.winner::before{
+  height: 5px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-hover) 100%);
+}
+.dog-cognitive-page-root .product-card.winner .rank-text{
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(30, 84, 184, 0.25);
+  padding: 8px 16px 8px 12px;
+}
+.dog-cognitive-page-root .product-card.winner .rank-text::before{
+  background: rgba(255, 255, 255, 0.2);
+}
+.dog-cognitive-page-root .winner .score-panel{
+  background: var(--accent-soft);
+  border-color: #c5d6ec;
+  border-width: 1.5px;
+}
+.dog-cognitive-page-root .winner .score-number{
+  color: var(--navy);
+}
+.dog-cognitive-page-root .hero-pick-card .hero-pick-score strong{
+  color: var(--navy);
+}
+.dog-cognitive-page-root .winner .verdict-badge{
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+  color: #fff;
+  border-color: var(--accent-hover);
+  box-shadow: 0 2px 6px rgba(30, 84, 184, 0.22);
+}
+.dog-cognitive-page-root .hero-pick-card{
+  border-top: 4px solid var(--accent);
+  background: linear-gradient(180deg, var(--accent-soft) 0%, #fff 70%);
+}
+.dog-cognitive-page-root .rankings-table tbody tr.winner td{
+  background: var(--accent-soft);
+}
+.dog-cognitive-page-root .rankings-table tbody tr.winner td:first-child{
+  border-left: 4px solid var(--accent);
+}
+.dog-cognitive-page-root .editorial-cta.primary, .dog-cognitive-page-root .btn-card, .dog-cognitive-page-root .btn-primary, .dog-cognitive-page-root .btn-sm{
+  background: var(--cta);
+  box-shadow: 0 3px 12px rgba(237, 125, 49, 0.28);
+}
+.dog-cognitive-page-root .editorial-cta.primary:hover, .dog-cognitive-page-root .btn-card:hover, .dog-cognitive-page-root .btn-primary:hover, .dog-cognitive-page-root .btn-sm:hover{
+  background: var(--cta-hover);
+}
+.dog-cognitive-page-root .cta-discount{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+  padding: 5px 11px;
+  background: var(--cta-soft);
+  border: 1px solid #f6d8a7;
+  border-radius: 999px;
+  color: #a05d12;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+.dog-cognitive-page-root .cta-final{
+  border-top: 3px solid var(--accent);
+}
+.dog-cognitive-page-root .cta-final .btn-primary{
+  min-height: 54px;
+  font-size: 15.5px;
+  padding: 0 30px;
+}
+.dog-cognitive-page-root .cta-final .final-lead{
+  color: var(--navy);
+}
+.dog-cognitive-page-root .warning-compact::before{
+  background: var(--bad);
+}
+.dog-cognitive-page-root .editorial-card-grid{
+  gap: 28px;
+}
+.dog-cognitive-page-root .editorial-card-inner{
+  padding: 28px;
+}
+.dog-cognitive-page-root .decision-points{
+  margin: 18px 0;
+}
+.dog-cognitive-page-root .decision-points li{
+  padding: 2px 0 2px 28px !important;
+}
+.dog-cognitive-page-root .decision-points li::before{
+  top: 0.16em !important;
+}
+.dog-cognitive-page-root .verdict-line{
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-light);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.dog-cognitive-page-root .long-review h3{
+  margin-top: 28px;
+  color: var(--navy);
+}
+.dog-cognitive-page-root .long-review p{
+  margin-bottom: 16px;
+}
+.dog-cognitive-page-root .long-review h2{
+  color: var(--navy);
+}
+.dog-cognitive-page-root .vs-winner{
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--accent-soft);
+  border-radius: 5px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  border-left: 3px solid var(--accent);
+}
+.dog-cognitive-page-root .vs-winner strong{
+  color: var(--accent);
+  font-weight: 800;
+}
+.dog-cognitive-page-root .table-note{
+  font-size: 12.5px;
+  line-height: 1.55;
+  padding: 12px 20px;
+}
+.dog-cognitive-page-root.sdi a:focus-visible, .dog-cognitive-page-root.sdi button:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.dog-cognitive-page-root .winner .offer-note{
+  display: inline-block;
+  font-weight: 700;
+}
+.dog-cognitive-page-root .secondary .offer-note, .dog-cognitive-page-root .product-card:not(.winner) .offer-note{
+  display: inline-block;
+  color: var(--light);
+  font-weight: 700;
+}
+.dog-cognitive-page-root .hero-pick-note{
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #53677d;
+  display: block;
+}
+
+/* anchor scroll */
+.dog-cognitive-page-root #pawprint, .dog-cognitive-page-root #senilife, .dog-cognitive-page-root #aktivait, .dog-cognitive-page-root #others, .dog-cognitive-page-root #top-pick, .dog-cognitive-page-root #deal, .dog-cognitive-page-root #review, .dog-cognitive-page-root #warnings, .dog-cognitive-page-root #guide, .dog-cognitive-page-root #vet, .dog-cognitive-page-root #faq{
+  scroll-margin-top: 90px !important;
+}
+.dog-cognitive-page-root .product-card{
+  scroll-margin-top: 90px !important;
+}
+.dog-cognitive-page-root .also-considered-block{
+  scroll-margin-top: 90px !important;
+}
+
+/* middle column clean */
+.dog-cognitive-page-root .decision-copy{
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  min-width: 0;
+}
+.dog-cognitive-page-root .product-card.winner .decision-copy{
+  background: transparent;
+  border: none;
+}
+.dog-cognitive-page-root .best-for{
+  padding: 0 0 0 12px !important;
+  background: none !important;
+  border: none !important;
+  border-left: 3px solid var(--accent) !important;
+  border-radius: 0 !important;
+  margin: 0 0 16px 0 !important;
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+  color: var(--text) !important;
+}
+.dog-cognitive-page-root .best-for strong{
+  color: var(--navy);
+  font-weight: 800;
+}
+.dog-cognitive-page-root .product-card.secondary .best-for{
+  border-left-color: #c8d2e0 !important;
+}
+.dog-cognitive-page-root .product-card.secondary .vs-winner strong{
+  color: #5a6b80 !important;
+}
+.dog-cognitive-page-root .decision-points{
+  margin: 0 0 16px;
+  list-style: none;
+  display: grid;
+  gap: 9px;
+  padding: 0;
+}
+.dog-cognitive-page-root .decision-points li{
+  position: relative;
+  padding: 0 0 0 26px;
+  font-size: 14.6px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dog-cognitive-page-root .decision-points li::before{
+  position: absolute;
+  left: 0;
+  top: 0.18em;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 9.5px;
+  line-height: 1;
+  font-weight: 800;
+}
+.dog-cognitive-page-root .decision-points li.positive::before{
+  content: "✓";
+  background: var(--good);
+}
+.dog-cognitive-page-root .decision-points li.caution::before{
+  content: "✕";
+  background: var(--bad);
+  font-size: 9px;
+}
+.dog-cognitive-page-root .decision-points li.neutral::before{
+  content: "›";
+  background: var(--accent);
+  font-size: 11px;
+}
+.dog-cognitive-page-root .verdict-line{
+  margin: 16px 0 0 !important;
+  padding: 14px 0 0 !important;
+  border-top: 1px solid var(--line-light) !important;
+  font-size: 14.5px !important;
+  line-height: 1.6 !important;
+  color: var(--text) !important;
+}
+.dog-cognitive-page-root .verdict-line strong{
+  color: var(--navy);
+  font-weight: 800;
+}
+.dog-cognitive-page-root .vs-winner{
+  margin: 14px 0 0;
+  padding: 12px 0 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--line-light);
+  border-radius: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.dog-cognitive-page-root .vs-winner strong{
+  color: var(--accent);
+  font-weight: 800;
+}
+@media (max-width: 760px) {
+  .dog-cognitive-page-root .best-for{
+    margin-bottom: 14px !important;
+  }
+  .dog-cognitive-page-root .decision-points{
+    gap: 7px;
+  }
+}
+
+
+/* Project additions layered on top of the ported template in review.css. */
+
+.dog-cognitive-page-root .hero-pick-media{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0 0 14px;
+  border: 1px solid #c8daf7;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #f4f8ff;
+  box-shadow: inset 0 0 0 1px rgba(37, 87, 214, 0.06);
+}
+.dog-cognitive-page-root .hero-pick-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The tablet card collapses to a fixed grid-template-areas bar,
+   which has no slot for the photo. */
+@media (min-width: 761px) and (max-width: 980px) {
+  .dog-cognitive-page-root .hero-pick-card .hero-pick-media{
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .dog-cognitive-page-root .hero-pick-media{
+    max-width: 210px;
+    margin: 0 auto 14px;
+  }
+}
+
+/* Byline removed, so the updated date is the only item in the meta bar. */
+.dog-cognitive-page-root .hero-meta--date-only .hero-updated{
+  margin-left: 0;
+}
+
+.dog-cognitive-page-root .author-block .author-bio{
+  margin-top: 0;
+}
+
+/* ============================================================
+   FULL COMPARISON — no product image; the rank badge and product
+   title head the column with the decision copy directly beneath.
+   ============================================================ */
+
+.dog-cognitive-page-root .editorial-card-grid{
+  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-areas:
+    "identity score"
+    "copy score";
+  gap: 16px 28px;
+  align-items: start;
+}
+.dog-cognitive-page-root .product-identity{
+  grid-area: identity;
+}
+.dog-cognitive-page-root .decision-copy{
+  grid-area: copy;
+}
+.dog-cognitive-page-root .score-panel{
+  grid-area: score;
+}
+@media (min-width: 761px) {
+  .dog-cognitive-page-root .product-card .product-identity{
+    transform: none;
+  }
+}
+@media (min-width: 761px) and (max-width: 980px) {
+  .dog-cognitive-page-root .editorial-card-grid{
+    grid-template-columns: minmax(0, 1fr) 205px;
+    gap: 16px 18px;
+  }
+}
+@media (max-width: 760px) {
+  .dog-cognitive-page-root .editorial-card-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    gap: 16px;
+  }
+  .dog-cognitive-page-root .product-identity, .dog-cognitive-page-root .decision-copy, .dog-cognitive-page-root .score-panel{
+    grid-area: auto;
+  }
+}
+
+/* ============================================================
+   FAQ ACCORDION
+   ============================================================ */
+
+.dog-cognitive-page-root .faq-compact summary{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.4;
+  transition: color 0.16s ease;
+}
+.dog-cognitive-page-root .faq-compact summary::-webkit-details-marker{
+  display: none;
+}
+.dog-cognitive-page-root .faq-compact summary:hover{
+  color: var(--accent);
+}
+.dog-cognitive-page-root .faq-compact summary::after{
+  content: "";
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  margin: 5px 2px 0 0;
+  border-right: 2px solid #7e91a6;
+  border-bottom: 2px solid #7e91a6;
+  transform: rotate(45deg);
+  transition:
+    transform 0.2s ease,
+    border-color 0.16s ease;
+}
+.dog-cognitive-page-root .faq-compact[open] summary::after{
+  transform: rotate(-135deg);
+  margin-top: 8px;
+  border-color: var(--accent);
+}
+.dog-cognitive-page-root .faq-answer{
+  margin-top: 9px;
+  padding-right: 25px;
+  font-size: 15.5px;
+  line-height: 1.72;
+  color: var(--muted);
+}
+
+/* ============================================================
+   FOOTER — ported from nationalconsumerreview.com
+   ============================================================ */
+
+.dog-cognitive-page-root.sdi{
+  --wide-content-width: 1060px;
+}
+
+.dog-cognitive-page-root .site-footer{
+  background: #161d1a;
+  color: #cbd2cf;
+  padding: 37px 24px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.dog-cognitive-page-root .footer-inner{
+  max-width: var(--wide-content-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+.dog-cognitive-page-root .footer-brand{
+  color: #fff;
+  font-weight: 900;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.dog-cognitive-page-root .footer-copy{
+  max-width: 610px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #aeb7b3;
+}
+.dog-cognitive-page-root .footer-links{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px 18px;
+}
+.dog-cognitive-page-root .footer-links a{
+  color: #d7dfdc;
+  font-size: 12px;
+  text-decoration: none;
+}
+.dog-cognitive-page-root .copyright{
+  max-width: var(--wide-content-width);
+  margin: 24px auto 0;
+  border-top: 1px solid #2d3834;
+  padding-top: 16px;
+  font-size: 11px;
+  color: #89948f;
+}
+@media (max-width: 760px) {
+  .dog-cognitive-page-root .footer-inner{
+    grid-template-columns: 1fr;
+  }
+  .dog-cognitive-page-root .footer-links{
+    justify-content: flex-start;
+  }
+}
+
+/* Clearance for this site's sticky offer bar, which the
+   reference footer does not have to account for. */
+.dog-cognitive-page-root .site-footer{
+  padding-bottom: 96px;
+}
+@media (max-width: 760px) {
+  .dog-cognitive-page-root .site-footer{
+    padding-bottom: 104px;
+  }
+}
+
+/* ============================================================
+   LEGAL PAGES — ported from nationalconsumerreview.com
+   ============================================================ */
+
+.dog-cognitive-page-root .legal-shell{
+  background: #ffffff;
+}
+.dog-cognitive-page-root .legal-page{
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 44px 24px 72px;
+  color: #282828;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.72;
+}
+.dog-cognitive-page-root .legal-page__eyebrow{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1d5f50;
+  margin-bottom: 10px;
+}
+.dog-cognitive-page-root .legal-page h1{
+  font-size: clamp(36px, 5vw, 50px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin: 0 0 10px;
+  color: #111;
+}
+.dog-cognitive-page-root .legal-page .effective-date{
+  color: #777;
+  font-size: 13px;
+  margin: 0 0 32px;
+}
+.dog-cognitive-page-root .legal-page h2{
+  font-size: 27px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 38px 0 12px;
+  color: #171717;
+}
+.dog-cognitive-page-root .legal-page h3{
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 27px 0 9px;
+  color: #202020;
+}
+.dog-cognitive-page-root .legal-page p{
+  margin: 0 0 17px;
+}
+.dog-cognitive-page-root .legal-page ul{
+  margin: 0 0 19px;
+  padding-left: 24px;
+}
+.dog-cognitive-page-root .legal-page li{
+  margin: 7px 0;
+}
+.dog-cognitive-page-root .legal-page a{
+  color: #1456b8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
