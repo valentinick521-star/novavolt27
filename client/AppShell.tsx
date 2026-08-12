@@ -1,15 +1,12 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import SiteLayout from "./components/SiteLayout";
-import DogCognitiveLayout from "./components/dog-cognitive/SiteLayout";
 import Index from "./pages/Index";
-import DogCognitiveSupplements from "./pages/DogCognitiveSupplements";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import AffiliateDisclosure from "./pages/AffiliateDisclosure";
 import NotFound from "./pages/NotFound";
 
-const DOG_COGNITIVE_PATH = "/best-dog-cognitive-supplements";
 
 function ScrollToTopOnRouteChange() {
   const location = useLocation();
@@ -25,19 +22,11 @@ function ScrollToTopOnRouteChange() {
   return null;
 }
 
-function RoutedContent() {
-  const { pathname } = useLocation();
-
-  if (pathname === DOG_COGNITIVE_PATH || pathname === `${DOG_COGNITIVE_PATH}/`) {
-    return (
-      <DogCognitiveLayout>
-        <DogCognitiveSupplements />
-      </DogCognitiveLayout>
-    );
-  }
-
+export default function AppShell() {
   return (
-    <SiteLayout>
+    <>
+      <ScrollToTopOnRouteChange />
+      <SiteLayout>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -46,15 +35,7 @@ function RoutedContent() {
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </SiteLayout>
-  );
-}
-
-export default function AppShell() {
-  return (
-    <>
-      <ScrollToTopOnRouteChange />
-      <RoutedContent />
+      </SiteLayout>
     </>
   );
 }
