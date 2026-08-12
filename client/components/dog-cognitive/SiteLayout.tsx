@@ -31,9 +31,6 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="dog-cognitive-page-root sdi">
-      <a className="skip-link" href="#top">
-        Skip to main content
-      </a>
       <SiteHeader />
       {children}
       <button
