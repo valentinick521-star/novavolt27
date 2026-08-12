@@ -1,4 +1,8 @@
-import "@/styles/dog-cognitive.css";
+import "@/styles/dog-cognitive-1.css";
+import "@/styles/dog-cognitive-2.css";
+import "@/styles/dog-cognitive-3.css";
+import "@/styles/dog-cognitive-4.css";
+import "@/styles/dog-cognitive-5.css";
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SiteHeader from "./SiteHeader";
