@@ -1,0 +1,732 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&family=DM+Sans:wght@400;500;600;700;800&display=swap");
+
+/* ============================================================
+   Editorial comparison template.
+   Custom properties are scoped to .sdi so they cannot collide
+   with the Tailwind/shadcn HSL tokens declared in global.css.
+   ============================================================ */
+
+.dog-cognitive-page-root{
+  scroll-behavior: smooth;
+}
+.dog-cognitive-page-root{
+  background: #f7f9fc;
+}
+
+.dog-cognitive-page-root.sdi{
+  --navy: #0d2848;
+  --navy-2: #1b3153;
+  --accent: #1e54b8;
+  --accent-hover: #1846a0;
+  --accent-soft: #f0f6fc;
+  --text: #1f2d3d;
+  --muted: #5a6b80;
+  --light: #8a9aae;
+  --line: #d8e0ea;
+  --line-light: #e8edf3;
+  --bg: #f7f9fc;
+  --bg-soft: #f0f4fa;
+  --bg-winner: #f0f6fc;
+  --card: #fff;
+  --good: #1e7a4d;
+  --bad: #c8311f;
+  --star: #fa8a00;
+  --cta: #ed7d31;
+  --cta-hover: #d96d24;
+  --cta-soft: #fef5e7;
+  --shadow: 0 2px 8px rgba(13, 40, 72, 0.045);
+  --shadow-md: 0 4px 16px rgba(13, 40, 72, 0.06);
+  --shadow-blue: 0 4px 14px rgba(30, 84, 184, 0.18);
+  --r: 6px;
+  --max: 1140px;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+:where(.dog-cognitive-page-root.sdi) *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.dog-cognitive-page-root.sdi{
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.78;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+/* :where() keeps these at the template's original element-selector
+   specificity, so component rules such as .btn-card still win. */
+:where(.dog-cognitive-page-root.sdi) a{
+  color: inherit;
+  text-decoration: none;
+}
+:where(.dog-cognitive-page-root.sdi) img{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+:where(.dog-cognitive-page-root.sdi) strong{
+  font-weight: 800;
+  color: var(--navy);
+}
+:where(.dog-cognitive-page-root.sdi) button{
+  font: inherit;
+  color: inherit;
+}
+.dog-cognitive-page-root .sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.dog-cognitive-page-root .skip-link{
+  position: absolute;
+  top: -48px;
+  left: 18px;
+  z-index: 1000;
+  background: #fff;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+}
+.dog-cognitive-page-root .skip-link:focus{
+  top: 12px;
+}
+.dog-cognitive-page-root #rankings, .dog-cognitive-page-root #comparison, .dog-cognitive-page-root #review, .dog-cognitive-page-root #warnings, .dog-cognitive-page-root #faq, .dog-cognitive-page-root #top-pick{
+  scroll-margin-top: 78px;
+}
+.dog-cognitive-page-root .nav-anchor{
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  scroll-margin-top: 78px;
+}
+
+.dog-cognitive-page-root .topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.dog-cognitive-page-root .topbar-inner{
+  max-width: var(--max);
+  height: 58px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.dog-cognitive-page-root .logo{
+  display: flex;
+  align-items: center;
+}
+.dog-cognitive-page-root .logo img{
+  width: 200px;
+}
+.dog-cognitive-page-root .anchor-nav{
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #40536a;
+}
+.dog-cognitive-page-root .anchor-nav a{
+  position: relative;
+  padding: 19px 14px;
+  color: inherit;
+  transition: color 0.18s ease;
+}
+.dog-cognitive-page-root .anchor-nav a::after{
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+.dog-cognitive-page-root .anchor-nav a:hover{
+  color: var(--navy);
+}
+.dog-cognitive-page-root .anchor-nav a:hover::after{
+  transform: scaleX(1);
+}
+.dog-cognitive-page-root .nav-toggle{
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+.dog-cognitive-page-root .nav-toggle span{
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 999px;
+}
+
+.dog-cognitive-page-root .page-wrap{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+.dog-cognitive-page-root .hero{
+  padding: 32px 0 0;
+}
+.dog-cognitive-page-root .hero-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) 310px;
+  gap: 40px;
+  align-items: start;
+}
+.dog-cognitive-page-root .hero-meta{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.dog-cognitive-page-root .hero-updated{
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #7e91a6;
+  letter-spacing: 0.12em;
+}
+.dog-cognitive-page-root .hero h1{
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  color: var(--navy);
+  max-width: 760px;
+  margin: 0 0 14px;
+}
+.dog-cognitive-page-root .hero-title-sub{
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.42;
+  color: #46586b;
+  max-width: 690px;
+  margin: 0 0 18px;
+}
+.dog-cognitive-page-root .hero-body{
+  max-width: 690px;
+}
+.dog-cognitive-page-root .hero-body p{
+  font-size: 17px;
+  line-height: 1.76;
+  color: var(--muted);
+  margin: 0 0 12px;
+  max-width: 66ch;
+}
+.dog-cognitive-page-root .hero-body p:last-child{
+  margin-bottom: 0;
+}
+.dog-cognitive-page-root .hero-transition{
+  max-width: 690px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-light);
+  font-size: 15px;
+  line-height: 1.65;
+  color: #667a8f;
+}
+.dog-cognitive-page-root .hero-side{
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 var(--r) var(--r);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+.dog-cognitive-page-root .hero-pick-card{
+  padding: 26px 24px;
+  text-align: center;
+}
+.dog-cognitive-page-root .hero-pick-eyebrow{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 28px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #eef3ff;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+.dog-cognitive-page-root .hero-pick-eyebrow::before{
+  content: "★";
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #5076d9;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(13, 40, 72, 0.08);
+}
+.dog-cognitive-page-root .hero-pick-name{
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1.18;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.dog-cognitive-page-root .hero-pick-best{
+  font-size: 15px;
+  line-height: 1.58;
+  color: var(--muted);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-light);
+  margin-bottom: 16px;
+  text-align: left;
+}
+.dog-cognitive-page-root .hero-pick-score{
+  text-align: center;
+  margin: 0 0 6px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+.dog-cognitive-page-root .hero-pick-score strong{
+  display: block;
+  font-family: var(--serif);
+  font-size: 46px;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+}
+.dog-cognitive-page-root .hero-pick-score span{
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6b7f95;
+}
+.dog-cognitive-page-root .hero-pick-rating{
+  text-align: center;
+  margin: 0 0 10px;
+  padding: 0;
+}
+.dog-cognitive-page-root .stars{
+  color: var(--star);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.dog-cognitive-page-root .hero-pick-rating small{
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #66788c;
+}
+.dog-cognitive-page-root .hero-pick-card .btn-card{
+  width: 100%;
+  min-height: 52px;
+  margin-top: 4px;
+}
+.dog-cognitive-page-root .hero-pick-note{
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #53677d;
+}
+@media (min-width: 981px) {
+  .dog-cognitive-page-root .hero-side.hero-pick-card{
+    position: sticky;
+    top: 82px;
+    align-self: start;
+  }
+}
+
+.dog-cognitive-page-root .section{
+  padding: 35px 0 0;
+}
+.dog-cognitive-page-root .section-title, .dog-cognitive-page-root .compact-section h2, .dog-cognitive-page-root .long-review h2{
+  font-family: var(--serif);
+  font-size: 27px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.dog-cognitive-page-root .section-kicker{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #315da8;
+}
+.dog-cognitive-page-root .section-kicker::before{
+  content: "";
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #315da8;
+}
+.dog-cognitive-page-root .card, .dog-cognitive-page-root .rankings-shell, .dog-cognitive-page-root .product-card, .dog-cognitive-page-root .compact-card, .dog-cognitive-page-root .cta-final, .dog-cognitive-page-root .also-considered-block{
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+
+.dog-cognitive-page-root .rankings-shell{
+  position: relative;
+  overflow: hidden;
+}
+.dog-cognitive-page-root .rankings-shell::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--navy);
+}
+.dog-cognitive-page-root .table-scroll{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.dog-cognitive-page-root .table-scroll::-webkit-scrollbar{
+  height: 6px;
+}
+.dog-cognitive-page-root .table-scroll::-webkit-scrollbar-thumb{
+  background: #c7d2de;
+  border-radius: 999px;
+}
+.dog-cognitive-page-root .rankings-table{
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.dog-cognitive-page-root .rankings-table th{
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--line);
+  background: #f7f9fb;
+  color: #6a7d91;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+}
+.dog-cognitive-page-root .rankings-table td{
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line-light);
+  vertical-align: middle;
+}
+.dog-cognitive-page-root .rankings-table tr:last-child td{
+  border-bottom: 0;
+}
+.dog-cognitive-page-root .rankings-table tbody tr:not(.winner) td{
+  background: #fbfcfe;
+  color: #6f8194;
+}
+.dog-cognitive-page-root .rankings-table tbody tr.winner td{
+  background: #f2f6ff;
+  border-top: 1px solid #bfd0e6;
+  border-bottom: 1px solid #bfd0e6;
+  color: var(--navy);
+  font-weight: 800;
+}
+.dog-cognitive-page-root .rankings-table tbody tr.winner td:first-child{
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.dog-cognitive-page-root .rank-num{
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 800;
+  color: inherit;
+}
+.dog-cognitive-page-root .product-link{
+  font-weight: 800;
+  color: inherit;
+}
+.dog-cognitive-page-root .product-link:hover{
+  text-decoration: underline;
+  text-decoration-color: rgba(31, 79, 184, 0.25);
+  text-underline-offset: 3px;
+  color: var(--accent);
+}
+.dog-cognitive-page-root .score-wrap{
+  display: flex;
+  align-items: center;
+}
+.dog-cognitive-page-root .score{
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 800;
+  color: inherit;
+}
+.dog-cognitive-page-root .winner .score{
+  font-size: 18px;
+  color: var(--navy);
+}
+.dog-cognitive-page-root .verdict-badge{
+  display: inline-flex;
+  align-items: center;
+  min-height: 29px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid #d8e2ee;
+  background: #f5f7fa;
+  color: #64778c;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.dog-cognitive-page-root .winner .verdict-badge{
+  background: #e8efff;
+  color: var(--accent);
+  border-color: #c2d3ef;
+}
+.dog-cognitive-page-root .verdict-badge.caution{
+  color: #8d5a55;
+  background: #faf3f2;
+  border-color: #ead7d4;
+}
+.dog-cognitive-page-root .table-note{
+  padding: 15px 20px;
+  border-top: 1px solid var(--line-light);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #66788c;
+}
+.dog-cognitive-page-root .mobile-swipe-hint{
+  display: none;
+}
+
+.dog-cognitive-page-root .comparison-stack{
+  display: grid;
+  gap: 20px;
+}
+.dog-cognitive-page-root .product-card{
+  overflow: hidden;
+}
+.dog-cognitive-page-root .product-card.winner{
+  border-color: #1f4fb8;
+  border-width: 1.5px;
+  box-shadow: 0 6px 20px rgba(31, 79, 184, 0.085);
+}
+.dog-cognitive-page-root .product-card.winner::before{
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--accent);
+}
+
+.dog-cognitive-page-root .editorial-card-inner{
+  padding: 24px;
+}
+.dog-cognitive-page-root .editorial-card-grid{
+  display: grid;
+  grid-template-columns: 205px minmax(0, 1fr) 220px;
+  gap: 24px;
+  align-items: start;
+}
+.dog-cognitive-page-root .product-identity{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.dog-cognitive-page-root .identity-copy{
+  margin-bottom: 13px;
+}
+.dog-cognitive-page-root .rank-text{
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.085em;
+  color: #64778c;
+}
+.dog-cognitive-page-root .product-card.winner .rank-text{
+  gap: 7px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  background: #2859c6;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(31, 79, 184, 0.22);
+}
+.dog-cognitive-page-root .product-card.winner .rank-text::before{
+  content: "★";
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 10px;
+}
+.dog-cognitive-page-root .identity-copy h3{
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.018em;
+  color: var(--navy);
+}
+.dog-cognitive-page-root .secondary .identity-copy h3{
+  font-size: 21px;
+}
+.dog-cognitive-page-root .product-image{
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+  padding: 0px;
+  background: #f6f8fb;
+  border: 1px solid #e1e8f0;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.dog-cognitive-page-root .product-image img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.dog-cognitive-page-root .decision-copy{
+  min-width: 0;
+}
+.dog-cognitive-page-root .best-for{
+  font-size: 15px;
+  line-height: 1.58;
+  color: var(--muted);
+  margin-bottom: 13px;
+}
+.dog-cognitive-page-root .decision-points{
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 0 0 11px;
+  padding: 0;
+}
+.dog-cognitive-page-root .decision-points li{
+  position: relative;
+  padding-left: 28px;
+  font-size: 14.6px;
+  line-height: 1.48;
+  color: var(--muted);
+}
+.dog-cognitive-page-root .decision-points li::before{
+  position: absolute;
+  left: 0;
+  top: 0.16em;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 9.5px;
+  line-height: 16px;
+  font-weight: 800;
+}
+.dog-cognitive-page-root .decision-points li.positive::before{
+  content: "✓";
+  background: var(--good);
+}
+.dog-cognitive-page-root .decision-points li.caution::before{
+  content: "✕";
+  background: var(--bad);
+  font-size: 9px;
+}
+.dog-cognitive-page-root .decision-points li.neutral::before{
+  content: "›";
+  background: var(--accent);
+  font-size: 11px;
+}
+.dog-cognitive-page-root .verdict-line{
+  margin: 0;
+  padding-top: 11px;
+  border-top: 1px solid var(--line-light);
+  font-size: 14.8px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.dog-cognitive-page-root .score-panel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 9px;
+  align-self: start;
+  padding: 17px 16px;
+  border: 1px solid #dfe7f0;
+  border-radius: 7px;
+  background: #fbfcfe;
+}
+.dog-cognitive-page-root .winner .score-panel{
+  background: #f6f9fe;
+  border-color: #bdd0e9;
+}
+.dog-cognitive-page-root .score-number{
+  font-family: var(--serif);
+  font-size: 42px;
+  line-height: 0.9;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--navy);
+}
+.dog-cognitive-page-root .score-label{
+  font-size: 10.5px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6b7f95;
+}
