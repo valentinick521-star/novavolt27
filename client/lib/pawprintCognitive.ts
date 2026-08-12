@@ -1,17 +1,15 @@
-// REPLACE WITH PAWPRINT AFFILIATE URL
-export const PAWPRINT_URL = "#";
+export const PAWPRINT_URL =
+  "https://pawprintlab.com/products/pawprint-lab/?aff_id=34379&affid=34379&lpid=1160&oid=1160&source_id=DL&utm_source=34379&utm_term=1160";
 
-const FORWARDED_PARAMS = [
+const PASSTHROUGH_PARAMS = [
   "gclid",
   "wbraid",
   "gbraid",
   "msclkid",
   "fbclid",
   "ttclid",
-  "utm_source",
   "utm_medium",
   "utm_campaign",
-  "utm_term",
   "utm_content",
   "utm_id",
   "adgroupid",
@@ -26,7 +24,7 @@ const FORWARDED_PARAMS = [
   "subid",
   "aff_sub",
   "click_id",
-];
+] as const;
 
 export type CtaLocation =
   | "hero"
@@ -38,20 +36,48 @@ export type CtaLocation =
   | "final_recommendation"
   | "sticky_cta";
 
-export function buildPawprintUrl(): string {
-  if (typeof window === "undefined" || PAWPRINT_URL === "#") return PAWPRINT_URL;
+function clean(value: string | null): string {
+  return (value || "").trim().replace(/\+$/g, "");
+}
 
-  const incoming = new URLSearchParams(window.location.search);
-  const forwarded = new URLSearchParams();
-  for (const key of FORWARDED_PARAMS) {
-    const value = incoming.get(key);
-    if (value) forwarded.set(key, value);
+function firstParam(
+  params: URLSearchParams,
+  ...keys: string[]
+): string {
+  for (const key of keys) {
+    const value = clean(params.get(key));
+    if (value) return value;
   }
-  if (![...forwarded].length) return PAWPRINT_URL;
+  return "";
+}
+
+export function buildPawprintUrl(): string {
+  if (typeof window === "undefined") return PAWPRINT_URL;
 
   try {
-    const url = new URL(PAWPRINT_URL, window.location.href);
-    forwarded.forEach((value, key) => url.searchParams.set(key, value));
+    const incoming = new URLSearchParams(window.location.search);
+    const url = new URL(PAWPRINT_URL);
+
+    // Preserve the PawPrint/GiddyUp affiliate tuple on the base URL. Google
+    // campaign data is carried in sub IDs and click-ID fields rather than
+    // overwriting PawPrint's affiliate utm_source / offer utm_term values.
+    const sub1 = firstParam(incoming, "sub1", "keyword", "utm_term");
+    const sub2 = firstParam(incoming, "sub2", "campaignid", "utm_campaign");
+    const sub3 = firstParam(incoming, "sub3", "adgroupid");
+    const sub4 = firstParam(incoming, "sub4", "matchtype");
+    const sub5 = firstParam(incoming, "sub5") || "best_dog_cognitive_supplements_v1";
+
+    if (sub1) url.searchParams.set("sub1", sub1);
+    if (sub2) url.searchParams.set("sub2", sub2);
+    if (sub3) url.searchParams.set("sub3", sub3);
+    if (sub4) url.searchParams.set("sub4", sub4);
+    url.searchParams.set("sub5", sub5);
+
+    for (const key of PASSTHROUGH_PARAMS) {
+      const value = clean(incoming.get(key));
+      if (value) url.searchParams.set(key, value);
+    }
+
     return url.toString();
   } catch {
     return PAWPRINT_URL;
