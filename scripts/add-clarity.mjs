@@ -17,8 +17,11 @@ const CLARITY_TAG = `<script type="text/javascript">
     })(window, document, "clarity", "script", "${CLARITY_ID}");
 </script>`;
 
+const GIDDYUP_TAG =
+  '<script type="text/javascript" src="https://js.giddyup.io/gulinkfixup.js"></script>';
+
 if (!html.includes("</head>")) {
-  throw new Error("Could not find </head> for Microsoft Clarity installation");
+  throw new Error("Could not find </head> for tracking installation");
 }
 
 // Remove any prior copy of this exact Clarity project snippet so the build
@@ -28,15 +31,34 @@ html = html.replace(
   "\n",
 );
 
-html = html.replace("</head>", `${CLARITY_TAG}\n</head>`);
+// Remove any existing GiddyUp link-fixup loader so we never publish duplicates.
+html = html.replace(
+  /\s*<script\s+[^>]*src=["']https:\/\/js\.giddyup\.io\/gulinkfixup\.js["'][^>]*><\/script>\s*/gi,
+  "\n",
+);
+
+html = html.replace(
+  "</head>",
+  `${GIDDYUP_TAG}\n${CLARITY_TAG}\n</head>`,
+);
 
 const idCount = (html.match(/y08j0wvw36/g) || []).length;
 const clarityTagCount = (html.match(/https:\/\/www\.clarity\.ms\/tag\//g) || []).length;
+const giddyupTagCount = (html.match(/https:\/\/js\.giddyup\.io\/gulinkfixup\.js/g) || []).length;
+
 if (idCount !== 1 || clarityTagCount !== 1) {
   throw new Error(
     `Expected exactly one Microsoft Clarity install, found id=${idCount}, tag=${clarityTagCount}`,
   );
 }
 
+if (giddyupTagCount !== 1) {
+  throw new Error(
+    `Expected exactly one GiddyUp link-fixup install, found ${giddyupTagCount}`,
+  );
+}
+
 fs.writeFileSync(filePath, html);
-console.log(`Installed Microsoft Clarity project ${CLARITY_ID} in <head>`);
+console.log(
+  `Installed GiddyUp link fixup and Microsoft Clarity project ${CLARITY_ID} in <head>`,
+);
