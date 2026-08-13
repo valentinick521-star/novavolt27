@@ -1,4 +1,4 @@
-# Redeploy trigger: 2026-08-09
+# Redeploy trigger: 2026-08-13 full-comparison-refresh
 [build]
 command = "npm run build:netlify"
 functions = "netlify/functions"
