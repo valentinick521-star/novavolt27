@@ -5,6 +5,7 @@ import "@/styles/dog-cognitive-4.css";
 import "@/styles/dog-cognitive-5.css";
 import "../../../dog-cognitive-page/full-comparison-buying-copy.js";
 import "../../../dog-cognitive-page/final-cta-cleanup.js";
+import "../../../dog-cognitive-page/accuracy-cleanup.js";
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SiteHeader from "./SiteHeader";
