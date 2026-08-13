@@ -9,42 +9,10 @@
     guide.dataset.lowerCleanup = "true";
 
     var buyerGuide = guide.querySelector(".compact-card:not(#vet)");
-    if (buyerGuide) {
-      var guideTitle = buyerGuide.querySelector("h2");
-      if (guideTitle) guideTitle.textContent = "Quick Guide to the Main Ingredients";
+    if (buyerGuide) buyerGuide.remove();
 
-      var guideList = buyerGuide.querySelector(".guide-list");
-      if (guideList) {
-        guideList.innerHTML = `
-          <div class="guide-compact">
-            <strong>Phosphatidylserine</strong>
-            <span>A fat-like substance found in cell membranes, including brain cells. It appears in senior-dog cognitive formulas as a way to support the normal structure and function of those cells.</span>
-          </div>
-          <div class="guide-compact">
-            <strong>SAMe</strong>
-            <span>A substance the body naturally makes and uses for many normal chemical jobs inside cells. Some products use SAMe by itself, while others include it in a larger blend.</span>
-          </div>
-          <div class="guide-compact">
-            <strong>Omega-3s + Antioxidants</strong>
-            <span>Omega-3s such as DHA are important parts of cell membranes. Antioxidants help protect cells from everyday oxidative stress, so both often appear in broad cognitive-support formulas.</span>
-          </div>
-          <div class="guide-compact">
-            <strong>NAD+ + NMN</strong>
-            <span>NAD+ is involved in normal cellular-energy processes. NMN is one substance the body can use to make NAD+. Dog-specific cognitive research on this approach is newer and less developed than research on some traditional ingredients.</span>
-          </div>
-          <div class="guide-compact">
-            <strong>CoQ10 + Carnitines</strong>
-            <span>These nutrients are involved in normal cellular and mitochondrial energy processes. They often appear as supporting ingredients in broader formulas.</span>
-          </div>
-        `;
-      }
-
-      var guideNote = buyerGuide.querySelector(".section-note");
-      if (guideNote) {
-        guideNote.textContent =
-          "This is a quick reference, not a ranking. The products above use these ingredients in different ways and combinations.";
-      }
-    }
+    var vet = document.getElementById("vet");
+    if (vet) vet.style.gridColumn = "1 / -1";
 
     var warningCards = warnings.querySelectorAll(".warning-compact");
     warningCards.forEach(function (card) {
@@ -80,7 +48,6 @@
       }
     });
 
-    var vet = document.getElementById("vet");
     if (vet) {
       var vetLead = vet.querySelector(".compact-lead");
       if (vetLead) {
