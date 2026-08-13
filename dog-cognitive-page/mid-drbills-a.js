@@ -1,0 +1,1 @@
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[3];if(!p)return requestAnimationFrame(f);p.textContent='Dr. Bill’s takes one of the broadest approaches.'})();
