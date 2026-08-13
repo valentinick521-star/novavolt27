@@ -1,9 +1,17 @@
 (function f(){
   var section=document.getElementById('popular-options-inside');
   var list=document.querySelector('#faq .faq-list');
-  if(!section||!list)return requestAnimationFrame(f);
+  var rankings=document.getElementById('rankings');
+  if(!section||!list||!rankings)return requestAnimationFrame(f);
   var transition=section.querySelector('.popular-options-transition');
   if(transition)transition.remove();
+
+  rankings.querySelectorAll('a').forEach(function(link){
+    link.removeAttribute('href');
+    link.style.cursor='default';
+    link.style.textDecoration='none';
+  });
+
   list.innerHTML=`
     <details class="faq-compact">
       <summary>What makes PawPrint different from the other supplements?</summary>
