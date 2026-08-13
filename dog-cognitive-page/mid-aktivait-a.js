@@ -1,0 +1,1 @@
+(function f(){var s=document.getElementById('popular-options-inside');if(!s)return requestAnimationFrame(f);var p=s.querySelectorAll('.popular-option p')[1];if(!p)return requestAnimationFrame(f);p.textContent='Aktivait takes a broader approach.'})();
