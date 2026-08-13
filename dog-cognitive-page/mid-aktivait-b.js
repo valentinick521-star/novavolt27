@@ -1,0 +1,1 @@
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[1];if(!p)return requestAnimationFrame(f);p.insertAdjacentHTML('beforeend',' <strong>Basic idea: support several parts of brain health at once instead of focusing on one system.</strong>')})();
