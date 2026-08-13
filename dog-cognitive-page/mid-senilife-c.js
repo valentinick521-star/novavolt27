@@ -1,0 +1,1 @@
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[0];if(!p)return requestAnimationFrame(f);p.insertAdjacentHTML('beforeend',' <strong>Basic idea: support the structure and normal function of brain cells.</strong>')})();
