@@ -175,14 +175,14 @@ export default function DogCognitiveSupplements() {
           <div className="hero-grid">
             <div>
               <h1>
-                Senior Dog Cognitive Supplements Compared: SAMe, Senilife,
-                Aktivait &amp; More – What Actually Helps
+                Senior Dog Cognitive Support: SAMe, Senilife, Aktivait &amp; More
+                — What Helps
               </h1>
               <div className="hero-title-sub">
-                Everything in this category is sold as "cognitive support" — but
-                the formulas behind that phrase are built on completely
-                different ingredient strategies, and the front of the box almost
-                never tells you which one you are buying.
+                We looked at the top supplements for older dogs to find which ones
+                may help bring back more of the dog you remember. Most took the
+                same basic approach. But one stood out because it worked in a very
+                different way.
               </div>
 
               <div className="hero-meta hero-meta--date-only">
@@ -193,35 +193,35 @@ export default function DogCognitiveSupplements() {
 
               <div className="hero-body">
                 <p>
-                  You have probably already done the search. An older dog starts
-                  pacing after dark, stands facing the hinge side of a door, or
-                  greets you like a stranger at two in the morning — and within
-                  an hour there are six tabs open, every one of them selling
-                  something described as a cognitive supplement for dogs. On the
-                  shelf they look interchangeable. On the label they are not.
+                  You're here because you want to support your older dog's brain
+                  and keep more of the dog you remember. That's exactly why we
+                  made this comparison.
                 </p>
                 <p>
-                  Put the ingredient panels side by side and the category splits
-                  into camps. One is built on{" "}
-                  <strong>phosphatidylserine</strong> and antioxidants. Another
-                  stacks phosphatidylserine with omega-3s, L-carnitine and
-                  mitochondrial cofactors. A third is centered on{" "}
-                  <strong>SAMe</strong>. A newer group, including our top pick,
-                  is built around cellular-energy ingredients —{" "}
-                  <strong>NAD+, NMN, CoQ10 and resveratrol</strong> — that
-                  barely appeared in this category five years ago. These are not
-                  five versions of the same product. They are four different
-                  bets about what is worth supporting in an aging brain.
+                  At first, most cognitive supplements look very similar. They
+                  all talk about brain health, memory, and healthy aging.
                 </p>
                 <p>
-                  What follows is a ranked comparison of five options a
-                  senior-dog owner could reasonably shortlist, scored on
-                  formulation strategy, label transparency, how realistically
-                  the format survives a daily routine, price and what happens if
-                  it does not work out. We compared published product
-                  information and labeling — we did not run a clinical trial,
-                  and no product here has been shown to beat the others on
-                  outcomes.
+                  But when we looked at what was actually inside them, we found
+                  something important:
+                </p>
+                <p>
+                  <strong>
+                    They are not all built to support the aging brain in the same
+                    way.
+                  </strong>
+                </p>
+                <p>
+                  Some are built around phosphatidylserine. Others use SAMe,
+                  antioxidants, omega-3s, or a mix of several nutrients.
+                </p>
+                <p>
+                  But one formula we reviewed started with a very different idea
+                  — <strong>supporting the energy used inside the cells themselves.</strong>
+                </p>
+                <p>
+                  That difference caught our attention and changed what we looked
+                  for in the rest of our comparison.
                 </p>
               </div>
             </div>
