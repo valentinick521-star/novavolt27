@@ -2,6 +2,17 @@
   var META_DESCRIPTION =
     "We compared five cognitive supplements for senior dogs on formulation strategy, label transparency, daily usability, price and guarantee. See how PawPrint Protocol, Senilife, Aktivait, Dr. Bill’s Canine Cognitive Support and Novifit actually differ.";
 
+  var HERO_SUBHEAD =
+    "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. Most took the same basic approach. But one stood out because it worked in a very different way.";
+
+  var HERO_BODY_HTML =
+    '<p>At first, most cognitive supplements look very similar. They all talk about brain health, memory, and healthy aging.</p>' +
+    '<p>But when we looked at what was actually inside them, we found something important:</p>' +
+    '<p><strong>They are not all built to support the aging brain in the same way.</strong></p>' +
+    '<p>Some are built around phosphatidylserine. Others use SAMe, antioxidants, omega-3s, or a mix of several nutrients.</p>' +
+    '<p>But one formula we reviewed started with a very different idea — <strong>supporting the energy used inside the cells themselves.</strong></p>' +
+    '<p>That difference caught our attention and changed what we looked for in the rest of our comparison.</p>';
+
   function setText(node, text) {
     if (node && node.textContent !== text) node.textContent = text;
   }
@@ -15,24 +26,13 @@
 
   function fixHeroAccuracy() {
     var sub = document.querySelector(".hero-title-sub");
-    if (sub) {
-      sub.innerHTML =
-        "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. <strong>Most took the same basic approach, but one didn’t.</strong>";
+    if (sub && sub.textContent !== HERO_SUBHEAD) {
+      sub.textContent = HERO_SUBHEAD;
     }
 
     var body = document.querySelector(".hero-body");
-    if (!body) return;
-    var paragraphs = body.querySelectorAll(":scope > p");
-    if (paragraphs.length >= 3) {
-      setText(
-        paragraphs[0],
-        "At first, most cognitive supplements look very similar. They all talk about brain health, memory, and healthy aging."
-      );
-      setText(
-        paragraphs[1],
-        "But once we looked at what was actually inside them, the differences became much clearer."
-      );
-      paragraphs[2].remove();
+    if (body && body.innerHTML !== HERO_BODY_HTML) {
+      body.innerHTML = HERO_BODY_HTML;
     }
   }
 
