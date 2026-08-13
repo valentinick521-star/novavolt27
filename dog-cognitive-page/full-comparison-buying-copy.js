@@ -27,8 +27,8 @@
       ['Built Around', '<strong>Cellular Energy · NAD+ + NMN.</strong> NMN and NAD+ are at the center of the formula, with CoQ10 and resveratrol alongside them.'],
       ['Why People Choose It', 'PawPrint makes NMN and NAD+ the main focus instead of building the formula around phosphatidylserine, SAMe, or a large nutrient blend.'],
       ['How It Differs', 'It is the clearest option here built around cellular energy rather than making a traditional brain ingredient or broad nutrient blend the main focus.'],
-      ['Daily Use', 'Weight-based liquid dropper.'],
-      ['Main Tradeoff', 'The cellular-energy approach is newer, so it should be viewed as a different strategy rather than proof of a better result.'],
+      ['Daily Use', 'A daily liquid dose based on body weight.'],
+      ['Main Tradeoff', 'The cellular-energy approach should be viewed as a different strategy rather than proof of a better result.'],
       ['Best Fit', 'Owners interested in cellular-energy support who also prefer a liquid format.']
     ]);
 
@@ -42,19 +42,24 @@
     ]);
 
     setCopy(aktivait, [
-      ['Built Around', '<strong>Broad Nutrient Support.</strong>'],
-      ['Why People Choose It', 'Depending on the version, Aktivait may combine phosphatidylserine, omega-3s, antioxidants, carnitines, CoQ10, and other nutrients to support the aging brain from several directions at once.'],
-      ['How It Differs From #1', 'Aktivait spreads support across many nutritional systems. PawPrint uses a more focused cellular-energy strategy centered on NAD+ and NMN.'],
-      ['Daily Use', 'Capsule or tablet depending on the version, with larger dogs potentially needing multiple units.'],
-      ['Main Tradeoff', 'A broader ingredient list means the formula is less centered around one simple mechanism.'],
-      ['Best Fit', 'Owners who like the idea of covering many nutritional areas at once.']
+      ['Built Around', '<strong>Broad Multi-Nutrient Support.</strong>'],
+      ['Why People Choose It', 'Aktivait takes a broad approach, combining several nutrients intended to support normal brain function rather than building the whole formula around one single ingredient.'],
+      ['How It Differs From #1', 'Aktivait spreads support across several nutritional areas. PawPrint uses a more focused cellular-energy strategy centered on NAD+ and NMN.'],
+      ['Daily Use', 'Tablet. Larger dogs may need more than one tablet per day.'],
+      ['Main Tradeoff', 'A broad multi-nutrient formula is less centered around one simple mechanism.'],
+      ['Best Fit', 'Owners who like the idea of covering several nutritional areas at once.']
     ]);
+
+    var aktivaitRank = aktivait.querySelector('.rank-text');
+    if (aktivaitRank) aktivaitRank.textContent = '#3 Broad Multi-Nutrient Formula';
+    var aktivaitOffer = aktivait.querySelector('.offer-note');
+    if (aktivaitOffer) aktivaitOffer.textContent = 'Tablet · Weight-based dosing';
 
     setCopy(drBills, [
       ['Built Around', '<strong>Broad Brain Nutrition · 36-Ingredient Blend.</strong>'],
       ['Why People Choose It', 'One of the widest formulas in the comparison, using many different nutrients intended to support normal brain and nervous-system function.'],
       ['How It Differs From #1', 'Dr. Bill’s starts with the idea of supporting the brain from many directions. PawPrint starts with cellular energy, centering the formula on NAD+ and NMN.'],
-      ['Daily Use', 'Weight-based powder added to food.'],
+      ['Daily Use', 'A weight-based powder added to food.'],
       ['Main Tradeoff', 'Its broad 36-ingredient formula is less centered around one simple mechanism.'],
       ['Best Fit', 'Owners who prefer a very broad multi-nutrient formula.']
     ]);
@@ -63,7 +68,7 @@
       ['Built Around', '<strong>SAMe.</strong>'],
       ['Why People Choose It', 'A simple, focused SAMe formula.'],
       ['How It Differs From #1', 'Novifit centers on one traditional active ingredient. PawPrint combines several ingredients around the cellular-energy idea.'],
-      ['Daily Use', 'Tablet with size based on the dog.'],
+      ['Daily Use', 'Tablet with size and dosing based on the dog.'],
       ['Main Tradeoff', 'Availability may vary.'],
       ['Best Fit', 'Owners specifically looking for a SAMe-focused product.']
     ]);
