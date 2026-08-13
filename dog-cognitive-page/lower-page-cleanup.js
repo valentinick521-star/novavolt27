@@ -14,50 +14,80 @@
     var vet = document.getElementById("vet");
     if (vet) vet.style.gridColumn = "1 / -1";
 
-    var warningCards = warnings.querySelectorAll(".warning-compact");
-    warningCards.forEach(function (card) {
-      var heading = card.querySelector("strong");
-      var copy = card.querySelector("span");
-      if (!heading || !copy) return;
+    var trustCards = warnings.querySelectorAll(".compact-card");
+    var redFlags = trustCards[0];
+    var methodology = trustCards[1];
 
-      if (heading.textContent.indexOf("format your dog") !== -1) {
-        heading.textContent = "A format that does not fit your routine.";
-        copy.textContent =
-          "If your dog regularly refuses the format, it is hard to use the product consistently. Choose a form you can realistically give every day.";
-      }
+    if (redFlags) {
+      redFlags.innerHTML = `
+        <div class="section-kicker">Buying Red Flags</div>
+        <h2>What to Watch For</h2>
 
-      if (heading.textContent.indexOf("return policy") !== -1) {
-        copy.textContent =
-          "A clear policy matters because owners should know what happens if a product is not a good fit for their dog or routine.";
-      }
-    });
+        <div class="warning-compact">
+          <strong>No clear ingredient disclosure.</strong>
+          <span>If you cannot tell what is actually in the formula, it is hard to compare products or discuss it clearly with your veterinarian.</span>
+        </div>
+        <div class="warning-compact">
+          <strong>Medical promises that sound too good to be true.</strong>
+          <span>Be cautious with supplement claims about curing, reversing, or treating serious cognitive problems.</span>
+        </div>
+        <div class="warning-compact">
+          <strong>A format your dog will not consistently take.</strong>
+          <span>A formula only matters if it can realistically become part of the daily routine.</span>
+        </div>
+        <div class="warning-compact">
+          <strong>No clear return policy or company information.</strong>
+          <span>You should be able to tell who makes the product, how to contact them, and what happens if the product is not a good fit.</span>
+        </div>
+      `;
+    }
 
-    var methodCards = warnings.querySelectorAll(".method-compact");
-    methodCards.forEach(function (card) {
-      var heading = card.querySelector("strong");
-      var copy = card.querySelector("span");
-      if (!heading || !copy) return;
-      var label = heading.textContent.trim();
+    if (methodology) {
+      methodology.innerHTML = `
+        <div class="section-kicker">How We Compared</div>
+        <h2>The Four Factors We Used</h2>
 
-      if (label.indexOf("Daily usability") === 0) {
-        copy.textContent = "Format, dose, dosing frequency, and how realistic the routine is for daily use.";
-      }
-
-      if (label.indexOf("Guarantee and buyer protection") === 0) {
-        copy.textContent = "How clear the return policy is and how much time the buyer has to decide whether the product is a fit.";
-      }
-    });
+        <div class="method-compact">
+          <strong>Formula Strategy.</strong>
+          <span>What is the product actually built around?</span>
+        </div>
+        <div class="method-compact">
+          <strong>Daily Usability.</strong>
+          <span>How realistic are the format and dosing for everyday use?</span>
+        </div>
+        <div class="method-compact">
+          <strong>Transparency.</strong>
+          <span>Are the ingredients, directions, and product information clear?</span>
+        </div>
+        <div class="method-compact">
+          <strong>Value &amp; Buyer Protection.</strong>
+          <span>We considered price, dosing needs, and the return or guarantee policy.</span>
+        </div>
+        <div class="section-note">These scores are editorial rankings based on the factors above. They do not represent proven clinical effectiveness.</div>
+      `;
+    }
 
     if (vet) {
       var vetLead = vet.querySelector(".compact-lead");
       if (vetLead) {
         vetLead.textContent =
-          "New confusion, pacing, night waking, or house-soiling in an older dog can have more than one cause. A veterinarian can help rule out pain, vision or hearing problems, illness, or medication side effects before you assume the change is cognitive.";
+          "New confusion, pacing, sleep changes, or other behavior changes in an older dog can have more than one cause. A veterinarian can help rule out other problems before you assume the change is normal cognitive aging.";
       }
+
+      var vetPoints = vet.querySelector(".decision-points");
+      if (vetPoints) {
+        vetPoints.innerHTML = `
+          <li class="neutral"><span>Your dog takes prescription medication.</span></li>
+          <li class="neutral"><span>Your dog has a chronic health condition.</span></li>
+          <li class="neutral"><span>Symptoms appeared suddenly or are getting worse quickly.</span></li>
+          <li class="neutral"><span>You are combining more than one supplement.</span></li>
+        `;
+      }
+
       var vetNote = vet.querySelector(".section-note");
       if (vetNote) {
         vetNote.textContent =
-          "This page compares consumer products. It is not veterinary advice, and supplements do not replace an exam or treatment plan from your veterinarian.";
+          "Bring the current ingredient label to your veterinarian so they can see exactly what you are considering.";
       }
     }
 
@@ -66,35 +96,31 @@
       faqList.innerHTML = `
         <details class="faq-compact">
           <summary>Which five products are in this comparison?</summary>
-          <div class="faq-answer">The five products are PawPrint Protocol, Senilife, Aktivait, Dr. Bill’s Canine Cognitive Support, and Novifit. They use different formula strategies, so the main question is not just which brand you know — it is what type of approach you want.</div>
+          <div class="faq-answer">PawPrint Protocol, Senilife, Aktivait, Dr. Bill’s Canine Cognitive Support, and Novifit. They use different formula strategies, so the best fit depends on what type of approach and daily format you prefer.</div>
         </details>
         <details class="faq-compact">
           <summary>How does PawPrint compare with Senilife?</summary>
-          <div class="faq-answer">Senilife is built mainly around phosphatidylserine and antioxidants and comes as a softgel. PawPrint is built around NAD+ and NMN cellular-energy support and comes as a liquid dropper. They are different approaches, and neither has been proven superior to the other in a head-to-head trial.</div>
+          <div class="faq-answer">Senilife is built mainly around phosphatidylserine and antioxidants and comes as a softgel. PawPrint is centered on NAD+ and NMN cellular-energy support and comes as a liquid dropper. They are different approaches, and neither has been proven superior to the other in a head-to-head trial.</div>
         </details>
         <details class="faq-compact">
           <summary>How does PawPrint compare with Aktivait?</summary>
-          <div class="faq-answer">Aktivait uses a broad mix of cognitive-support nutrients, which may include phosphatidylserine, omega-3s, antioxidants, carnitines, and CoQ10 depending on the version. PawPrint uses a more focused formula built around NAD+ and NMN. A broader ingredient list is a different strategy, not automatically a better one.</div>
+          <div class="faq-answer">Aktivait uses a broad mix of nutrients that may include phosphatidylserine, omega-3s, antioxidants, carnitines, and CoQ10 depending on the version. PawPrint uses a more focused formula centered on NAD+ and NMN. A broader ingredient list is a different strategy, not automatically a better one.</div>
         </details>
         <details class="faq-compact">
           <summary>How does PawPrint compare with Dr. Bill’s Canine Cognitive Support?</summary>
-          <div class="faq-answer">Dr. Bill’s uses a broad 36-ingredient powder approach designed to provide many types of nutritional support. PawPrint uses a more focused formula built around NAD+ and NMN cellular-energy support and comes as a liquid dropper. Neither approach has been proven superior to the other in a head-to-head trial.</div>
+          <div class="faq-answer">Dr. Bill’s uses a broad 36-ingredient powder approach designed to provide many types of nutritional support. PawPrint uses a more focused formula centered on NAD+ and NMN cellular-energy support and comes as a liquid dropper. Neither approach has been proven superior in a head-to-head trial.</div>
         </details>
         <details class="faq-compact">
-          <summary>What ingredients are common in senior-dog cognitive supplements?</summary>
-          <div class="faq-answer">Common ingredients include phosphatidylserine, SAMe, omega-3s, antioxidants, CoQ10, carnitines, vitamins, and botanicals. Newer formulas may also use NAD+ and NMN. Different products combine these ingredients in very different ways.</div>
+          <summary>What is the difference between NAD+ and NMN?</summary>
+          <div class="faq-answer">NAD+ is involved in normal cellular-energy processes. NMN is one substance the body can use to make NAD+. The earlier cellular-energy section explains why that approach stood out in this comparison.</div>
         </details>
         <details class="faq-compact">
-          <summary>What are NAD+ and NMN?</summary>
-          <div class="faq-answer">NAD+ is a substance involved in normal cellular-energy processes. NMN is one substance the body can use to make NAD+. Dog-specific cognitive research on this approach is newer and less developed than research on some traditional ingredients.</div>
-        </details>
-        <details class="faq-compact">
-          <summary>Are liquid cognitive supplements better than capsules, chews, or powders?</summary>
-          <div class="faq-answer">Not because they are liquid. There is no reason to assume a liquid works better inside the body. The difference is practical: a liquid removes the specific problem of a dog finding and spitting out a solid pill or chew. For a dog that easily takes another format, that may not matter.</div>
+          <summary>Are liquid supplements better than capsules, chews, or powders?</summary>
+          <div class="faq-answer">Not simply because they are liquid. The difference is practical: some owners find a liquid easier to fit into a daily routine. If your dog easily takes another format, that may not matter.</div>
         </details>
         <details class="faq-compact">
           <summary>Should I talk to my veterinarian before adding a supplement?</summary>
-          <div class="faq-answer">It is especially important if your dog has new or fast-changing symptoms, takes prescription medication, has a chronic health condition, or already uses other supplements. Bring the current ingredient label so your veterinarian can see exactly what you are considering.</div>
+          <div class="faq-answer">It is especially important if your dog takes prescription medication, has a chronic condition, shows sudden changes, or already uses other supplements. Bring the current ingredient label with you.</div>
         </details>
       `;
     }
