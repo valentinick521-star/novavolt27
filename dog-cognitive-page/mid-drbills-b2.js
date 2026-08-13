@@ -1,0 +1,1 @@
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[3];if(!p)return requestAnimationFrame(f);p.append(' It uses a 36-ingredient blend.')})();
