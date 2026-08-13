@@ -1,0 +1,1 @@
+(function(){const x=document.getElementById('formula-types');if(x)x.remove();})();
