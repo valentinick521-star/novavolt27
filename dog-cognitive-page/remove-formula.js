@@ -1,1 +1,1 @@
-(function(){const x=document.getElementById('formula-types');if(x)x.remove();})();
+(function f(){var x=document.getElementById('formula-types'),c=document.getElementById('cellular-energy-attention');if(!x||!c)return requestAnimationFrame(f);x.remove()})();
