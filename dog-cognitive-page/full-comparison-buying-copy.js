@@ -24,27 +24,21 @@
     if (!pawprint || !senilife || !aktivait || !drBills || !novifit) return false;
 
     setCopy(pawprint, [
-      ['Built Around', '<strong>Cellular Energy · NAD+ + NMN.</strong> NMN and NAD+ are at the center of the formula, with CoQ10 and resveratrol alongside them.'],
-      ['Why People Choose It', 'PawPrint makes NMN and NAD+ the main focus instead of building the formula around phosphatidylserine, SAMe, or a large nutrient blend.'],
-      ['How It Differs', 'It is the clearest option here built around cellular energy rather than making a traditional brain ingredient or broad nutrient blend the main focus.'],
-      ['Daily Use', 'A daily liquid dose based on body weight.'],
-      ['Main Tradeoff', 'The cellular-energy approach should be viewed as a different strategy rather than proof of a better result.'],
+      ['How It Works', 'PawPrint starts from a different place.<br><br>Its formula centers on NMN and NAD+, which are involved in normal cellular-energy processes, with CoQ10 and resveratrol alongside them.<br><br>So while other formulas focus more on the <strong>walls, tools, or jobs inside the cell</strong>, PawPrint puts the <strong>cellular-energy system</strong> at the center of its formula.<br><br>Think of it like focusing on the <strong>power system the cell uses</strong> rather than one of the individual jobs that power supports.<br><br>That difference is what made PawPrint stand out to us.'],
+      ['Daily Use', 'Weight-based liquid dropper with directions that change with the dog’s size.'],
+      ['Main Tradeoff', 'The cellular-energy approach is a different strategy, not evidence that it will outperform every traditional option.'],
       ['Best Fit', 'Owners interested in cellular-energy support who also prefer a liquid format.']
     ]);
 
     setCopy(senilife, [
-      ['Built Around', '<strong>Phosphatidylserine + Antioxidants.</strong>'],
-      ['Why People Choose It', 'A focused formula built around phosphatidylserine with supporting nutrients around it.'],
-      ['How It Differs From #1', 'Senilife starts mainly with cell-membrane support. PawPrint starts mainly with cellular-energy support.'],
+      ['How It Works', 'Senilife is built around phosphatidylserine, along with antioxidants and other nutrients.<br><br>Phosphatidylserine is a phospholipid found in cell membranes, including the membranes around brain cells. Think of it like putting more of the focus on the <strong>outer structure of the cell</strong>.<br><br>That is a different starting point from a formula centered on cellular-energy ingredients.'],
       ['Daily Use', 'Softgel that can be given whole or opened onto food.'],
       ['Main Tradeoff', 'It still requires consistently giving a capsule or its contents.'],
       ['Best Fit', 'Owners who prefer a focused phosphatidylserine formula.']
     ]);
 
     setCopy(aktivait, [
-      ['Built Around', '<strong>Broad Multi-Nutrient Support.</strong>'],
-      ['Why People Choose It', 'Aktivait takes a broad approach, combining several nutrients intended to support normal brain function rather than building the whole formula around one single ingredient.'],
-      ['How It Differs From #1', 'Aktivait spreads support across several nutritional areas. PawPrint uses a more focused cellular-energy strategy centered on NAD+ and NMN.'],
+      ['How It Works', 'Aktivait spreads its support across several areas.<br><br>It includes phosphatidylserine, omega-3s, antioxidants, L-carnitine, CoQ10, and other nutrients. Think of it like giving the aging brain a <strong>toolbox with several different tools inside</strong>.<br><br>Instead of putting one nutritional strategy at the center, it tries to cover several areas at once.'],
       ['Daily Use', 'Tablet. Larger dogs may need more than one tablet per day.'],
       ['Main Tradeoff', 'A broad multi-nutrient formula is less centered around one simple mechanism.'],
       ['Best Fit', 'Owners who like the idea of covering several nutritional areas at once.']
@@ -56,18 +50,14 @@
     if (aktivaitOffer) aktivaitOffer.textContent = 'Tablet · Weight-based dosing';
 
     setCopy(drBills, [
-      ['Built Around', '<strong>Broad Brain Nutrition · 36-Ingredient Blend.</strong>'],
-      ['Why People Choose It', 'One of the widest formulas in the comparison, using many different nutrients intended to support normal brain and nervous-system function.'],
-      ['How It Differs From #1', 'Dr. Bill’s starts with the idea of supporting the brain from many directions. PawPrint starts with cellular energy, centering the formula on NAD+ and NMN.'],
+      ['How It Works', 'Dr. Bill’s goes much wider.<br><br>Its formula contains 36 ingredients intended to support the aging brain in several nutritional ways. Think of it like giving the brain a <strong>big box of tools and supplies</strong>.<br><br>It is a broad-coverage approach rather than one centered on a single nutritional strategy.'],
       ['Daily Use', 'A weight-based powder added to food.'],
       ['Main Tradeoff', 'Its broad 36-ingredient formula is less centered around one simple mechanism.'],
       ['Best Fit', 'Owners who prefer a very broad multi-nutrient formula.']
     ]);
 
     setCopy(novifit, [
-      ['Built Around', '<strong>SAMe.</strong>'],
-      ['Why People Choose It', 'A simple, focused SAMe formula.'],
-      ['How It Differs From #1', 'Novifit centers on one traditional active ingredient. PawPrint combines several ingredients around the cellular-energy idea.'],
+      ['How It Works', 'Novifit takes another route.<br><br>Its main ingredient is SAMe, a substance the body naturally makes and uses in normal chemical processes inside cells. You can think of it like a <strong>helper inside the cell</strong> that participates in those processes.<br><br>That gives Novifit a focused SAMe strategy rather than a broad nutrient blend or an NMN/NAD+-centered formula.'],
       ['Daily Use', 'Tablet with size and dosing based on the dog.'],
       ['Main Tradeoff', 'Availability may vary.'],
       ['Best Fit', 'Owners specifically looking for a SAMe-focused product.']
