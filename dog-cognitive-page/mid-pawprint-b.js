@@ -1,1 +1,1 @@
-(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[4];if(!p)return requestAnimationFrame(f);p.append(' Its main focus is cellular energy rather than one traditional ingredient.')})();
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[4];if(!p)return requestAnimationFrame(f);p.insertAdjacentHTML('beforeend','<br><br>As dogs age, NAD+ can decline. And NAD+ helps brain cells make the energy they need to stay active and do their jobs.')})();
