@@ -1,1 +1,1 @@
-(function f(){var p=document.querySelector('#popular-options-inside .popular-options-intro');if(!p)return requestAnimationFrame(f);if(p.dataset.done)return;p.append(' But once you look at what they’re built around, the approaches are very different.');p.dataset.done='1'})();
+(function f(){var s=document.getElementById('popular-options-inside');if(!s)return requestAnimationFrame(f);var p=s.querySelector('.popular-options-transition');if(p)p.remove()})();
