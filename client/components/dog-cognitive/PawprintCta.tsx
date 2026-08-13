@@ -1,4 +1,5 @@
-import { ReactNode, useEffect } from "react";
+import "../../../dog-cognitive-page/full-comparison-rewrite.js";
+import { ReactNode } from "react";
 import {
   buildPawprintUrl,
   trackOutboundClick,
@@ -16,15 +17,6 @@ export default function PawprintCta({
   children: ReactNode;
   ariaLabel?: string;
 }) {
-  useEffect(() => {
-    if (document.getElementById("full-comparison-rewrite-script")) return;
-
-    const script = document.createElement("script");
-    script.id = "full-comparison-rewrite-script";
-    script.src = "/full-comparison-rewrite.js";
-    document.body.appendChild(script);
-  }, []);
-
   return (
     <a
       className={className}
