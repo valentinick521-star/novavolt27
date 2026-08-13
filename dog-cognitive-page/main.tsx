@@ -143,6 +143,64 @@ function updateQuickRankings() {
   });
 }
 
+function addFormulaTypeSection() {
+  const rankings = document.getElementById("rankings");
+  const comparison = document.getElementById("comparison");
+  if (!rankings || !comparison || document.getElementById("formula-types")) return;
+
+  if (!document.getElementById("formula-type-section-styles")) {
+    const style = document.createElement("style");
+    style.id = "formula-type-section-styles";
+    style.textContent = `
+      #formula-types .formula-types-card {
+        max-width: 860px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        box-shadow: var(--shadow);
+        padding: 22px 24px;
+      }
+      #formula-types .formula-types-card p {
+        margin: 0 0 12px;
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      #formula-types .formula-types-card p:last-child {
+        margin-bottom: 0;
+      }
+      #formula-types .formula-types-close {
+        padding-top: 12px;
+        border-top: 1px solid var(--line-light);
+        color: var(--navy);
+      }
+      @media (max-width: 760px) {
+        #formula-types .formula-types-card {
+          padding: 18px;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const section = document.createElement("section");
+  section.className = "section formula-types-section";
+  section.id = "formula-types";
+  section.innerHTML = `
+    <h2 class="section-title">Why the Type of Formula Matters</h2>
+    <div class="formula-types-card">
+      <p>Two products can both say “cognitive support” and still be built in very different ways. That is why it helps to look past the front label and ask what the formula starts with.</p>
+      <p><strong>Phosphatidylserine-based formulas.</strong> These start with phosphatidylserine, a substance found in cell membranes. Senilife is the clearest example on this page.</p>
+      <p><strong>SAMe-based formulas.</strong> These start with SAMe, a substance the body uses in several normal processes. Novifit is the clearest example.</p>
+      <p><strong>Broad nutrient formulas.</strong> These try to support the aging brain from many directions at once. They may mix omega-3s, antioxidants, vitamins, phospholipids, amino acids, botanicals, and other nutrients. Aktivait and Dr. Bill’s are examples of this broader approach.</p>
+      <p>The point is not that one style is always better. It is that products made for the same goal can start from very different ideas.</p>
+      <p class="formula-types-close"><strong>And then there is a newer approach: cellular energy.</strong><br><br>Instead of starting with one traditional brain ingredient or combining many nutrients at once, these formulas start with the energy system every brain cell depends on.<br><br>That was the difference we wanted to look at more closely.</p>
+    </div>
+  `;
+
+  comparison.parentNode?.insertBefore(section, comparison);
+}
+
 function DogCognitivePage() {
   useEffect(() => {
     const summary = document.querySelector<HTMLElement>(".hero-pick-best");
@@ -152,6 +210,7 @@ function DogCognitivePage() {
     }
 
     updateQuickRankings();
+    addFormulaTypeSection();
   }, []);
 
   return (
