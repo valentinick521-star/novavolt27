@@ -19,6 +19,13 @@ function dogCognitiveFocusedCleanup() {
     name: "dog-cognitive-focused-cleanup",
     enforce: "pre" as const,
     transform(code: string, id: string) {
+      if (id.includes("dog-cognitive-page/main.tsx")) {
+        return code.replace(
+          "addPopularOptionsSection();",
+          'addPopularOptionsSection();\n    document.getElementById("popular-options-inside")?.style.setProperty("display", "none", "important");',
+        );
+      }
+
       if (!id.includes("client/components/dog-cognitive/SiteLayout.tsx")) return null;
       return code.replace(
         'import "../../../dog-cognitive-page/accuracy-cleanup.js";',
