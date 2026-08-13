@@ -103,5 +103,101 @@
 
     <div id="root"></div>
     <script type="module" src="/main.tsx"></script>
+    <script>
+      (function () {
+        function addCellularEnergySection() {
+          var formulaTypes = document.getElementById("formula-types");
+          if (!formulaTypes || document.getElementById("cellular-energy-attention")) return false;
+
+          var style = document.createElement("style");
+          style.id = "cellular-energy-attention-styles";
+          style.textContent = `
+            #cellular-energy-attention {
+              max-width: 860px;
+            }
+            #cellular-energy-attention .cellular-energy-copy {
+              max-width: 72ch;
+            }
+            #cellular-energy-attention p {
+              margin: 0 0 14px;
+              font-size: 16px;
+              line-height: 1.7;
+              color: var(--muted);
+            }
+            #cellular-energy-attention .energy-flow {
+              max-width: 520px;
+              margin: 22px 0;
+              padding: 18px 22px;
+              border: 1px solid var(--line);
+              border-radius: var(--r);
+              background: var(--bg-soft);
+              text-align: center;
+              color: var(--navy);
+              font-size: 15px;
+              line-height: 1.35;
+              font-weight: 800;
+            }
+            #cellular-energy-attention .energy-flow span {
+              display: block;
+            }
+            #cellular-energy-attention .energy-flow .energy-arrow {
+              margin: 5px 0;
+              color: var(--accent);
+              font-size: 20px;
+              line-height: 1;
+            }
+            #cellular-energy-attention .cellular-energy-close {
+              margin-top: 20px;
+              padding-top: 18px;
+              border-top: 1px solid var(--line-light);
+              color: var(--navy);
+            }
+          `;
+          document.head.appendChild(style);
+
+          var section = document.createElement("section");
+          section.className = "section";
+          section.id = "cellular-energy-attention";
+          section.innerHTML = `
+            <h2 class="section-title">Why Cellular Energy Caught Our Attention</h2>
+            <div class="cellular-energy-copy">
+              <p>Your dog’s brain is made of cells. And just like the other cells in the body, brain cells need energy to do their normal jobs. That includes the everyday work that helps the brain stay active, send signals, and keep its normal processes moving.</p>
+
+              <p>That made us look at cognitive formulas in a different way. Most people compare the ingredients on the label. But those ingredients still have to be used inside living cells, and those cells depend on normal cellular-energy processes.</p>
+
+              <div class="energy-flow" aria-label="Food and nutrients feed the cellular energy system, which provides energy used by brain cells">
+                <span>Food + Nutrients</span>
+                <span class="energy-arrow" aria-hidden="true">↓</span>
+                <span>Cellular Energy System</span>
+                <span class="energy-arrow" aria-hidden="true">↓</span>
+                <span>Energy Used by Brain Cells</span>
+              </div>
+
+              <p>This is where <strong>NAD+</strong> comes in. NAD+ is a substance the body uses during the processes that turn nutrients into usable energy inside cells. It is not a drug or a source of energy by itself. It is part of the normal system cells use while making and using energy.</p>
+
+              <p><strong>NMN</strong> is connected to that system too. It is one of the substances the body can use to make NAD+.</p>
+
+              <p>Traditional cognitive formulas often start with phosphatidylserine, SAMe, omega-3s, antioxidants, vitamins, or a broad mix of nutrients. Those are different ways of supporting the aging brain. The cellular-energy approach starts with a different question: <strong>What about the energy system those brain cells depend on in the first place?</strong></p>
+
+              <p>That idea is interesting, but it is also newer in this category. Dog-specific cognitive research on NAD+ and NMN is still less developed than research on some older cognitive-support ingredients. So this is not proof that an NAD+ formula will work better than every traditional option.</p>
+
+              <p class="cellular-energy-close">But it gave us a very different reason to pay attention to PawPrint. Instead of making another version of the usual cognitive formula, PawPrint was built around this cellular-energy idea from the start.</p>
+            </div>
+          `;
+
+          formulaTypes.insertAdjacentElement("afterend", section);
+          return true;
+        }
+
+        if (addCellularEnergySection()) return;
+
+        var root = document.getElementById("root");
+        if (!root) return;
+        var observer = new MutationObserver(function () {
+          if (addCellularEnergySection()) observer.disconnect();
+        });
+        observer.observe(root, { childList: true, subtree: true });
+      })();
+    </script>
   </body>
 </html>
