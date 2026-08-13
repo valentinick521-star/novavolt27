@@ -15,15 +15,24 @@
 
   function fixHeroAccuracy() {
     var sub = document.querySelector(".hero-title-sub");
-    if (!sub) return;
-    var current = sub.textContent.replace(/\s+/g, " ").trim();
-    var oldText =
-      "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. Most took the same basic approach. But one stood out because it worked in a very different way.";
-    if (current === oldText) {
+    if (sub) {
+      sub.innerHTML =
+        "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. <strong>Most took the same basic approach, but one didn’t.</strong>";
+    }
+
+    var body = document.querySelector(".hero-body");
+    if (!body) return;
+    var paragraphs = body.querySelectorAll(":scope > p");
+    if (paragraphs.length >= 3) {
       setText(
-        sub,
-        "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. Most took the same basic approach. But one stood out because it was built around a very different approach."
+        paragraphs[0],
+        "At first, most cognitive supplements look very similar. They all talk about brain health, memory, and healthy aging."
       );
+      setText(
+        paragraphs[1],
+        "But once we looked at what was actually inside them, the differences became much clearer."
+      );
+      paragraphs[2].remove();
     }
   }
 
