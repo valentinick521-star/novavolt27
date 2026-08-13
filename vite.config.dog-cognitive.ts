@@ -14,6 +14,20 @@ function dogCognitiveAccuracyHtml() {
   };
 }
 
+function dogCognitiveFocusedCleanup() {
+  return {
+    name: "dog-cognitive-focused-cleanup",
+    enforce: "pre" as const,
+    transform(code: string, id: string) {
+      if (!id.includes("client/components/dog-cognitive/SiteLayout.tsx")) return null;
+      return code.replace(
+        'import "../../../dog-cognitive-page/accuracy-cleanup.js";',
+        'import "../../../dog-cognitive-page/accuracy-core.js";\nimport "../../../dog-cognitive-page/middle-loader.js";',
+      );
+    },
+  };
+}
+
 export default defineConfig({
   root: path.resolve(__dirname, "dog-cognitive-page"),
   base: "/best-dog-cognitive-supplements/",
@@ -24,7 +38,7 @@ export default defineConfig({
     ),
     emptyOutDir: true,
   },
-  plugins: [react(), dogCognitiveAccuracyHtml()],
+  plugins: [dogCognitiveFocusedCleanup(), react(), dogCognitiveAccuracyHtml()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client"),
