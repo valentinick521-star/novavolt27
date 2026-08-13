@@ -1,5 +1,5 @@
 export const PAWPRINT_URL =
-  "https://pawprintlab.com/products/pawprint-lab/?aff_id=34379&affid=34379&lpid=1160&oid=1160&source_id=DL&utm_source=34379&utm_term=1160";
+  "https://pawprintlab.com/products/pawprint-lab/?lpid=1160&source_id=DL&utm_source=34379&utm_medium=&utm_term=1160&aff_id=34379&sub_id=&req_id=&oid=1160&device_type=&country_name=&_ef_transaction_id=&oid=1160&affid=34379";
 
 const PASSTHROUGH_PARAMS = [
   "gclid",
@@ -58,9 +58,6 @@ export function buildPawprintUrl(): string {
     const incoming = new URLSearchParams(window.location.search);
     const url = new URL(PAWPRINT_URL);
 
-    // Preserve the PawPrint/GiddyUp affiliate tuple on the base URL. Google
-    // campaign data is carried in sub IDs and click-ID fields rather than
-    // overwriting PawPrint's affiliate utm_source / offer utm_term values.
     const sub1 = firstParam(incoming, "sub1", "keyword", "utm_term");
     const sub2 = firstParam(incoming, "sub2", "campaignid", "utm_campaign");
     const sub3 = firstParam(incoming, "sub3", "adgroupid");
