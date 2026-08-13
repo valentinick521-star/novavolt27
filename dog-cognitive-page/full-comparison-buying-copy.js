@@ -26,7 +26,7 @@
     setCopy(pawprint, [
       ['How It Works', 'PawPrint starts from a different place.<br><br>Its formula centers on NMN and NAD+, which are involved in normal cellular-energy processes, with CoQ10 and resveratrol alongside them.<br><br>So while other formulas focus more on the <strong>walls, tools, or jobs inside the cell</strong>, PawPrint puts the <strong>cellular-energy system</strong> at the center of its formula.<br><br>Think of it like focusing on the <strong>power system the cell uses</strong> rather than one of the individual jobs that power supports.<br><br>That difference is what made PawPrint stand out to us.'],
       ['Daily Use', 'Weight-based liquid dropper with directions that change with the dog’s size.'],
-      ['Main Tradeoff', 'The cellular-energy approach is a different strategy, not evidence that it will outperform every traditional option.'],
+      ['Main Tradeoff', 'If you want the most familiar, traditional formula, PawPrint may not be your pick. It takes a less conventional route by centering on NMN and NAD+ instead of the phosphatidylserine or SAMe approaches used by many older products.'],
       ['Best Fit', 'Owners interested in cellular-energy support who also prefer a liquid format.']
     ]);
 
