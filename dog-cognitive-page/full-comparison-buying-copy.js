@@ -12,6 +12,22 @@
     return true;
   }
 
+  function ensureCompareLink(card) {
+    if (!card) return;
+    var panel = card.querySelector('.score-panel');
+    if (!panel) return;
+    var link = panel.querySelector('a.editorial-cta.secondary');
+    if (!link) {
+      link = document.createElement('a');
+      link.className = 'editorial-cta secondary';
+      link.textContent = 'Compare With #1 →';
+      var note = panel.querySelector('.offer-note');
+      if (note) panel.insertBefore(link, note);
+      else panel.appendChild(link);
+    }
+    link.setAttribute('href', '#pawprint');
+  }
+
   function addTransition(comparison) {
     if (comparison.querySelector('.full-comparison-transition')) return;
     var heading = comparison.querySelector('.section-title');
@@ -99,6 +115,11 @@
 
     stack.appendChild(novifit);
     stack.appendChild(drBills);
+
+    ensureCompareLink(senilife);
+    ensureCompareLink(aktivait);
+    ensureCompareLink(novifit);
+    ensureCompareLink(drBills);
 
     comparison.dataset.buyingCopyRewrite = 'true';
     return true;
