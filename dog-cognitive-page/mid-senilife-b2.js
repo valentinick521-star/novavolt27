@@ -1,1 +1,1 @@
-(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[0];if(!p)return requestAnimationFrame(f);p.append(' It is part of cell membranes, including brain-cell membranes.')})();
+(function f(){var c=document.querySelector('#cellular-energy-attention .cellular-energy-copy');if(!c)return requestAnimationFrame(f);c.insertAdjacentHTML('beforeend','<p><strong>As the brain ages, support the energy system its cells depend on to keep doing their jobs.</strong></p>')})();
