@@ -143,6 +143,82 @@ function updateQuickRankings() {
   });
 }
 
+function addPopularOptionsSection() {
+  const rankings = document.getElementById("rankings");
+  if (!rankings || document.getElementById("popular-options-inside")) return;
+
+  if (!document.getElementById("popular-options-inside-styles")) {
+    const style = document.createElement("style");
+    style.id = "popular-options-inside-styles";
+    style.textContent = `
+      #popular-options-inside {
+        max-width: 860px;
+      }
+      #popular-options-inside .popular-option {
+        margin-top: 26px;
+      }
+      #popular-options-inside h3 {
+        font-family: var(--serif);
+        font-size: 21px;
+        line-height: 1.25;
+        font-weight: 800;
+        color: var(--navy);
+        margin: 0 0 7px;
+      }
+      #popular-options-inside p {
+        max-width: 72ch;
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+      #popular-options-inside .popular-options-transition {
+        margin-top: 30px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line-light);
+        color: var(--navy);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const section = document.createElement("section");
+  section.className = "section";
+  section.id = "popular-options-inside";
+  section.innerHTML = `
+    <h2 class="section-title">What’s Actually Inside the Popular Options?</h2>
+
+    <div class="popular-option">
+      <h3>Senilife</h3>
+      <p>Senilife is built mainly around phosphatidylserine, with ginkgo, vitamin B6, vitamin E, and resveratrol alongside it. Phosphatidylserine is a fat-like substance that makes up part of the outer membrane around cells, including brain cells. Think of it as part of the structure that helps brain cells stay healthy and do their normal jobs. So the Senilife approach starts with supporting the brain cell itself — especially the membrane around it — and adds antioxidants and other nutrients around that.</p>
+    </div>
+
+    <div class="popular-option">
+      <h3>Aktivait</h3>
+      <p>Aktivait takes a broader approach. Depending on the version, it may combine phosphatidylserine, omega-3s, antioxidants, carnitines, CoQ10, and other nutrients. Omega-3s are important parts of cell membranes. Antioxidants help protect cells from everyday oxidative stress. Ingredients like carnitine and CoQ10 are involved in the way cells make and use energy. Instead of focusing on one system, Aktivait tries to support the aging brain from several directions at once.</p>
+    </div>
+
+    <div class="popular-option">
+      <h3>Novifit and Other SAMe Products</h3>
+      <p>These products are built mainly around SAMe. SAMe is a substance the body naturally makes and uses to carry out many normal chemical jobs inside cells. Those jobs help cells make, move, and use other substances they need. So instead of starting with the cell membrane, SAMe products focus more on helping support the normal chemical processes happening inside cells.</p>
+    </div>
+
+    <div class="popular-option">
+      <h3>Dr. Bill’s Canine Cognitive Support</h3>
+      <p>Dr. Bill’s takes one of the broadest approaches. The manufacturer describes it as a 36-ingredient powder with nutrients such as phosphatidylcholine, DHA, ginkgo, bacopa, glutathione, amino acids, and B vitamins. Some ingredients help support cell membranes. Some are antioxidants. Some are involved in normal brain signaling or energy use. Instead of choosing one main pathway, Dr. Bill’s tries to cover many different parts of brain nutrition at the same time.</p>
+    </div>
+
+    <div class="popular-option">
+      <h3>PawPrint Protocol</h3>
+      <p>PawPrint starts somewhere different. Its formula centers on NMN and NAD+, with CoQ10 and resveratrol alongside them. NAD+ is a substance cells use during the process of turning nutrients into usable energy. NMN is one of the building blocks the body can use to make NAD+. So instead of starting with the cell membrane, one chemical pathway, or a huge mix of nutrients, PawPrint starts with the energy system used inside the cells themselves.</p>
+    </div>
+
+    <p class="popular-options-transition"><strong>That was the biggest difference we found.</strong><br><br>Most of the products above start by asking what nutrients the aging brain may need. PawPrint starts with a different question:<br><br><strong>What about the energy those brain cells need to do their jobs?</strong><br><br>That is what we looked at next.</p>
+  `;
+
+  rankings.insertAdjacentElement("afterend", section);
+}
+
 function addFormulaTypeSection() {
   const rankings = document.getElementById("rankings");
   const comparison = document.getElementById("comparison");
@@ -211,6 +287,7 @@ function DogCognitivePage() {
 
     updateQuickRankings();
     addFormulaTypeSection();
+    addPopularOptionsSection();
   }, []);
 
   return (
