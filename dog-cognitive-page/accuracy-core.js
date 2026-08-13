@@ -36,6 +36,22 @@
     }
   }
 
+  function fixRankingsPresentation() {
+    var rankings = document.getElementById("rankings");
+    if (!rankings) return;
+
+    setText(rankings.querySelector(".section-title"), "Quick Comparison");
+
+    if (!document.getElementById("rankings-corner-fix")) {
+      var style = document.createElement("style");
+      style.id = "rankings-corner-fix";
+      style.textContent =
+        ".dog-cognitive-page-root .rankings-shell{border-top:3px solid var(--navy);}" +
+        ".dog-cognitive-page-root .rankings-shell::before{display:none;}";
+      document.head.appendChild(style);
+    }
+  }
+
   function fixRankingsAccuracy() {
     var rows = document.querySelectorAll("#rankings tbody tr");
     if (rows.length < 5) return;
@@ -88,6 +104,7 @@
   function apply() {
     fixMeta();
     fixHeroAccuracy();
+    fixRankingsPresentation();
     fixRankingsAccuracy();
     fixFaqAccuracy();
     fixResidualDosingLanguage();
