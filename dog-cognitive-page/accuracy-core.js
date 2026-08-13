@@ -48,16 +48,16 @@
       style.textContent =
         ".dog-cognitive-page-root .rankings-shell{" +
           "border-top:3px solid var(--navy);" +
-          "background:#f7f9fb;" +
+          "background:#eef3fb;" +
         "}" +
         ".dog-cognitive-page-root .rankings-shell::before{display:none;}" +
         ".dog-cognitive-page-root .rankings-shell .table-scroll{" +
-          "background:#f7f9fb;" +
+          "background:#eef3fb;" +
           "border-radius:calc(var(--r) - 1px) calc(var(--r) - 1px) 0 0;" +
         "}" +
         ".dog-cognitive-page-root .rankings-table thead th:first-child{" +
           "border-top-left-radius:calc(var(--r) - 1px);" +
-          "background:#f7f9fb;" +
+          "background:#eef3fb;" +
         "}";
       document.head.appendChild(style);
     }
