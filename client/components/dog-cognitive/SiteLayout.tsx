@@ -7,6 +7,7 @@ import "../../../dog-cognitive-page/full-comparison-buying-copy.js";
 import "../../../dog-cognitive-page/full-comparison-corrections.js";
 import "../../../dog-cognitive-page/final-cta-cleanup.js";
 import "../../../dog-cognitive-page/accuracy-cleanup.js";
+import "../../../dog-cognitive-page/compact-why-pawprint.js";
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SiteHeader from "./SiteHeader";
