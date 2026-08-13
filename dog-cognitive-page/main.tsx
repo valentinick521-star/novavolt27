@@ -190,22 +190,22 @@ function addPopularOptionsSection() {
 
     <div class="popular-option">
       <h3>Senilife</h3>
-      <p>Senilife is built mainly around phosphatidylserine, with ginkgo, vitamin B6, vitamin E, and resveratrol alongside it. Phosphatidylserine is a fat-like substance that makes up part of the outer membrane around cells, including brain cells. Think of it as part of the structure that helps brain cells stay healthy and do their normal jobs. So the Senilife approach starts with supporting the brain cell itself — especially the membrane around it — and adds antioxidants and other nutrients around that.</p>
+      <p>Senilife is mainly built around phosphatidylserine, along with ginkgo, vitamin B6, vitamin E, and resveratrol. Phosphatidylserine is a fat-like substance that makes up part of the outer membrane around cells, including brain cells. So the Senilife approach starts with supporting the structure around brain cells, with antioxidants and other nutrients added around it.</p>
     </div>
 
     <div class="popular-option">
       <h3>Aktivait</h3>
-      <p>Aktivait takes a broader approach. Depending on the version, it may combine phosphatidylserine, omega-3s, antioxidants, carnitines, CoQ10, and other nutrients. Omega-3s are important parts of cell membranes. Antioxidants help protect cells from everyday oxidative stress. Ingredients like carnitine and CoQ10 are involved in the way cells make and use energy. Instead of focusing on one system, Aktivait tries to support the aging brain from several directions at once.</p>
+      <p>Aktivait takes a broader approach. Depending on the current version, it may combine phosphatidylserine, omega-3s, antioxidants, carnitines, CoQ10, and other nutrients. Omega-3s are important parts of cell membranes. Antioxidants help protect cells from everyday oxidative stress. Ingredients like carnitine and CoQ10 are involved in the way cells make and use energy. Instead of focusing on one system, Aktivait tries to support the aging brain from several directions at once.</p>
     </div>
 
     <div class="popular-option">
       <h3>Novifit and Other SAMe Products</h3>
-      <p>These products are built mainly around SAMe. SAMe is a substance the body naturally makes and uses to carry out many normal chemical jobs inside cells. Those jobs help cells make, move, and use other substances they need. So instead of starting with the cell membrane, SAMe products focus more on helping support the normal chemical processes happening inside cells.</p>
+      <p>Novifit and other SAMe products are built mainly around SAMe. SAMe is a substance the body naturally makes and uses to carry out many normal chemical jobs inside cells. Instead of starting with the cell membrane, SAMe products focus more on supporting the normal chemical processes happening inside cells.</p>
     </div>
 
     <div class="popular-option">
       <h3>Dr. Bill’s Canine Cognitive Support</h3>
-      <p>Dr. Bill’s takes one of the broadest approaches. The manufacturer describes it as a 36-ingredient powder with nutrients such as phosphatidylcholine, DHA, ginkgo, bacopa, glutathione, amino acids, and B vitamins. Some ingredients help support cell membranes. Some are antioxidants. Some are involved in normal brain signaling or energy use. Instead of choosing one main pathway, Dr. Bill’s tries to cover many different parts of brain nutrition at the same time.</p>
+      <p>Dr. Bill’s takes one of the broadest approaches. The manufacturer describes it as a 36-ingredient powder with nutrients such as phosphatidylcholine, DHA, ginkgo, bacopa, glutathione, amino acids, and B vitamins. Some ingredients support cell membranes. Some act as antioxidants. Some are involved in normal brain signaling or energy use. Instead of choosing one main pathway, Dr. Bill’s tries to cover many different parts of brain nutrition at the same time.</p>
     </div>
 
     <div class="popular-option">
