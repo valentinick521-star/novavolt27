@@ -11,5 +11,6 @@ import "./mid-drbills-b2.js";
 import "./mid-drbills-c2.js";
 import "./mid-pawprint-a.js";
 import "./mid-pawprint-b.js";
+import "./mid-pawprint-c.js";
 import "./mid-cellular-trim.js";
 import "./remove-formula.js";
