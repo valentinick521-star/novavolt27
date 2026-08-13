@@ -1,0 +1,1 @@
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[4];if(!p)return requestAnimationFrame(f);p.append(' The other approaches start with cell membranes, chemical processes, or broader nutrient support.')})();
