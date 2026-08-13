@@ -58,6 +58,7 @@
 }
 
 /* Main editorial body copy. */
+.dog-cognitive-page-root .hero-body p,
 .dog-cognitive-page-root #popular-options-inside .popular-option > p,
 .dog-cognitive-page-root #cellular-energy-attention p,
 .dog-cognitive-page-root #review > p{
@@ -207,6 +208,7 @@
     line-height: 1.32;
   }
 
+  .dog-cognitive-page-root .hero-body p,
   .dog-cognitive-page-root #popular-options-inside .popular-option > p,
   .dog-cognitive-page-root #cellular-energy-attention p,
   .dog-cognitive-page-root #review > p{
