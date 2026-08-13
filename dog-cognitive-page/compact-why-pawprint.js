@@ -2,22 +2,27 @@
   var EXACT_HTML = `
     <h2>Why PawPrint Finished #1</h2>
 
-    <h3>1. It Focuses on Cellular Energy</h3>
-    <p>PawPrint stood out because NMN and NAD+ sit at the center of the formula.</p>
-    <p>Instead of mainly supporting one part of the brain cell or using a broad mix of nutrients, it focuses on the <strong>energy system those cells depend on.</strong></p>
-    <p>That was the clearest difference we found.</p>
+    <p>After comparing the different approaches, PawPrint stood out for one main reason:</p>
 
-    <h3>2. It’s Easy to Use Every Day</h3>
-    <p>PawPrint comes as a weight-based liquid dropper.</p>
-    <p>There is no pill, capsule, or chew for your dog to find and spit out.</p>
-    <p>That does not mean liquid works better inside the body. It simply makes daily use more practical for many dogs.</p>
+    <p><strong>It puts cellular-energy support at the center of the formula.</strong></p>
 
-    <h3>3. It Gives You More Time to Decide</h3>
-    <p>PawPrint includes a <strong>90-day money-back guarantee</strong>, giving owners more time to decide whether it is right for their dog.</p>
+    <p>NAD+ helps cells turn nutrients into energy they can use, while NMN is something the body can use to help make NAD+.</p>
 
-    <h3>Final Verdict</h3>
-    <p>PawPrint finished #1 because it paired the clearest cellular-energy approach with a practical daily format and a longer window to decide.</p>
-    <p><strong>It was the most complete option we reviewed — not because every other approach is useless, but because its main focus started with something every brain cell depends on: energy.</strong></p>
+    <p>So while other formulas focus more on the walls, tools, or individual jobs inside the cell, PawPrint starts with the energy system underneath them.</p>
+
+    <p>That is the difference that caught our attention.</p>
+
+    <p>But the formula was not the only reason it finished #1.</p>
+
+    <p><strong>It’s also built to be practical every day.</strong> PawPrint comes as a weight-based liquid dropper instead of a pill, capsule, chew, or powder your dog has to eat on its own.</p>
+
+    <p>And because trying another supplement can feel like a gamble, <strong>PawPrint includes a 90-day money-back guarantee</strong>, giving you more time to decide whether it is right for your dog.</p>
+
+    <h3>Our Final Take</h3>
+
+    <p>PawPrint was our top choice because it combined the most distinct formula strategy we reviewed with a practical daily format and a longer window to try it.</p>
+
+    <p>But if you're looking for a senior-dog supplement built around cellular-energy support rather than another phosphatidylserine, SAMe, or broad nutrient formula, <strong>PawPrint is the option we would look at first.</strong></p>
   `;
 
   function apply() {
@@ -27,6 +32,9 @@
     if (review.innerHTML.trim() !== EXACT_HTML.trim()) {
       review.innerHTML = EXACT_HTML;
     }
+
+    var cellular = document.getElementById('cellular-energy-attention');
+    if (cellular) cellular.remove();
 
     var daily = document.getElementById('daily-routine-advantage');
     if (daily) daily.remove();
