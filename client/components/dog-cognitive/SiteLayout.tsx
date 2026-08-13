@@ -3,6 +3,7 @@ import "@/styles/dog-cognitive-2.css";
 import "@/styles/dog-cognitive-3.css";
 import "@/styles/dog-cognitive-4.css";
 import "@/styles/dog-cognitive-5.css";
+import "../../../dog-cognitive-page/full-comparison-buying-copy.js";
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SiteHeader from "./SiteHeader";
