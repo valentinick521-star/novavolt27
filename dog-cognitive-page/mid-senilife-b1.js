@@ -1,1 +1,1 @@
-void 0;
+(function f(){var c=document.querySelector('#cellular-energy-attention .cellular-energy-copy');if(!c)return requestAnimationFrame(f);c.insertAdjacentHTML('beforeend','<p>That is why cellular energy stood out to us as the more basic place to start.</p>')})();
