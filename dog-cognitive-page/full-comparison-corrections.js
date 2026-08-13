@@ -49,7 +49,6 @@
     setField(pawprint, 'Why People Choose It', 'Its main point of difference is a formula centered on cellular-energy support rather than phosphatidylserine, SAMe, or a very broad nutrient blend.');
     setField(pawprint, 'How It Differs', 'PawPrint starts with NMN and NAD+ as the central strategy. That makes it different from the other approaches here, but it is not proof of clinically superior results.');
     setField(pawprint, 'Daily Use', 'Weight-based liquid dropper with directions that change with the dog’s size.');
-    setField(pawprint, 'Main Tradeoff', 'The cellular-energy approach is a different strategy, not evidence that it will outperform every traditional option.');
     setField(pawprint, 'Best Fit', 'Owners interested in cellular-energy support who also prefer a liquid format.');
 
     setField(senilife, 'Built Around', '<strong>Phosphatidylserine + Antioxidants.</strong> Phosphatidylserine sits at the center of the formula, with antioxidants and other nutrients alongside it.');
