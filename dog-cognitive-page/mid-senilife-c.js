@@ -1,1 +1,1 @@
-(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[0];if(!p)return requestAnimationFrame(f);p.insertAdjacentHTML('beforeend',' <strong>Basic idea: support the structure and normal function of brain cells.</strong>')})();
+(function f(){var c=document.querySelector('#cellular-energy-attention .cellular-energy-copy');if(!c)return requestAnimationFrame(f);c.insertAdjacentHTML('beforeend','<p>The other approaches may help support the <strong>walls, tools, or work inside the cell</strong>.</p>')})();
