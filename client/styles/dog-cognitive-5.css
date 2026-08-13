@@ -270,6 +270,42 @@
   }
 }
 
+/* Exact typography sync for the Popular Options and NAD+ sections. */
+.dog-cognitive-page-root #popular-options-inside > h2,
+.dog-cognitive-page-root #popular-options-inside > .section-title,
+.dog-cognitive-page-root #cellular-energy-attention > h2,
+.dog-cognitive-page-root #cellular-energy-attention > .section-title{
+  font-family: var(--serif) !important;
+  font-size: 27px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--navy) !important;
+  margin-bottom: 14px !important;
+}
+.dog-cognitive-page-root #popular-options-inside .popular-option > p,
+.dog-cognitive-page-root #cellular-energy-attention p{
+  font-size: 18px !important;
+  line-height: 1.72 !important;
+  color: var(--muted) !important;
+}
+
+@media (max-width: 760px) {
+  .dog-cognitive-page-root #popular-options-inside > h2,
+  .dog-cognitive-page-root #popular-options-inside > .section-title,
+  .dog-cognitive-page-root #cellular-energy-attention > h2,
+  .dog-cognitive-page-root #cellular-energy-attention > .section-title{
+    font-size: 25px !important;
+    line-height: 1.22 !important;
+    margin-bottom: 12px !important;
+  }
+  .dog-cognitive-page-root #popular-options-inside .popular-option > p,
+  .dog-cognitive-page-root #cellular-energy-attention p{
+    font-size: 17px !important;
+    line-height: 1.7 !important;
+  }
+}
+
 @media (max-width: 600px) {
   .dog-cognitive-page-root .legal-page{
     padding: 32px 20px 58px;
