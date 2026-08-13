@@ -5,7 +5,6 @@ const SECTIONS = [
   { id: "rankings", label: "Rankings" },
   { id: "top-pick", label: "Top Pick" },
   { id: "review", label: "Full Review" },
-  { id: "warnings", label: "Buying Guide" },
   { id: "faq", label: "FAQ" },
 ];
 
