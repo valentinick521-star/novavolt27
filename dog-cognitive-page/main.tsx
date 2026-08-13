@@ -279,10 +279,28 @@ function addFormulaTypeSection() {
 
 function DogCognitivePage() {
   useEffect(() => {
+    const subheadline = document.querySelector<HTMLElement>(".hero-title-sub");
+    if (subheadline) {
+      subheadline.textContent =
+        "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. Most took the same basic approach. But one stood out because it worked in a very different way.";
+    }
+
+    const heroBody = document.querySelector<HTMLElement>(".hero-body");
+    if (heroBody) {
+      heroBody.innerHTML = `
+        <p>At first, most cognitive supplements look very similar. They all talk about brain health, memory, and healthy aging.</p>
+        <p>But when we looked at what was actually inside them, we found something important:</p>
+        <p><strong>They are not all built to support the aging brain in the same way.</strong></p>
+        <p>Some are built around phosphatidylserine. Others use SAMe, antioxidants, omega-3s, or a mix of several nutrients.</p>
+        <p>But one formula we reviewed started with a very different idea — <strong>supporting the energy used inside the cells themselves.</strong></p>
+        <p>That difference caught our attention and changed what we looked for in the rest of our comparison.</p>
+      `;
+    }
+
     const summary = document.querySelector<HTMLElement>(".hero-pick-best");
     if (summary) {
       summary.innerHTML =
-        "<strong>Why it stood out:</strong> PawPrint takes a different approach from most products we reviewed. Its formula centers on NMN and NAD+, which are involved in normal cellular-energy processes, rather than making phosphatidylserine or SAMe the main focus.";
+        "<strong>Why it stood out:</strong> PawPrint's formula centers on NMN and NAD+, which are involved in cellular-energy processes, rather than making phosphatidylserine or SAMe the main focus.";
     }
 
     updateQuickRankings();
