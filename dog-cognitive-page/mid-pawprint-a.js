@@ -1,0 +1,1 @@
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[4];if(!p)return requestAnimationFrame(f);p.textContent='PawPrint centers its formula on NMN and NAD+, with CoQ10 and resveratrol alongside them.'})();
