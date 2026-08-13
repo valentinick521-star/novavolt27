@@ -99,6 +99,24 @@
       `;
     }
 
+    var review = document.getElementById("review");
+    if (review) {
+      review.innerHTML = `
+        <h2>Why PawPrint Finished #1</h2>
+
+        <h3>1. It Started With a Different Approach</h3>
+        <p>PawPrint was the clearest formula we reviewed built around the cellular-energy idea. NMN and NAD+ sit at the center of the formula instead of phosphatidylserine, SAMe, or a very large nutrient blend. That is what first caught our attention. It does not mean NAD+ has been proven better.</p>
+
+        <h3>2. It Was Built for Daily Use</h3>
+        <p>PawPrint comes as a weight-based liquid dropper. That creates a different daily routine from capsules, tablets, chews, and powders. This is about how it is used each day, not a claim that liquid works better inside the body.</p>
+
+        <h3>3. It Gives You More Room to Decide</h3>
+        <p>PawPrint includes a 90-day money-back guarantee. Changes in an older dog can be hard to judge from one day to the next, so a longer return window gives owners more time to decide whether they want to continue. It does not promise that results will appear within 90 days.</p>
+
+        <p><strong>Final verdict:</strong> PawPrint did not finish first because we proved it works better than every other formula. It finished first because it gave us the clearest point of difference, a practical daily format, weight-based directions, and a longer window to decide whether it is right for your dog.</p>
+      `;
+    }
+
     var finalLead = finalSection.querySelector(".final-lead");
     if (finalLead) finalLead.textContent = "Before You Choose";
 
