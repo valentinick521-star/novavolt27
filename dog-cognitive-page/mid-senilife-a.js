@@ -1,0 +1,1 @@
+(function f(){var p=document.querySelectorAll('#popular-options-inside .popular-option p')[0];if(!p)return requestAnimationFrame(f);p.textContent='Senilife is built mainly around phosphatidylserine, along with antioxidants and other nutrients.'})();
