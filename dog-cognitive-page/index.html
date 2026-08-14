@@ -67,24 +67,62 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&family=DM+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.onload=null;this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&family=DM+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <style>
       html, body, #root { margin: 0; min-height: 100%; }
       body { background: #f7f9fc; }
     </style>
 
-    <!-- GiddyUp link fixup -->
-    <script type="text/javascript" src="https://js.giddyup.io/gulinkfixup.js"></script>
+    <!-- GiddyUp link fixup: deferred so it does not block first paint -->
+    <script type="text/javascript" defer src="https://js.giddyup.io/gulinkfixup.js"></script>
     <!-- End GiddyUp link fixup -->
 
-    <!-- Microsoft Clarity -->
+    <!-- Microsoft Clarity: defer replay code until interaction or after initial load -->
     <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "y08j0wvw36");
+      (function (w, d) {
+        var loaded = false;
+        var events = ["pointerdown", "touchstart", "keydown", "scroll"];
+
+        function cleanup() {
+          events.forEach(function (eventName) {
+            w.removeEventListener(eventName, loadClarity);
+          });
+        }
+
+        function loadClarity() {
+          if (loaded) return;
+          loaded = true;
+          cleanup();
+          (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(w, d, "clarity", "script", "y08j0wvw36");
+        }
+
+        events.forEach(function (eventName) {
+          w.addEventListener(eventName, loadClarity, {
+            once: true,
+            passive: eventName !== "keydown",
+          });
+        });
+        w.addEventListener(
+          "load",
+          function () {
+            setTimeout(loadClarity, 5000);
+          },
+          { once: true },
+        );
+      })(window, document);
     </script>
     <!-- End Microsoft Clarity -->
   </head>
