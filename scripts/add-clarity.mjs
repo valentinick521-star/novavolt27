@@ -12,8 +12,15 @@ const CLARITY_ID = "y08j0wvw36";
 const CLARITY_TAG = `<script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        function loadClarity(){
+            if(l.querySelector('script[data-ncr-clarity-loader]')) return;
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            t.setAttribute('data-ncr-clarity-loader','');
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        }
+        function scheduleClarity(){c.setTimeout(loadClarity,2500);}
+        if(l.readyState==='complete') scheduleClarity();
+        else c.addEventListener('load',scheduleClarity,{once:true});
     })(window, document, "clarity", "script", "${CLARITY_ID}");
 </script>`;
 
@@ -55,6 +62,10 @@ if (idCount !== 1 || clarityTagCount !== 1) {
   );
 }
 
+if (!html.includes("data-ncr-clarity-loader")) {
+  throw new Error("Microsoft Clarity loader was not configured for delayed loading");
+}
+
 if (giddyupTagCount !== 1) {
   throw new Error(
     `Expected exactly one GiddyUp link-fixup install, found ${giddyupTagCount}`,
@@ -67,5 +78,5 @@ if (!/<script[^>]*\bdefer\b[^>]*src=["']https:\/\/js\.giddyup\.io\/gulinkfixup\.
 
 fs.writeFileSync(filePath, html);
 console.log(
-  `Installed deferred GiddyUp link fixup and Microsoft Clarity project ${CLARITY_ID} in <head>`,
+  `Installed deferred GiddyUp link fixup and delayed Microsoft Clarity project ${CLARITY_ID} in <head>`,
 );
