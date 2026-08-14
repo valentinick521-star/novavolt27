@@ -40,6 +40,57 @@ function dogCognitiveImageSizing() {
   };
 }
 
+function dogCognitiveMainThreadPerformance() {
+  const originalImport = 'import { useLayoutEffect } from "react";';
+  const optimizedImport = 'import { useEffect, useLayoutEffect } from "react";';
+
+  const originalEffect = `  useLayoutEffect(() => {
+    ensurePageStyles();
+    updateMetaAndHero();
+    updateQuickRankings();
+    rewriteFullComparison();
+    removeRetiredSections();
+    restoreFinalFaq();
+    updateWhyPawprint();
+    simplifyFinalCta();
+    updateAllPawprintScores();
+  }, []);`;
+
+  const optimizedEffects = `  useLayoutEffect(() => {
+    // Keep only the above-the-fold copy synchronized before the first paint.
+    updateMetaAndHero();
+    updateAllPawprintScores();
+  }, []);
+
+  useEffect(() => {
+    // The rest of these rewrites are below the first mobile viewport. Running
+    // them after paint avoids holding FCP/LCP behind a large synchronous DOM pass.
+    ensurePageStyles();
+    updateQuickRankings();
+    rewriteFullComparison();
+    removeRetiredSections();
+    restoreFinalFaq();
+    updateWhyPawprint();
+    simplifyFinalCta();
+    updateAllPawprintScores();
+  }, []);`;
+
+  return {
+    name: "dog-cognitive-main-thread-performance",
+    transform(code: string, id: string) {
+      if (!id.replace(/\\/g, "/").endsWith("/dog-cognitive-page/main.tsx")) {
+        return null;
+      }
+
+      const nextCode = code
+        .replace(originalImport, optimizedImport)
+        .replace(originalEffect, optimizedEffects);
+
+      return nextCode === code ? null : nextCode;
+    },
+  };
+}
+
 export default defineConfig({
   root: path.resolve(__dirname, "dog-cognitive-page"),
   base: "/best-dog-cognitive-supplements/",
@@ -50,9 +101,18 @@ export default defineConfig({
     ),
     emptyOutDir: true,
   },
-  plugins: [dogCognitiveImageSizing(), react(), dogCognitiveAccuracyHtml()],
+  plugins: [
+    dogCognitiveMainThreadPerformance(),
+    dogCognitiveImageSizing(),
+    react(),
+    dogCognitiveAccuracyHtml(),
+  ],
   resolve: {
     alias: [
+      {
+        find: "react-router-dom",
+        replacement: path.resolve(__dirname, "dog-cognitive-page/router-lite.tsx"),
+      },
       {
         find: "@/components/dog-cognitive/SiteLayout",
         replacement: path.resolve(
