@@ -14,6 +14,12 @@ function dogCognitiveAccuracyHtml() {
   };
 }
 
+function isDogCognitivePageSource(id: string) {
+  return id
+    .replace(/\\/g, "/")
+    .endsWith("/client/pages/DogCognitiveSupplements.tsx");
+}
+
 function dogCognitiveImageSizing() {
   const pawprintImage =
     "https://cdn.builder.io/api/v1/image/assets%2Ff12907698ec44301a20b66b5fc338f8f%2F274eb223542840a882b8acfbca08781d";
@@ -21,9 +27,7 @@ function dogCognitiveImageSizing() {
   return {
     name: "dog-cognitive-image-sizing",
     transform(code: string, id: string) {
-      if (!id.replace(/\\/g, "/").endsWith("/client/pages/DogCognitiveSupplements.tsx")) {
-        return null;
-      }
+      if (!isDogCognitivePageSource(id)) return null;
 
       const nextCode = code
         .replace(
@@ -40,6 +44,74 @@ function dogCognitiveImageSizing() {
   };
 }
 
+function dogCognitiveRuntimePerformance() {
+  const stickyEffect = /  useEffect\(\(\) => \{\n    const sticky = document\.querySelector<HTMLElement>\("\\\.sticky-cta"\);[\s\S]*?  \}, \[\]\);\n\n  return \(/;
+
+  const replacement = `  useEffect(() => {
+    const sticky = document.querySelector<HTMLElement>(".sticky-cta");
+    const rankings = document.getElementById("rankings");
+    const hero = document.querySelector<HTMLElement>(".hero");
+    const root = document.querySelector<HTMLElement>(".dog-cognitive-page-root");
+    if (!sticky || !root || (!rankings && !hero)) return;
+
+    let visible = false;
+    let observer: IntersectionObserver | null = null;
+    const mobile = window.matchMedia("(max-width: 760px)");
+
+    const setVisible = (next: boolean) => {
+      if (next === visible) return;
+      visible = next;
+      sticky.classList.toggle("is-visible", next);
+      root.classList.toggle("sticky-cta-visible", next);
+    };
+
+    const observe = () => {
+      observer?.disconnect();
+
+      if (mobile.matches && rankings) {
+        observer = new IntersectionObserver(([entry]) => {
+          setVisible(entry.isIntersecting || entry.boundingClientRect.top < 0);
+        });
+        observer.observe(rankings);
+        return;
+      }
+
+      if (hero) {
+        const topOffset = 68;
+        observer = new IntersectionObserver(
+          ([entry]) => {
+            setVisible(
+              !entry.isIntersecting && entry.boundingClientRect.bottom <= topOffset,
+            );
+          },
+          { rootMargin: \`-\${topOffset}px 0px 0px 0px\` },
+        );
+        observer.observe(hero);
+      }
+    };
+
+    observe();
+    mobile.addEventListener("change", observe);
+
+    return () => {
+      observer?.disconnect();
+      mobile.removeEventListener("change", observe);
+      root.classList.remove("sticky-cta-visible");
+    };
+  }, []);
+
+  return (`;
+
+  return {
+    name: "dog-cognitive-runtime-performance",
+    transform(code: string, id: string) {
+      if (!isDogCognitivePageSource(id)) return null;
+      const nextCode = code.replace(stickyEffect, replacement);
+      return nextCode === code ? null : nextCode;
+    },
+  };
+}
+
 export default defineConfig({
   root: path.resolve(__dirname, "dog-cognitive-page"),
   base: "/best-dog-cognitive-supplements/",
@@ -50,7 +122,12 @@ export default defineConfig({
     ),
     emptyOutDir: true,
   },
-  plugins: [dogCognitiveImageSizing(), react(), dogCognitiveAccuracyHtml()],
+  plugins: [
+    dogCognitiveImageSizing(),
+    dogCognitiveRuntimePerformance(),
+    react(),
+    dogCognitiveAccuracyHtml(),
+  ],
   resolve: {
     alias: [
       {
