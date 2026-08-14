@@ -481,15 +481,17 @@ function updateWhyPawprint() {
 
     <p>But the formula was not the only reason it finished #1.</p>
 
-    <p><strong>It’s also built to be practical every day.</strong> PawPrint comes as a weight-based liquid dropper instead of a pill, capsule, chew, or powder your dog has to eat on its own.</p>
+    <p>It’s also built to be practical every day. PawPrint comes as a weight-based liquid dropper instead of a pill, capsule, chew, or powder your dog has to eat on its own.</p>
 
-    <p>And because trying another supplement can feel like a gamble, <strong>PawPrint includes a 90-day money-back guarantee</strong>, giving you more time to decide whether it is right for your dog.</p>
+    <p>And because trying another supplement can feel like a gamble, PawPrint includes a 90-day money-back guarantee, giving you more time to decide whether it is right for your dog.</p>
 
     <h3>Our Final Take</h3>
 
     <p>PawPrint was our top choice because it combined the most distinct formula strategy we reviewed with a practical daily format and a longer window to try it.</p>
 
-    <p>If you're looking for a senior-dog supplement built around cellular-energy support rather than another phosphatidylserine, SAMe, or broad nutrient formula, <strong>PawPrint is the option we would look at first.</strong></p>
+    <p>It does not prove that the NAD+ approach will work better for every dog.</p>
+
+    <p>But if you're looking for a senior-dog supplement built around cellular-energy support rather than another phosphatidylserine, SAMe, or broad nutrient formula, PawPrint is the option we would look at first.</p>
   `;
 }
 
