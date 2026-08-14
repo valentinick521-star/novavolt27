@@ -17,8 +17,11 @@ const CLARITY_TAG = `<script type="text/javascript">
     })(window, document, "clarity", "script", "${CLARITY_ID}");
 </script>`;
 
+// GiddyUp is needed for affiliate click-ID/link handling, but it does not need
+// to block HTML parsing or first paint. `defer` preserves execution after the
+// document has been parsed while keeping it out of the render-critical path.
 const GIDDYUP_TAG =
-  '<script type="text/javascript" src="https://js.giddyup.io/gulinkfixup.js"></script>';
+  '<script defer type="text/javascript" src="https://js.giddyup.io/gulinkfixup.js"></script>';
 
 if (!html.includes("</head>")) {
   throw new Error("Could not find </head> for tracking installation");
@@ -58,7 +61,11 @@ if (giddyupTagCount !== 1) {
   );
 }
 
+if (!/<script[^>]*\bdefer\b[^>]*src=["']https:\/\/js\.giddyup\.io\/gulinkfixup\.js["'][^>]*><\/script>/i.test(html)) {
+  throw new Error("GiddyUp link-fixup loader is present but not deferred");
+}
+
 fs.writeFileSync(filePath, html);
 console.log(
-  `Installed GiddyUp link fixup and Microsoft Clarity project ${CLARITY_ID} in <head>`,
+  `Installed deferred GiddyUp link fixup and Microsoft Clarity project ${CLARITY_ID} in <head>`,
 );
