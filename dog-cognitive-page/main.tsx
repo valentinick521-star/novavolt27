@@ -133,7 +133,7 @@ function updateMetaAndHero() {
   const subheadline = document.querySelector<HTMLElement>(".hero-title-sub");
   if (subheadline) {
     subheadline.textContent =
-      "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. Most took the same basic approach. But one stood out because it was built around a very different approach.";
+      "We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. Most took the same basic approach, but one stood out.";
   }
 
   const heroBody = document.querySelector<HTMLElement>(".hero-body");
