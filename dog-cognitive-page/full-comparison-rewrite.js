@@ -74,11 +74,11 @@
         ) +
         comparisonField(
           "What It Focuses On",
-          "The energy system brain cells depend on to keep doing their normal jobs. That is the main idea behind the formula."
+          "Supporting the cellular energy brain cells depend on to keep doing their normal jobs. That is the main idea behind the formula."
         ) +
         comparisonField(
-          "The Limit",
-          "This is a newer approach in dog cognitive supplements. Dog-specific cognitive research on NAD+ and NMN is less established than research on some older ingredients."
+          "Evidence Note",
+          "Dog-specific cognitive research on NAD+ and NMN is still limited compared with some older ingredients."
         ) +
         comparisonField(
           "Daily Use",
@@ -86,7 +86,7 @@
         ) +
         comparisonField(
           "Why It Ranked Here",
-          "<strong>Most of the other products start with one part of the cell or a mix of nutrients. PawPrint starts with the energy those parts need to work.</strong> That made it our #1 formula strategy in this comparison. It is not proof that it will produce better clinical results."
+          "<strong>Most of the other products start with one part of the cell or a mix of nutrients. PawPrint starts with the energy those parts need to work.</strong> That made it our #1 formula strategy in this comparison."
         );
     }
 
