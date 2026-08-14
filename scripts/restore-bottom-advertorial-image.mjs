@@ -94,24 +94,36 @@ if (!/<head>[\s\S]*<script[^>]*\bdefer\b[^>]*gulinkfixup\.js[\s\S]*<\/head>/i.te
   throw new Error("GiddyUp click-ID script was not deferred in <head>");
 }
 
-// Mobile LCP patch: serve the large third-party hero through Netlify Image CDN
-// on this site's own origin. Netlify handles responsive resizing, modern-format
-// negotiation, quality compression, and edge caching. This removes the extra
-// dependency on another site's image optimizer from the LCP path.
+// Prefer build-time generated, same-origin WebP variants for the LCP hero.
+// That keeps resizing/compression work and the third-party image service out of
+// the visitor's critical path. If the build-time fetch is unavailable, retain
+// the already-working Netlify Image CDN path as a safe fallback.
 const HERO_ORIGINAL =
   "https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg";
-const HERO_ENCODED = encodeURIComponent(HERO_ORIGINAL);
-const heroUrl = (width) =>
-  `/.netlify/images?url=${HERO_ENCODED}&w=${width}&q=60`;
-const htmlAttr = (value) => value.replace(/&/g, "&amp;");
-const HERO_384 = htmlAttr(heroUrl(384));
-const HERO_480 = htmlAttr(heroUrl(480));
-const HERO_640 = htmlAttr(heroUrl(640));
-const HERO_780 = htmlAttr(heroUrl(780));
-const HERO_1024 = htmlAttr(heroUrl(1024));
-const HERO_1280 = htmlAttr(heroUrl(1280));
-const HERO_SRCSET = `${HERO_384} 384w, ${HERO_480} 480w, ${HERO_640} 640w, ${HERO_780} 780w, ${HERO_1024} 1024w, ${HERO_1280} 1280w`;
+const HERO_WIDTHS = [384, 640, 828, 1080];
+const localHeroPath = (width) =>
+  path.join(root, "dist", "spa", "assets", `pawprint-hero-${width}-20260813.webp`);
+const localHeroUrl = (width) => `/assets/pawprint-hero-${width}-20260813.webp`;
+const hasPrebuiltHero = HERO_WIDTHS.every((width) => fs.existsSync(localHeroPath(width)));
 const HERO_SIZES = "(max-width: 780px) calc(100vw - 48px), 780px";
+
+let heroSrc;
+let heroSrcset;
+let heroMode;
+
+if (hasPrebuiltHero) {
+  heroSrc = localHeroUrl(640);
+  heroSrcset = HERO_WIDTHS.map((width) => `${localHeroUrl(width)} ${width}w`).join(", ");
+  heroMode = "prebuilt static WebP assets";
+} else {
+  const HERO_ENCODED = encodeURIComponent(HERO_ORIGINAL);
+  const heroUrl = (width) =>
+    `/.netlify/images?url=${HERO_ENCODED}&w=${width}&q=60`.replace(/&/g, "&amp;");
+  const fallbackWidths = [384, 480, 640, 780, 1024, 1280];
+  heroSrc = heroUrl(780);
+  heroSrcset = fallbackWidths.map((width) => `${heroUrl(width)} ${width}w`).join(", ");
+  heroMode = "Netlify Image CDN fallback";
+}
 
 const optimizedHero = `<img alt="Senior dog"
   width="6000"
@@ -119,8 +131,8 @@ const optimizedHero = `<img alt="Senior dog"
   loading="eager"
   decoding="async"
   fetchpriority="high"
-  src="${HERO_780}"
-  srcset="${HERO_SRCSET}"
+  src="${heroSrc}"
+  srcset="${heroSrcset}"
   sizes="${HERO_SIZES}"/>`;
 
 const heroPattern = /<img\s+alt=["']Senior dog["'][^>]*>/i;
@@ -136,14 +148,14 @@ html = html.replace(
   "",
 );
 
-// Remove any previous hero hints before installing the same-origin responsive preload.
+// Remove prior hero hints before installing exactly one responsive preload.
 html = html.replace(/\s*<link[^>]+data-ncr-hero-preload[^>]*>/gi, "");
 html = html.replace(/\s*<link[^>]+data-ncr-epoch-preconnect[^>]*>/gi, "");
 html = html.replace(/\s*<link[^>]+data-ncr-hero-performance-hints[^>]*>/gi, "");
 
 const HERO_PRELOAD = `<link data-ncr-hero-preload rel="preload" as="image"
-  href="${HERO_780}"
-  imagesrcset="${HERO_SRCSET}"
+  href="${heroSrc}"
+  imagesrcset="${heroSrcset}"
   imagesizes="${HERO_SIZES}"
   fetchpriority="high" />`;
 html = html.replace("</head>", `${HERO_PRELOAD}\n</head>`);
@@ -151,8 +163,14 @@ html = html.replace("</head>", `${HERO_PRELOAD}\n</head>`);
 if (!html.includes('width="6000"') || !html.includes('height="3376"')) {
   throw new Error("Hero intrinsic dimensions were not added");
 }
-if (!html.includes("/.netlify/images?url=") || !html.includes("imagesrcset=")) {
-  throw new Error("Netlify Image CDN responsive hero delivery/preload was not added");
+if (!html.includes("imagesrcset=")) {
+  throw new Error("Responsive hero preload was not added");
+}
+if (hasPrebuiltHero && !html.includes("/assets/pawprint-hero-640-20260813.webp")) {
+  throw new Error("Prebuilt static PawPrint hero was not installed");
+}
+if (!hasPrebuiltHero && !html.includes("/.netlify/images?url=")) {
+  throw new Error("Netlify Image CDN hero fallback was not installed");
 }
 if (/badcc4098d254fadb81b2c01ff7bb98c[^>]*fetchpriority=["']high["']/i.test(html)) {
   throw new Error("Old high-priority logo preload remained");
@@ -164,5 +182,5 @@ if (/data-ncr-epoch-preconnect/i.test(html)) {
 fs.writeFileSync(filePath, html);
 
 console.log(
-  "Kept hero and requested UGC image, restored bottom proof, moved the LCP hero to Netlify Image CDN, and deferred GiddyUp without changing tracking logic",
+  `Kept hero and requested UGC image, restored bottom proof, served the LCP hero via ${heroMode}, and deferred GiddyUp without changing tracking logic`,
 );
