@@ -749,67 +749,50 @@ export default function DogCognitiveSupplements() {
         {/* ── WHY #1 WON ── */}
         <section className="section long-review" id="review">
           <div className="section-kicker">Why #1 Won</div>
-          <h2>The Formulas Split Into Camps Long Before You Reach the Price</h2>
+          <h2>Why PawPrint Finished #1</h2>
 
-          <h3>The formula difference shows up immediately.</h3>
           <p>
-            Line the five labels up and they stop looking like competitors.
-            Senilife is a short phosphatidylserine-and-antioxidant list, every
-            active quantified. Aktivait is a wide sweep of antioxidants,
-            omega-3s and mitochondrial cofactors. CogniCaps and Novifit both
-            build on SAMe — one inside a botanical blend, one on its own.
-            PawPrint starts somewhere else entirely, with NMN and NAD+ as the
-            center of gravity and CoQ10 and resveratrol around them. An owner
-            comparing front panels sees five products for the same problem. An
-            owner comparing ingredient panels sees four distinct theories about
-            what an aging brain needs.
+            After comparing the different approaches, PawPrint stood out for one
+            main reason:
+          </p>
+          <p>It puts cellular-energy support at the center of the formula.</p>
+          <p>
+            NAD+ helps cells turn nutrients into energy they can use, while NMN
+            is something the body can use to help make NAD+.
+          </p>
+          <p>
+            So while other formulas focus more on the walls, tools, or individual
+            jobs inside the cell, PawPrint starts with the energy system
+            underneath them.
+          </p>
+          <p>That is the difference that caught our attention.</p>
+          <p>But the formula was not the only reason it finished #1.</p>
+          <p>
+            It’s also built to be practical every day. PawPrint comes as a
+            weight-based liquid dropper instead of a pill, capsule, chew, or
+            powder your dog has to eat on its own.
+          </p>
+          <p>
+            And because trying another supplement can feel like a gamble,
+            PawPrint includes a 90-day money-back guarantee, giving you more time
+            to decide whether it is right for your dog.
           </p>
 
-          <h3>The daily administration problem.</h3>
+          <h3>Our Final Take</h3>
           <p>
-            This is the part product pages tend to skip. A cognitive supplement
-            does nothing at all unless the dog takes it, every day, for weeks.
-            Senior dogs are often the hardest population to dose: appetite gets
-            less reliable, many have already learned to eat around a pill, and
-            dental or swallowing problems are common at that age. Capsules get
-            hidden in cheese until the dog starts leaving the cheese. Chews get
-            chewed around. Powders change the smell of a bowl that was already
-            being picked at. A liquid dropper does not solve every case, but it
-            removes the specific failure mode where a solid unit is found and
-            rejected. That is an argument about daily compliance — not about
-            absorption, and not about the supplement working better once it is
-            inside the dog.
+            PawPrint was our top choice because it combined the most distinct
+            formula strategy we reviewed with a practical daily format and a
+            longer window to try it.
           </p>
-
-          <h3>Where the traditional options are strong.</h3>
           <p>
-            This matters, and leaving it out would be dishonest. Both
-            phosphatidylserine and SAMe have more dog-specific cognitive
-            literature behind them than NAD+ and NMN currently do. Senilife's
-            label is arguably the clearest in the group — five actives, each
-            named and quantified. Aktivait carries the widest nutrient coverage
-            per dose. CogniCaps is the only product here formulated by a
-            veterinary neurologist and the only one with a published trial of
-            the finished product, small and uncontrolled though that trial was.
-            Novifit is the cleanest way to give SAMe by itself, which is exactly
-            what some owners and some vets want. If your priority is the
-            longest-standing ingredient evidence in this category, our top pick
-            is not automatically the right answer for you.
+            It does not prove that the NAD+ approach will work better for every
+            dog.
           </p>
-
-          <h3>Why PawPrint finished first under our criteria.</h3>
           <p>
-            Our scoring rewards formulation strategy and differentiation, label
-            transparency, realistic daily usability, value, buyer protection and
-            senior-dog relevance. PawPrint scored highest on the combination: it
-            is the most clearly differentiated formula in the group, its dropper
-            is the format least likely to be defeated by a fussy senior dog, its
-            administration scales with body weight, and its 90-day guarantee is
-            the longest window here in which to decide whether anything has
-            changed. It did not finish first because we demonstrated better
-            health outcomes. Nobody in this comparison has demonstrated that
-            against the others, and any page telling you otherwise is
-            overselling what is known.
+            But if you're looking for a senior-dog supplement built around
+            cellular-energy support rather than another phosphatidylserine, SAMe,
+            or broad nutrient formula, PawPrint is the option we would look at
+            first.
           </p>
         </section>
 
