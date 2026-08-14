@@ -65,28 +65,28 @@
     if (pawprintCopy) {
       pawprintCopy.innerHTML =
         comparisonField(
-          "Built Around",
-          "<strong>Cellular Energy · NAD+ + NMN.</strong> NMN and NAD+ sit at the center of the formula, with CoQ10 and resveratrol alongside them."
+          "What It Is",
+          "<strong>NMN + NAD+ for cellular energy.</strong> NAD+ helps cells turn nutrients into usable energy. NMN is something the body can use to help make NAD+. CoQ10 and resveratrol are included too."
         ) +
         comparisonField(
-          "Why It Stood Out",
-          "PawPrint was the clearest product in this comparison built around the cellular-energy idea we just explained. Rather than making phosphatidylserine, SAMe, or a large nutrient blend the center of the formula, it starts with NMN and NAD+."
+          "Easy Way to Think About It",
+          "<strong>Think of it like supporting the power source inside the cell.</strong> The cell still needs walls, tools, and helpers — but it also needs energy to use them."
         ) +
         comparisonField(
-          "Why That Matters",
-          "That gives PawPrint a different starting point from the traditional cognitive formulas in this comparison. It does not prove better results, but it makes the formula meaningfully different from the others."
+          "What It Focuses On",
+          "The energy system brain cells depend on to keep doing their normal jobs. That is the main idea behind the formula."
+        ) +
+        comparisonField(
+          "The Limit",
+          "This is a newer approach in dog cognitive supplements. Dog-specific cognitive research on NAD+ and NMN is less established than research on some older ingredients."
         ) +
         comparisonField(
           "Daily Use",
-          "Weight-based liquid dropper. The amount changes with the dog’s size."
+          "A liquid dose based on the dog’s weight."
         ) +
         comparisonField(
-          "Main Tradeoff",
-          "The NAD+/NMN approach has less dog-specific cognitive research behind it than older ingredients such as phosphatidylserine and SAMe."
-        ) +
-        comparisonField(
-          "Best Fit",
-          "Owners interested in the cellular-energy approach who also want a liquid instead of another capsule, tablet, chew, or powder."
+          "Why It Ranked Here",
+          "<strong>Most of the other products start with one part of the cell or a mix of nutrients. PawPrint starts with the energy those parts need to work.</strong> That made it our #1 formula strategy in this comparison. It is not proof that it will produce better clinical results."
         );
     }
 
@@ -96,59 +96,59 @@
     if (senilifeCopy) {
       senilifeCopy.innerHTML =
         comparisonField(
-          "Built Around",
-          "<strong>Phosphatidylserine + Antioxidants.</strong> Phosphatidylserine is the main idea, with ginkgo, vitamin B6, vitamin E, and resveratrol around it."
+          "What It Is",
+          "<strong>Phosphatidylserine + antioxidants.</strong> Phosphatidylserine is part of the thin outer layer around cells, including brain cells."
         ) +
         comparisonField(
-          "Why People Choose It",
-          "It uses a focused, more established phosphatidylserine approach and keeps the formula fairly simple compared with broad multi-ingredient products."
+          "Easy Way to Think About It",
+          "<strong>Think of it like helping support the outside wall of the cell.</strong> That wall helps the cell keep its shape and communicate normally."
         ) +
         comparisonField(
-          "How It Differs From #1",
-          "Senilife starts with phosphatidylserine, a substance found in cell membranes. PawPrint starts with NAD+/NMN and cellular energy. Neither approach has been proven superior to the other."
+          "What It Focuses On",
+          "Cell-membrane support, with ginkgo, vitamin B6, vitamin E, and resveratrol added around it."
+        ) +
+        comparisonField(
+          "The Limit",
+          "Supporting the outside of the cell can be useful, but the outside is only one part of keeping the whole cell working."
         ) +
         comparisonField(
           "Daily Use",
-          "Softgel capsule. It can be given whole or opened so the contents can go onto food."
+          "Softgel capsule. It can be given whole or opened and squeezed onto food."
         ) +
         comparisonField(
-          "Main Tradeoff",
-          "It still requires the owner to consistently give a capsule or its contents."
-        ) +
-        comparisonField(
-          "Best Fit",
-          "Owners who prefer the more established phosphatidylserine approach over the newer NAD+/NMN strategy."
+          "Why It Ranked Here",
+          "Senilife is a simple, more established approach. <strong>But it starts with the cell wall, while PawPrint starts with the energy system underneath the cell’s work.</strong>"
         );
     }
 
     var aktivaitCopy = aktivait.querySelector(".decision-copy");
     var aktivaitRank = aktivait.querySelector(".rank-text");
-    if (aktivaitRank) aktivaitRank.textContent = "#3 Broad Nutrient Support";
+    if (aktivaitRank) aktivaitRank.textContent = "#3 Broad Multi-Nutrient Formula";
     if (aktivaitCopy) {
       aktivaitCopy.innerHTML =
         comparisonField(
-          "Built Around",
-          "<strong>Broad Nutrient Support.</strong> Depending on the version, Aktivait may combine phosphatidylserine, omega-3s, antioxidants, carnitines, CoQ10, and other nutrients."
+          "What It Is",
+          "<strong>A broad mix of brain-support nutrients.</strong> Aktivait uses several ingredients instead of building the whole formula around one main ingredient."
         ) +
         comparisonField(
-          "Why People Choose It",
-          "Aktivait tries to support the aging brain from several nutritional directions at once instead of putting nearly all the focus on one ingredient."
+          "Easy Way to Think About It",
+          "<strong>Think of it like giving the aging brain a toolbox with several tools inside.</strong> Different tools are there for different jobs."
         ) +
         comparisonField(
-          "How It Differs From #1",
-          "Some versions include ingredients tied to normal energy use, but NAD+ and NMN are not the center of the formula. Aktivait uses a broader nutrient strategy, while PawPrint uses a narrower cellular-energy strategy."
+          "What It Focuses On",
+          "Several areas at once. Depending on the version, that can include cell membranes, antioxidants, omega-3s, and nutrients tied to normal energy use."
+        ) +
+        comparisonField(
+          "The Limit",
+          "It covers a lot of bases, but it does not put one simple system at the center. More ingredients also do not automatically mean a better result."
         ) +
         comparisonField(
           "Daily Use",
-          "Capsule or tablet, depending on the version. Larger dogs may need multiple units."
+          "Tablet with weight-based dosing. Larger dogs may need more than one tablet per day."
         ) +
         comparisonField(
-          "Main Tradeoff",
-          "The wide ingredient list may appeal to some owners, but a longer list does not automatically mean a better result."
-        ) +
-        comparisonField(
-          "Best Fit",
-          "Owners who prefer a broad, ‘cover many bases’ nutritional approach."
+          "Why It Ranked Here",
+          "Aktivait is the broadest traditional approach near the top of our list. <strong>But the toolbox still needs power to use the tools. PawPrint makes that cellular-energy system the main focus.</strong>"
         );
     }
 
@@ -166,28 +166,28 @@
           </div>
           <div class="decision-copy">
             ${comparisonField(
-              "Built Around",
-              "<strong>Broad Brain Nutrition · 36-Ingredient Blend.</strong> The manufacturer describes it as a 36-ingredient powder with a large mix of nutrients for normal brain and nervous-system support."
+              "What It Is",
+              "<strong>A 36-ingredient brain-support powder.</strong> It uses a very large mix of nutrients meant to support the aging brain in different ways."
             )}
             ${comparisonField(
-              "Why People Choose It",
-              "It takes one of the broadest approaches here. Listed ingredients include phosphatidylcholine, DHA, ginkgo, bacopa, glutathione, amino acids, turmeric, and B vitamins, so the goal is to cover many parts of brain nutrition at once."
+              "Easy Way to Think About It",
+              "<strong>Think of it like giving the brain a big box of tools and supplies.</strong> There is a lot inside the box, and each item may play a different role."
             )}
             ${comparisonField(
-              "How It Differs From #1",
-              "Dr. Bill’s uses broad nutritional coverage. PawPrint uses a more focused cellular-energy strategy built around NAD+ and NMN. One covers many nutritional angles; the other makes one biological system the center of the formula. Fewer ingredients do not automatically mean better."
+              "What It Focuses On",
+              "Broad nutrition. The formula includes ingredients for cell membranes, antioxidants, normal brain signaling, and other forms of nutritional support."
+            )}
+            ${comparisonField(
+              "The Limit",
+              "A very long ingredient list can cover many areas, but it can also make the main idea less clear. More ingredients do not automatically mean stronger support."
             )}
             ${comparisonField(
               "Daily Use",
-              "Powder with weight-based scoop amounts. It can be sprinkled onto food, mixed in, or moistened. The daily amount can be given once or split into two servings."
+              "Weight-based powder added to food."
             )}
             ${comparisonField(
-              "Main Tradeoff",
-              "The 36-ingredient approach gives broad coverage, but it is less focused around one clear central mechanism. It is also a powder that needs to be added to food."
-            )}
-            ${comparisonField(
-              "Best Fit",
-              "Owners who prefer a broad, multi-nutrient brain-support formula rather than one centered mainly on a single biological system."
+              "Why It Ranked Here",
+              "Dr. Bill’s gives the brain a lot of tools and supplies. <strong>PawPrint takes the opposite approach: it puts the energy system that helps cells use their tools at the center.</strong>"
             )}
           </div>
           <aside class="score-panel">
@@ -214,28 +214,28 @@
           </div>
           <div class="decision-copy">
             ${comparisonField(
-              "Built Around",
-              "<strong>SAMe.</strong> Novifit is the simplest and most focused SAMe option in this comparison."
+              "What It Is",
+              "<strong>A simple SAMe-focused tablet.</strong> SAMe is something the body naturally makes and uses in many normal chemical reactions."
             )}
             ${comparisonField(
-              "Why People Choose It",
-              "It gives owners and veterinarians a straightforward way to choose a SAMe-focused product without a large mix of extra ingredients."
+              "Easy Way to Think About It",
+              "<strong>Think of SAMe like a helper inside the cell.</strong> It helps certain chemical jobs get done."
             )}
             ${comparisonField(
-              "How It Differs From #1",
-              "Novifit centers on one traditional active ingredient. PawPrint combines several ingredients around the broader cellular-energy idea."
+              "What It Focuses On",
+              "Helping normal chemical processes inside cells instead of using a large blend of extra ingredients."
+            )}
+            ${comparisonField(
+              "The Limit",
+              "A helper can help with a job, but the cell still needs energy to do the work. Novifit is also a tablet, and availability can vary."
             )}
             ${comparisonField(
               "Daily Use",
-              "Tablet with size and dose based on the dog."
+              "Tablet with size and dosing based on the dog."
             )}
             ${comparisonField(
-              "Main Tradeoff",
-              "Availability may vary by region or seller."
-            )}
-            ${comparisonField(
-              "Best Fit",
-              "Owners or veterinarians specifically looking for a SAMe-focused option rather than a broader blend."
+              "Why It Ranked Here",
+              "Novifit is the simplest option here if SAMe is the goal. <strong>But it focuses on one helper used inside the cell, while PawPrint focuses on the energy system the cell depends on.</strong>"
             )}
           </div>
           <aside class="score-panel">
