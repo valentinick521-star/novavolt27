@@ -20,17 +20,17 @@
         }
         var events = ["pointerdown", "touchstart", "keydown", "scroll"];
         function cleanup() {
-          w.removeEventListener("load", loadGTM);
+          w.removeEventListener("load", scheduleGTM);
           events.forEach(function (e) {
             w.removeEventListener(e, loadGTM, { passive: true });
           });
         }
-        w.addEventListener("load", loadGTM);
+        function scheduleGTM() {
+          setTimeout(loadGTM, 8000);
+        }
+        w.addEventListener("load", scheduleGTM, { once: true });
         events.forEach(function (e) {
-          w.addEventListener(e, loadGTM, { passive: true });
-        });
-        d.addEventListener("DOMContentLoaded", function () {
-          setTimeout(loadGTM, 2500);
+          w.addEventListener(e, loadGTM, { passive: true, once: true });
         });
       })(window, document, "script", "dataLayer", "GTM-5PZ88WLJ");
     </script>
@@ -86,7 +86,7 @@
     <script type="text/javascript" defer src="https://js.giddyup.io/gulinkfixup.js"></script>
     <!-- End GiddyUp link fixup -->
 
-    <!-- Microsoft Clarity: defer replay code until interaction or after initial load -->
+    <!-- Microsoft Clarity: defer replay code until interaction or well after initial load -->
     <script type="text/javascript">
       (function (w, d) {
         var loaded = false;
@@ -118,7 +118,7 @@
         w.addEventListener(
           "load",
           function () {
-            setTimeout(loadClarity, 5000);
+            setTimeout(loadClarity, 10000);
           },
           { once: true },
         );
@@ -139,7 +139,48 @@
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static first-view shell. React replaces this with the full interactive page once loaded. -->
+      <div class="dog-cognitive-page-root sdi" data-ncr-first-paint-shell>
+        <header class="topbar">
+          <div class="topbar-inner">
+            <a class="logo" href="/" aria-label="National Consumer Review home">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2Ff12907698ec44301a20b66b5fc338f8f%2F6e07a1b8bd4c41b7b6b7bc44ee60c192?format=webp&width=300&quality=70"
+                alt="National Consumer Review"
+                width="300"
+                height="64"
+                decoding="async"
+              />
+            </a>
+            <button type="button" class="nav-toggle" aria-label="Open section navigation">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </header>
+        <main class="page-wrap" id="top">
+          <section class="hero">
+            <div class="hero-grid">
+              <div>
+                <h1>Senior Dog Cognitive Support: SAMe, Senilife, Aktivait &amp; More — What Helps</h1>
+                <div class="hero-title-sub">We looked at the top supplements for older dogs to find which ones may help bring back more of the dog you remember. Most took the same basic approach. But one stood out because it worked in a very different way.</div>
+                <div class="hero-meta hero-meta--date-only">
+                  <time class="hero-updated" datetime="2026-08-12">Updated August 12, 2026</time>
+                </div>
+                <div class="hero-body">
+                  <p>At first, most cognitive supplements look very similar. They all talk about brain health, memory, and healthy aging.</p>
+                  <p>But when we looked at what was actually inside them, we found something important:</p>
+                  <p><strong>They are not all built to support the aging brain in the same way.</strong></p>
+                  <p>Some are built around SAMe, antioxidants, omega-3s, or a mix of several nutrients.</p>
+                  <p>But one formula we reviewed started with a very different idea — <strong>supporting the energy used inside the cells themselves.</strong></p>
+                  <p>That difference caught our attention and changed what we looked for in the rest of our comparison.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
     <script type="module" src="/main.tsx"></script>
   </body>
 </html>
