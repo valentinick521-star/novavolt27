@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -23,9 +21,9 @@ export default function SiteFooter() {
           </div>
         </div>
         <div className="footer-links">
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/terms-of-use">Terms</Link>
-          <Link to="/affiliate-disclosure">Affiliate Disclosure</Link>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-use">Terms</a>
+          <a href="/affiliate-disclosure">Affiliate Disclosure</a>
         </div>
       </div>
       <div className="copyright">
