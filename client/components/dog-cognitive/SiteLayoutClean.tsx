@@ -3,7 +3,7 @@ import "@/styles/dog-cognitive-2.css";
 import "@/styles/dog-cognitive-3.css";
 import "@/styles/dog-cognitive-4.css";
 import "@/styles/dog-cognitive-5.css";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
@@ -11,6 +11,19 @@ import SiteFooter from "./SiteFooter";
 export default function SiteLayoutClean({ children }: { children: ReactNode }) {
   const { hash, pathname } = useLocation();
   const [showTop, setShowTop] = useState(false);
+
+  useLayoutEffect(() => {
+    const guide = document.getElementById("guide");
+    if (!guide) return;
+
+    const buyerEducation = guide.querySelector<HTMLElement>(
+      ".compact-card:not(#vet)",
+    );
+    buyerEducation?.remove();
+
+    const vet = document.getElementById("vet");
+    if (vet) vet.style.gridColumn = "1 / -1";
+  }, []);
 
   useEffect(() => {
     if (!hash) {
