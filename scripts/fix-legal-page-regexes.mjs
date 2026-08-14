@@ -40,11 +40,19 @@ for (const [bad, good] of replacements) {
   }
 }
 
-if (replacementCount < replacements.length) {
+// This script may run against either of two valid states:
+// 1) the original malformed source, where all 7 groups need repair; or
+// 2) an already-repaired source, where there is nothing left to change.
+// A partial repair (1-6 groups) is still treated as an unknown state.
+if (replacementCount !== 0 && replacementCount !== replacements.length) {
   throw new Error(
-    `Expected to repair ${replacements.length} malformed regex patterns, repaired ${replacementCount}. Refusing to continue with an unknown script state.`,
+    `Expected either 0 repairs (already fixed) or ${replacements.length} repairs (legacy state), repaired ${replacementCount}. Refusing to continue with a partially repaired script.`,
   );
 }
 
-fs.writeFileSync(targetPath, source);
-console.log(`Repaired ${replacementCount} malformed regex pattern groups in build-legal-pages.mjs`);
+if (replacementCount === 0) {
+  console.log("Legal-page regex patterns are already repaired; no changes needed.");
+} else {
+  fs.writeFileSync(targetPath, source);
+  console.log(`Repaired ${replacementCount} malformed regex pattern groups in build-legal-pages.mjs`);
+}
