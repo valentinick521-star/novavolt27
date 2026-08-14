@@ -15,6 +15,32 @@ from = "/api/*"
 status = 200
 to = "/.netlify/functions/api/:splat"
 
+# Serve the generated Terms page explicitly before the SPA fallback.
+[[redirects]]
+force = true
+from = "/terms"
+status = 200
+to = "/terms/index.html"
+
+[[redirects]]
+force = true
+from = "/terms/"
+status = 200
+to = "/terms/index.html"
+
+# Keep the older Terms slug working if it is visited directly.
+[[redirects]]
+force = true
+from = "/terms-of-use"
+status = 301
+to = "/terms/"
+
+[[redirects]]
+force = true
+from = "/terms-of-use/"
+status = 301
+to = "/terms/"
+
 # SPA fallback for any route without a prerendered file.
 # Prerendered static files (e.g. /privacy-policy/index.html) take precedence.
 [[redirects]]
