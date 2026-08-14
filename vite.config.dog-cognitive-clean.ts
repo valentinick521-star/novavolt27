@@ -33,6 +33,10 @@ function dogCognitiveImageSizing() {
         .replace(
           `${pawprintImage}?format=webp&width=200`,
           `${pawprintImage}?format=webp&width=96&quality=70`,
+        )
+        .replace(
+          /alt="PawPrint Protocol"\s+loading="lazy"/g,
+          'alt="PawPrint Protocol"\n                  width={420}\n                  height={420}\n                  decoding="async"\n                  loading="lazy"',
         );
 
       return nextCode === code ? null : nextCode;
