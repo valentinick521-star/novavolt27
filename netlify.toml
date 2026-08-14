@@ -1,9 +1,11 @@
-# Redeploy trigger: 2026-08-13 full-comparison-refresh
+# Redeploy trigger: 2026-08-13 homepage-performance-pass
 [build]
 command = "npm run build:netlify"
 functions = "netlify/functions"
 publish = "dist/spa"
 
+[images]
+remote_images = ["https:\\/\\/img\\.theepochtimes\\.com\\/.*"]
 
 [functions]
 external_node_modules = ["express"]
