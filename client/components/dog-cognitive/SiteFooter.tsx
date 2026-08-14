@@ -22,7 +22,7 @@ export default function SiteFooter() {
         </div>
         <div className="footer-links">
           <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-of-use">Terms</a>
+          <a href="/terms/">Terms</a>
           <a href="/affiliate-disclosure">Affiliate Disclosure</a>
         </div>
       </div>
