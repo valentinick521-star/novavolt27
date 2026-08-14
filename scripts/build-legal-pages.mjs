@@ -20,8 +20,8 @@ function updateFooterLink(footer, label, href) {
   }
   return footer.replace(re, (_match, attrs) => {
     let nextAttrs = attrs;
-    if (/\\bhref\\s*=/.test(nextAttrs)) {
-      nextAttrs = nextAttrs.replace(/\\bhref\\s*=\\s*["'][^"']*["']/i, `href="${href}"`);
+    if (/\bhref\s*=/.test(nextAttrs)) {
+      nextAttrs = nextAttrs.replace(/\bhref\s*=\s*["'][^"']*["']/i, `href="${href}"`);
     } else {
       nextAttrs = ` href="${href}"${nextAttrs}`;
     }
@@ -29,7 +29,7 @@ function updateFooterLink(footer, label, href) {
   });
 }
 
-const footerMatch = indexHtml.match(/<footer\\b[^>]*class=["'][^"']*site-footer[^"']*["'][^>]*>[\\s\\S]*?<\\/footer>/i);
+const footerMatch = indexHtml.match(/<footer\b[^>]*class=["'][^"']*site-footer[^"']*["'][^>]*>[\s\S]*?<\/footer>/i);
 if (!footerMatch) {
   throw new Error("Could not find site footer");
 }
@@ -42,11 +42,11 @@ footer = updateFooterLink(footer, "Contact", "mailto:nickv_3@outlook.com");
 indexHtml = indexHtml.replace(footerMatch[0], footer);
 fs.writeFileSync(indexPath, indexHtml);
 
-const header = indexHtml.match(/<header\\b[^>]*class=["'][^"']*site-header[^"']*["'][^>]*>[\\s\\S]*?<\\/header>/i)?.[0] || "";
-const finalFooter = indexHtml.match(/<footer\\b[^>]*class=["'][^"']*site-footer[^"']*["'][^>]*>[\\s\\S]*?<\\/footer>/i)?.[0] || footer;
-const head = indexHtml.match(/<head>[\\s\\S]*?<\\/head>/i)?.[0] || "";
-const sharedStyles = [...head.matchAll(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi)].map((m) => m[0]).join("\n");
-const sharedHeadScripts = [...head.matchAll(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi)].map((m) => m[0]).join("\n");
+const header = indexHtml.match(/<header\b[^>]*class=["'][^"']*site-header[^"']*["'][^>]*>[\s\S]*?<\/header>/i)?.[0] || "";
+const finalFooter = indexHtml.match(/<footer\b[^>]*class=["'][^"']*site-footer[^"']*["'][^>]*>[\s\S]*?<\/footer>/i)?.[0] || footer;
+const head = indexHtml.match(/<head>[\s\S]*?<\/head>/i)?.[0] || "";
+const sharedStyles = [...head.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/gi)].map((m) => m[0]).join("\n");
+const sharedHeadScripts = [...head.matchAll(/<script\b[^>]*>[\s\S]*?<\/script>/gi)].map((m) => m[0]).join("\n");
 
 const LEGAL_CSS = `
 <style data-ncr-legal-pages>
