@@ -186,6 +186,8 @@ function updateQuickRankings() {
     const productCell = row.cells[1];
     const scoreCell = row.cells[2];
 
+    // The original source has seven columns. If the approach column is still
+    // present, use the original indexes and remove it after copying the data.
     if (row.cells.length >= 7) {
       const approachCell = row.cells[3];
       const formatCell = row.cells[4];
