@@ -418,7 +418,7 @@ function rewriteFullComparison() {
         <aside class="score-panel">
           <div class="score-number">7.6</div>
           <div class="score-label">Editor Score</div>
-          <div class="score-rating"><span aria-hidden="true" class="stars">★★★★☆</span></div>
+          <div class="score-rating"><span aria-hidden="true" class="stars">★★★☆☆</span></div>
           <div class="offer-note">Tablet · Size-based dosing</div>
         </aside>
       </div>
@@ -492,6 +492,29 @@ function updateWhyPawprint() {
 }
 
 function simplifyFinalCta() {
+  const deal = document.getElementById("deal");
+  if (deal) {
+    const dealLabel = deal.querySelector<HTMLElement>(".cta-label");
+    const dealOffer = deal.querySelector<HTMLElement>(".cta-offer");
+    const dealSpecs = deal.querySelector<HTMLElement>(".cta-specs");
+    const dealButton = deal.querySelector<HTMLElement>(".btn-primary");
+    const dealTrust = deal.querySelector<HTMLElement>(".cta-trust");
+
+    if (dealLabel) dealLabel.textContent = "Official PawPrint Website";
+    if (dealOffer) {
+      dealOffer.textContent =
+        "See current pricing, the 90-day guarantee, and today’s PawPrint offer.";
+    }
+    if (dealSpecs) {
+      dealSpecs.textContent =
+        "You’ll be taken to PawPrint’s official website to view the current offer and order directly.";
+    }
+    if (dealButton) dealButton.textContent = "Visit Official PawPrint Website →";
+    if (dealTrust) {
+      dealTrust.textContent = "Official PawPrint Site · From $69 · 90-Day Money-Back";
+    }
+  }
+
   const section = document.querySelector<HTMLElement>(".cta-final");
   if (!section) return;
 
@@ -500,13 +523,16 @@ function simplifyFinalCta() {
   const button = section.querySelector<HTMLElement>(".btn-primary");
   const trust = section.querySelector<HTMLElement>(".trust-badges");
 
-  if (lead) lead.textContent = "Our #1 Pick";
+  if (lead) lead.textContent = "Final Verdict: PawPrint Protocol";
   if (summary) {
     summary.innerHTML =
-      '<strong class="final-pick-name">PawPrint Protocol</strong><span class="final-pick-line">Cellular Energy · Weight-Based Liquid · 90-Day Guarantee</span>';
+      '<span class="final-pick-line">Our #1 pick for its cellular-energy approach, weight-based liquid format, and 90-day guarantee.</span>';
   }
-  if (button) button.textContent = "Check Today’s PawPrint Offer →";
-  if (trust) trust.innerHTML = "<span>From $69 · 90-Day Money-Back</span>";
+  if (button) button.textContent = "Visit Official PawPrint Website →";
+  if (trust) {
+    trust.innerHTML =
+      "<span>Official PawPrint Site · From $69 · 90-Day Money-Back</span>";
+  }
 }
 
 function updateAllPawprintScores() {
