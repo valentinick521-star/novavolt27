@@ -48,9 +48,9 @@ html = html.replace('<div class="footer-brand">Pet Wellness Report</div>', '<div
 html = html.replace(/<div class="copyright">[\s\S]*?<\/div>\s*<\/footer>/, '<div class="copyright">© 2026 NationalConsumerReview.com. All rights reserved. This page is an advertorial and general educational content, not veterinary advice.</div>\n</footer>');
 html = html.replace(/<link[^>]+rel=["'](?:shortcut )?icon["'][^>]*>/gi, "");
 html = html.replace("</head>", `${favicon}\n<style data-ncr-advertorial-patch>${PATCH_CSS}</style>\n</head>`);
-html = html.replace("</body>", `${affiliateTracking}\n</body>`);
+html = html.replace("</body>", `${affiliateTracking}\n<script type="text/javascript" defer src="https://js.giddyup.io/gulinkfixup.js"></script>\n</body>`);
 
-for (const marker of [HEADLINE,'id="senior-dogs"','id="approaches"','id="cellular-energy"','id="ninety-day"','class="site-logo"','CHECK PAWPRINT PROTOCOL AVAILABILITY']) {
+for (const marker of [HEADLINE,'id="senior-dogs"','id="approaches"','id="cellular-energy"','id="ninety-day"','class="site-logo"','CHECK PAWPRINT PROTOCOL AVAILABILITY','https://js.giddyup.io/gulinkfixup.js']) {
   if (!html.includes(marker)) throw new Error(`Missing expected marker: ${marker}`);
 }
 if (html.includes("Practical guides for better pet care decisions")) throw new Error("Header tagline remained");
