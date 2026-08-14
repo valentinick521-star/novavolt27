@@ -315,21 +315,45 @@
   }
 }
 
-/* Show PawPrint's ranking rationale first without adding another runtime DOM mutation. */
-.dog-cognitive-page-root #comparison #pawprint .decision-copy{
+/* Show each product's ranking rationale first without adding more DOM mutations. */
+.dog-cognitive-page-root #comparison .product-card .decision-copy{
   display: flex;
   flex-direction: column;
 }
-.dog-cognitive-page-root #comparison #pawprint .comparison-field:last-child{
+.dog-cognitive-page-root #comparison .product-card .comparison-field:last-child{
   order: -1;
   padding-bottom: 14px;
   margin-bottom: 14px;
   border-bottom: 1px solid var(--line-light);
 }
-.dog-cognitive-page-root #comparison #pawprint .comparison-field:nth-last-child(2){
+.dog-cognitive-page-root #comparison .product-card .comparison-field:nth-last-child(2){
   padding-bottom: 0;
   margin-bottom: 0;
   border-bottom: 0;
+}
+
+/* Novifit is a 3/5 rating: three filled stars, then two visibly empty stars. */
+.dog-cognitive-page-root #comparison #others .score-rating .stars{
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  font-size: 0;
+  letter-spacing: 0;
+  color: transparent;
+}
+.dog-cognitive-page-root #comparison #others .score-rating .stars::before,
+.dog-cognitive-page-root #comparison #others .score-rating .stars::after{
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.dog-cognitive-page-root #comparison #others .score-rating .stars::before{
+  content: "★★★";
+  color: var(--star);
+}
+.dog-cognitive-page-root #comparison #others .score-rating .stars::after{
+  content: "☆☆";
+  color: #aeb9c6;
 }
 
 @media (max-width: 600px) {
