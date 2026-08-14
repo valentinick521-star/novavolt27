@@ -21,6 +21,15 @@
   border-top-left-radius: 0 !important;
 }
 
+/* Retired sections can still be inserted briefly by older runtime cleanup paths.
+   Keep them hidden from first paint so they never flash before removal. */
+.dog-cognitive-page-root #popular-options-inside,
+.dog-cognitive-page-root #formula-types,
+.dog-cognitive-page-root #cellular-energy-attention,
+.dog-cognitive-page-root #daily-routine-advantage{
+  display: none !important;
+}
+
 /* ============================================================
    Cognitive comparison page typography system
    Keeps editorial content on one hierarchy while preserving
