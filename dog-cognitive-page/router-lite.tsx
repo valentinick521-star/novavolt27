@@ -1,9 +1,8 @@
-import {
+import { useEffect, useState } from "react";
+import type {
   AnchorHTMLAttributes,
   MouseEventHandler,
   ReactNode,
-  useEffect,
-  useState,
 } from "react";
 
 type To =
