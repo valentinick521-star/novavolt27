@@ -160,7 +160,7 @@ function updateQuickRankings() {
   if (!rankings) return;
 
   const heading = rankings.querySelector<HTMLElement>(".section-title");
-  if (heading) heading.textContent = "How the Top Cognitive Supplements Compare";
+  if (heading) heading.textContent = "Quick Comparison";
 
   rankings.querySelector(".rankings-intro")?.remove();
 
