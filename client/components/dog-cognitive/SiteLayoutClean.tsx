@@ -13,16 +13,7 @@ export default function SiteLayoutClean({ children }: { children: ReactNode }) {
   const [showTop, setShowTop] = useState(false);
 
   useLayoutEffect(() => {
-    const guide = document.getElementById("guide");
-    if (!guide) return;
-
-    const buyerEducation = guide.querySelector<HTMLElement>(
-      ".compact-card:not(#vet)",
-    );
-    buyerEducation?.remove();
-
-    const vet = document.getElementById("vet");
-    if (vet) vet.style.gridColumn = "1 / -1";
+    document.getElementById("guide")?.remove();
   }, []);
 
   useEffect(() => {
