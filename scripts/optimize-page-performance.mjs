@@ -19,8 +19,10 @@ const nadAgingOutputPath = path.join(
   "pawprint-nad-aging-20260812.webp",
 );
 const nadAgingUrl = "/assets/pawprint-nad-aging-20260812.webp";
-const nadAgingTarget =
-  "<p>But as dogs age, <strong>levels of NAD+ drop sharply.</strong></p>";
+// Match the paragraph by its actual copy, not by whether inline emphasis is present.
+// This keeps harmless bolding/copy-format changes from breaking the production build.
+const nadAgingTargetPattern =
+  /<p>\s*But as dogs age,\s*(?:<strong>)?levels of NAD\+ drop sharply\.(?:<\/strong>)?\s*<\/p>/i;
 const nadAgingFigure = `<figure class="editorial-image pawprint-nad-aging-image" style="margin:24px 0 28px;">
 <img alt="Illustration of a dog shown at three stages of aging" decoding="async" loading="lazy" width="1200" height="675" src="${nadAgingUrl}" style="display:block;width:100%;height:auto;"/>
 </figure>`;
@@ -42,20 +44,23 @@ fs.copyFileSync(nadAgingSourcePath, nadAgingOutputPath);
 let html = fs.readFileSync(filePath, "utf8");
 
 if (!html.includes(nadAgingUrl)) {
-  if (!html.includes(nadAgingTarget)) {
-    throw new Error(
-      "Could not find the NAD+ decline paragraph for image placement",
+  const nadAgingTargetMatch = html.match(nadAgingTargetPattern);
+
+  if (!nadAgingTargetMatch) {
+    console.warn(
+      "NAD+ decline paragraph not found; skipping optional aging-image placement",
+    );
+  } else {
+    const nadAgingTarget = nadAgingTargetMatch[0];
+    html = html.replace(
+      nadAgingTargetPattern,
+      `${nadAgingTarget}\n${nadAgingFigure}`,
+    );
+    fs.writeFileSync(filePath, html);
+    console.log(
+      `Inserted NAD+ aging illustration directly below the decline paragraph: ${nadAgingUrl}`,
     );
   }
-
-  html = html.replace(
-    nadAgingTarget,
-    `${nadAgingTarget}\n${nadAgingFigure}`,
-  );
-  fs.writeFileSync(filePath, html);
-  console.log(
-    `Inserted NAD+ aging illustration directly below the decline paragraph: ${nadAgingUrl}`,
-  );
 } else {
   console.log("NAD+ aging illustration is already present");
 }
