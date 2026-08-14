@@ -94,19 +94,23 @@ if (!/<head>[\s\S]*<script[^>]*\bdefer\b[^>]*gulinkfixup\.js[\s\S]*<\/head>/i.te
   throw new Error("GiddyUp click-ID script was not deferred in <head>");
 }
 
-// Mobile performance patch: the original hero is a 6000x3376 JPEG (~567 KiB)
-// even though it renders at roughly article width. Route it through the same
-// responsive Next.js image endpoint used by the source publisher, give the
-// browser explicit intrinsic dimensions, and preload the responsive candidate.
+// Mobile LCP patch: serve the large third-party hero through Netlify Image CDN
+// on this site's own origin. Netlify handles responsive resizing, modern-format
+// negotiation, quality compression, and edge caching. This removes the extra
+// dependency on another site's image optimizer from the LCP path.
 const HERO_ORIGINAL =
   "https://img.theepochtimes.com/assets/uploads/2026/04/02/id6007372-PawPrint-Protocol-2.jpg";
 const HERO_ENCODED = encodeURIComponent(HERO_ORIGINAL);
 const heroUrl = (width) =>
-  `https://www.theepochtimes.com/_next/image?url=${HERO_ENCODED}&w=${width}&q=75`;
-const HERO_640 = heroUrl(640).replace(/&/g, "&amp;");
-const HERO_828 = heroUrl(828).replace(/&/g, "&amp;");
-const HERO_1080 = heroUrl(1080).replace(/&/g, "&amp;");
-const HERO_SRCSET = `${HERO_640} 640w, ${HERO_828} 828w, ${HERO_1080} 1080w`;
+  `/.netlify/images?url=${HERO_ENCODED}&w=${width}&q=60`;
+const htmlAttr = (value) => value.replace(/&/g, "&amp;");
+const HERO_384 = htmlAttr(heroUrl(384));
+const HERO_480 = htmlAttr(heroUrl(480));
+const HERO_640 = htmlAttr(heroUrl(640));
+const HERO_780 = htmlAttr(heroUrl(780));
+const HERO_1024 = htmlAttr(heroUrl(1024));
+const HERO_1280 = htmlAttr(heroUrl(1280));
+const HERO_SRCSET = `${HERO_384} 384w, ${HERO_480} 480w, ${HERO_640} 640w, ${HERO_780} 780w, ${HERO_1024} 1024w, ${HERO_1280} 1280w`;
 const HERO_SIZES = "(max-width: 780px) calc(100vw - 48px), 780px";
 
 const optimizedHero = `<img alt="Senior dog"
@@ -115,7 +119,7 @@ const optimizedHero = `<img alt="Senior dog"
   loading="eager"
   decoding="async"
   fetchpriority="high"
-  src="${HERO_828}"
+  src="${HERO_780}"
   srcset="${HERO_SRCSET}"
   sizes="${HERO_SIZES}"/>`;
 
@@ -132,13 +136,13 @@ html = html.replace(
   "",
 );
 
-// Ensure only one responsive hero preload/preconnect is present.
+// Remove any previous hero hints before installing the same-origin responsive preload.
 html = html.replace(/\s*<link[^>]+data-ncr-hero-preload[^>]*>/gi, "");
 html = html.replace(/\s*<link[^>]+data-ncr-epoch-preconnect[^>]*>/gi, "");
+html = html.replace(/\s*<link[^>]+data-ncr-hero-performance-hints[^>]*>/gi, "");
 
-const HERO_PRELOAD = `<link data-ncr-epoch-preconnect rel="preconnect" href="https://www.theepochtimes.com" crossorigin />
-<link data-ncr-hero-preload rel="preload" as="image"
-  href="${HERO_828}"
+const HERO_PRELOAD = `<link data-ncr-hero-preload rel="preload" as="image"
+  href="${HERO_780}"
   imagesrcset="${HERO_SRCSET}"
   imagesizes="${HERO_SIZES}"
   fetchpriority="high" />`;
@@ -147,15 +151,18 @@ html = html.replace("</head>", `${HERO_PRELOAD}\n</head>`);
 if (!html.includes('width="6000"') || !html.includes('height="3376"')) {
   throw new Error("Hero intrinsic dimensions were not added");
 }
-if (!html.includes("/_next/image?url=") || !html.includes("imagesrcset=")) {
-  throw new Error("Responsive hero delivery/preload was not added");
+if (!html.includes("/.netlify/images?url=") || !html.includes("imagesrcset=")) {
+  throw new Error("Netlify Image CDN responsive hero delivery/preload was not added");
 }
 if (/badcc4098d254fadb81b2c01ff7bb98c[^>]*fetchpriority=["']high["']/i.test(html)) {
   throw new Error("Old high-priority logo preload remained");
+}
+if (/data-ncr-epoch-preconnect/i.test(html)) {
+  throw new Error("Obsolete third-party hero preconnect remained");
 }
 
 fs.writeFileSync(filePath, html);
 
 console.log(
-  "Kept hero and requested UGC image, restored bottom proof, optimized responsive image delivery and LCP, and deferred GiddyUp without changing tracking logic",
+  "Kept hero and requested UGC image, restored bottom proof, moved the LCP hero to Netlify Image CDN, and deferred GiddyUp without changing tracking logic",
 );
