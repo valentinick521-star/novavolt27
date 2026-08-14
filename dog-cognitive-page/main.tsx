@@ -263,10 +263,6 @@ function rewriteFullComparison() {
         "What It Focuses On",
         "Supporting the cellular energy brain cells depend on to keep doing their normal jobs. That is the main idea behind the formula.",
       ) +
-      comparisonField(
-        "Evidence Note",
-        "Dog-specific cognitive research on NAD+ and NMN is still limited compared with some older ingredients.",
-      ) +
       comparisonField("Daily Use", "A liquid dose based on the dog’s weight.") +
       comparisonField(
         "Why It Ranked Here",
