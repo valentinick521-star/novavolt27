@@ -151,7 +151,7 @@ function updateMetaAndHero() {
   const summary = document.querySelector<HTMLElement>(".hero-pick-best");
   if (summary) {
     summary.innerHTML =
-      "<strong>Why it stood out:</strong> PawPrint's formula centers on NMN and NAD+, which are involved in cellular-energy processes, rather than making phosphatidylserine or SAMe the main focus.";
+      "<strong>Why it stood out:</strong> As dogs age, the cellular-energy systems their brain cells rely on can become less efficient. PawPrint is built around NMN and NAD+ to support that system at the source.";
   }
 }
 
@@ -186,8 +186,6 @@ function updateQuickRankings() {
     const productCell = row.cells[1];
     const scoreCell = row.cells[2];
 
-    // The original source has seven columns. If the approach column is still
-    // present, use the original indexes and remove it after copying the data.
     if (row.cells.length >= 7) {
       const approachCell = row.cells[3];
       const formatCell = row.cells[4];
