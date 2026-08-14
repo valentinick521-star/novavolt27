@@ -45,7 +45,7 @@ function dogCognitiveImageSizing() {
 }
 
 function dogCognitiveRuntimePerformance() {
-  const stickyEffect = /  useEffect\(\(\) => \{\n    const sticky = document\.querySelector<HTMLElement>\("\\\.sticky-cta"\);[\s\S]*?  \}, \[\]\);\n\n  return \(/;
+  const stickyEffect = /  useEffect\(\(\) => \{\n    const sticky = document\.querySelector<HTMLElement>\("\.sticky-cta"\);[\s\S]*?  \}, \[\]\);\n\n  return \(/;
 
   const replacement = `  useEffect(() => {
     const sticky = document.querySelector<HTMLElement>(".sticky-cta");
